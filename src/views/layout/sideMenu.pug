@@ -1,0 +1,5 @@
+nav.side__menu((click)='closeMenu($event)')
+    .links
+        a(*ngFor="let item of menuItems" class="menu__link" href="{{item.href}}")
+            i(class="{{item.icon}}")
+            span {{item.title}}

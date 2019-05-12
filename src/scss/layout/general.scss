@@ -1,7 +1,8 @@
 * {
     font-family: $istok;
+    box-sizing: border-box;
 }
-
-h1 {
-    color: $primaryDark;
+html,
+body {
+    height: 100%;
 }

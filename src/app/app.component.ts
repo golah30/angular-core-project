@@ -5,6 +5,11 @@ interface User {
     initials: string;
     name: string;
 }
+interface MenuItem {
+    icon: string;
+    href: string;
+    title: string;
+}
 
 @Component({
     selector: "app-root",
@@ -19,6 +24,23 @@ export class AppComponent implements OnInit {
         initials: "DK",
         name: "Khristofer Khristorozhdestvenskii"
     };
+    menuItems: Array<MenuItem> = [
+        {
+            icon: "icon-view_compact",
+            href: "",
+            title: "Dashboard"
+        },
+        {
+            icon: "icon-school",
+            href: "",
+            title: "Workshops"
+        },
+        {
+            icon: "icon-question_answer",
+            href: "",
+            title: "Quizzes"
+        }
+    ];
     isSearch: boolean = false;
     isMenu: boolean = false;
 
@@ -28,6 +50,12 @@ export class AppComponent implements OnInit {
     }
     toggleMenu(): void {
         this.isMenu = !this.isMenu;
+        document.querySelector(".side__menu").classList.toggle("active");
     }
     account(): void {}
+    closeMenu(event: any): void {
+        if (event.target.classList.contains("side__menu")) {
+            this.toggleMenu();
+        }
+    }
 }

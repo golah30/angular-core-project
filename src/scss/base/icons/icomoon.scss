@@ -56,6 +56,9 @@ $path: "assets/fonts/icomoon/icomoon.";
 .icon-favorite_border:before {
     content: "\e87e";
 }
+.icon-question_answer:before {
+    content: "\e8af";
+}
 .icon-info:before {
     content: "\e88e";
 }
@@ -89,12 +92,15 @@ $path: "assets/fonts/icomoon/icomoon.";
 .icon-school:before {
     content: "\e80c";
 }
+.icon-search:before {
+    content: "\e8b6";
+}
 .icon-settings:before {
     content: "\e8b8";
 }
+.icon-view_compact:before {
+    content: "\e42b";
+}
 .icon-visibility_off:before {
     content: "\e8f5";
-}
-.icon-search:before {
-    content: "\e8b6";
 }

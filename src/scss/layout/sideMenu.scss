@@ -1,0 +1,74 @@
+.side__menu {
+    height: 100%;
+    transition: left 0.5s, background-color 0.5s;
+    @include small() {
+        position: absolute;
+        left: -100%;
+        width: 100%;
+        &.active {
+            left: 0;
+            background-color: rgba($dark, 0.2);
+            & .links {
+                left: 0;
+            }
+        }
+    }
+}
+.side__menu .links {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 140px;
+    background-color: lighten($dark, 10);
+    transition: width 0.3s;
+    @include medium() {
+        width: 60px;
+    }
+    @include small() {
+        width: 80%;
+        position: absolute;
+        left: -100%;
+        transition: left 0.5s;
+    }
+}
+.menu__link {
+    text-decoration: none;
+    color: darken($text, 14);
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 12px 0;
+    transition: color 0.4s, background-color 0.4s;
+    &:hover {
+        color: $text;
+        background-color: lighten($dark, 5);
+    }
+    & i {
+        font-size: 32px;
+        margin-bottom: 8px;
+    }
+    & span {
+        font-size: 16px;
+    }
+    @include medium() {
+        padding: 12px;
+        & span {
+            display: none;
+        }
+        & i {
+            margin-bottom: 0;
+        }
+    }
+    @include small() {
+        flex-direction: row;
+        & span {
+            display: block;
+        }
+        & i {
+            font-size: 24px;
+            margin-bottom: 0;
+            margin-right: 8px;
+        }
+    }
+}

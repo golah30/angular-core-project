@@ -1,0 +1,16 @@
+header.header
+    .header__container(*ngIf='!isSearch')
+        .header__item
+            .header__logo
+                img(src="{{logoSrc}}", alt='ACP')
+            i.header__menu-icon.icon-close(*ngIf="isMenu" '(click)'="toggleMenu()")
+            i.header__menu-icon.icon-menu(*ngIf="!isMenu" '(click)'="toggleMenu()")
+            i.header__search.icon-search((click)="toggleSearch()")
+        .header__item.header__item--user((click)="account()")
+            .header__user-name {{user.name}}
+            .header__user-avatar
+                img(src="{{user.img}}", alt="{{user.initials}}")
+    .header__container(*ngIf='isSearch')
+        .header__search--open
+            i.icon-close((click)='toggleSearch()')
+            input(type='text' name='search' placeholder='Start typing')

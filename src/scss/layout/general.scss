@@ -1,8 +1,32 @@
 * {
     font-family: $istok;
     box-sizing: border-box;
+    scrollbar-color: $dark transparent;
+    scrollbar-width: thin;
 }
 html,
 body {
     height: 100%;
+}
+::-webkit-scrollbar {
+    width: 5px;
+}
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+::-webkit-scrollbar-thumb {
+    background: $dark;
+    border-radius: 2px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: lighten($dark, 20);
+    border-radius: 2px;
+}
+ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+input:focus {
+    outline: none;
 }

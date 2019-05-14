@@ -5,3 +5,12 @@
     position: relative;
     overflow: hidden;
 }
+
+main {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    height: 100%;
+    position: relative;
+    flex-grow: 1;
+}

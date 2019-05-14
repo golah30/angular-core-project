@@ -3,14 +3,13 @@
     width: 0;
     padding: 32px 0;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
     box-shadow: -3px 0px 8px 0px rgba(0, 0, 0, 0.1);
     overflow-x: hidden;
     overflow-y: auto;
     flex-shrink: 0;
-    order: 1;
     transition: width 0.4s;
-    align-self: flex-end;
     &.show {
         width: 320px;
         padding: 32px 10px;
@@ -20,7 +19,7 @@
     }
     @include wide() {
         &.show {
-            width: calc(100% - 1580px);
+            width: calc(100% - 1440px);
             padding: 32px 10px;
         }
     }

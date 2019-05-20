@@ -1,4 +1,8 @@
-.header {
+@import "variables/variables";
+@import "mixins/mixins";
+
+:host {
+    display: block;
     background-color: $dark;
     height: 70px;
     padding: 0 24px;

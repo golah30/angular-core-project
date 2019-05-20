@@ -1,10 +1,10 @@
 @import "base/reset/normalize";
 @import "base/icons/icomoon";
 @import url("https://fonts.googleapis.com/css?family=Istok+Web:400,400i,700&subset=cyrillic");
+
 @import "variables/variables";
 @import "mixins/mixins";
+
 @import "layout/general";
-@import "layout/sideMenu";
 @import "layout/mainContentArea";
 @import "layout/sideContentArea";
-@import "layout/header";

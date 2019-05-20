@@ -1,6 +1,6 @@
-include ../views/layout/header.pug
+acp-top-pane('[user]'='user' '[isMenu]'='isMenu' '(toggleMenu)'='toggleMenu()')
 .wrapper
     main
         include ../views/layout/mainContentArea.pug
         include ../views/layout/sideContentArea.pug
-    include ../views/layout/sideMenu.pug
+    acp-side-menu('[isMenu]'='isMenu' '(closeMenu)'='closeMenu($event)')

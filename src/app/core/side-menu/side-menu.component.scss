@@ -1,7 +1,11 @@
-.side__menu {
+@import "variables/variables";
+@import "mixins/mixins";
+
+:host {
     height: 100%;
     order: -1;
     position: relative;
+    display: block;
     @include small() {
         width: 100%;
         left: -100%;
@@ -21,10 +25,14 @@
     }
 }
 .side__menu-backdrop {
-    height: 100%;
-    width: 100%;
+    height: 0%;
+    width: 0%;
     position: absolute;
     transition: background-color 0.5s ease-out 0s;
+    @include small() {
+        height: 100%;
+        width: 100%;
+    }
 }
 .side__menu-links {
     height: 100%;

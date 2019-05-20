@@ -2,9 +2,6 @@
     height: 100%;
     width: 0;
     padding: 32px 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
     box-shadow: -3px 0px 8px 0px rgba(0, 0, 0, 0.1);
     overflow-x: hidden;
     overflow-y: auto;
@@ -19,12 +16,18 @@
     }
     @include wide() {
         &.show {
-            width: calc(100% - 1440px);
+            width: 480px;
             padding: 32px 10px;
         }
     }
 }
 
+.side__content-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 2000px;
+}
 .demo-form {
     width: 300px;
     text-align: center;
@@ -70,8 +73,9 @@
 
 .show-panel-button {
     position: absolute;
+    border: none;
     right: -24px;
-    top: 120px;
+    top: 10px;
     width: 60px;
     height: 30px;
     background-color: $primary;
@@ -80,6 +84,8 @@
     display: flex;
     padding-left: 6px;
     align-items: center;
+    outline: none;
+    cursor: pointer;
     transition: background-color 0.4s, right 0.4s;
     &:hover {
         background-color: $primaryDark;

@@ -1,5 +1,6 @@
-nav.side__menu((click)='closeMenu($event)')
-    .links
-        a(*ngFor="let item of menuItems" class="menu__link" href="{{item.href}}")
+nav.side__menu([ngClass]='{active: isMenu}')
+    .side__menu-backdrop((click)='closeMenu()')
+    .side__menu-links
+        a.menu__link(*ngFor="let item of menuItems" href="{{item.href}}")
             i(class="{{item.icon}}")
             span {{item.title}}

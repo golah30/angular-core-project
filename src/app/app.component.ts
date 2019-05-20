@@ -51,15 +51,12 @@ export class AppComponent implements OnInit {
     }
     toggleMenu(): void {
         this.isMenu = !this.isMenu;
-        document.querySelector(".side__menu").classList.toggle("active");
     }
     toggleSideContent(): void {
         this.isSideContent = !this.isSideContent;
     }
     account(): void {}
-    closeMenu(event: any): void {
-        if (event.target.classList.contains("side__menu")) {
-            this.toggleMenu();
-        }
+    closeMenu(): void {
+        this.isMenu = false;
     }
 }

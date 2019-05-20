@@ -5,7 +5,7 @@
     display: flex;
     justify-content: center;
     overflow: auto;
-    max-width: 1440px;
+
     @include medium() {
         padding: 24px 5%;
     }
@@ -13,7 +13,9 @@
         padding: 16px 5%;
     }
 }
-
+.main__content-conteiner {
+    max-width: 1440px;
+}
 .demo-content__list {
     max-width: 600px;
 }

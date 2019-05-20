@@ -1,22 +1,32 @@
 .side__menu {
     height: 100%;
     order: -1;
+    position: relative;
     @include small() {
         width: 100%;
         left: -100%;
         position: absolute;
-        transition: background-color 0.5s ease-out 0s, left 0s ease 0.5s;
+        transition: left 0s ease 0.5s;
         &.active {
-            transition: background-color 0.5s ease-out 0s, left 0s ease 0s;
-            & .links {
+            transition: left 0s ease 0s;
+            .side__menu-backdrop {
+                background-color: rgba($dark, 0.2);
+            }
+
+            & .side__menu-links {
                 left: 0;
             }
             left: 0;
-            background-color: rgba($dark, 0.2);
         }
     }
 }
-.side__menu .links {
+.side__menu-backdrop {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    transition: background-color 0.5s ease-out 0s;
+}
+.side__menu-links {
     height: 100%;
     width: 140px;
     background-color: lighten($dark, 10);

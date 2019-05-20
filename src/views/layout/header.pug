@@ -4,17 +4,20 @@ header.header
             .header__item
                 .header__logo
                     img(src="{{logoSrc}}" alt='ACP')
-                i.header__menu-icon(
-                    [ngClass]='isMenu ? "icon-close" : "icon-menu"' 
-                    '(click)'="toggleMenu()"
-                    )
-                i.header__search.icon-search((click)="toggleSearch()")
-            .header__item.header__item--user((click)="account()")
+                button.header__menu-icon('(click)'="toggleMenu()")
+                    i(
+                        [ngClass]='isMenu ? "icon-close" : "icon-menu"' 
+                        
+                        )
+                button.header__search('(click)'="toggleSearch()")
+                    i.icon-search
+            .header__item.header__item--user('(click)'="account()")
                 .header__user-name {{user.name}}
                 .header__user-avatar
                     img(src="{{user.img}}" alt="{{user.initials}}")
         
 ng-template(#headerControls="")
     .header__search--open
-        i.icon-close((click)='toggleSearch()')
-        input(type='text' name='search' placeholder='Start typing')
+        button.header__close-btn('(click)'='toggleSearch()')
+            i.icon-close
+        input(name='search' placeholder='Start typing')

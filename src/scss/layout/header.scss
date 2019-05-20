@@ -2,6 +2,11 @@
     background-color: $dark;
     height: 70px;
     padding: 0 24px;
+    & button {
+        border: none;
+        background-color: transparent;
+        padding: 0;
+    }
 }
 .header__container {
     display: flex;
@@ -15,16 +20,19 @@
     align-items: center;
 }
 .header__menu-icon {
-    color: $text;
     cursor: pointer;
-    transition: color 0.4s;
-    font-size: 32px;
     display: none;
-    &:hover {
-        color: $secondary;
-    }
+    outline: none;
     @include small() {
         display: block;
+    }
+    & i {
+        color: $text;
+        font-size: 32px;
+        transition: color 0.4s;
+        &:hover {
+            color: $secondary;
+        }
     }
 }
 
@@ -42,29 +50,35 @@
 .header__search {
     margin-left: 16px;
     cursor: pointer;
-    color: $text;
-    font-size: 32px;
-    transition: color 0.4s;
-    &:hover {
-        color: $secondary;
+    outline: none;
+    & i {
+        color: $text;
+        font-size: 32px;
+        transition: color 0.4s;
+        &:hover {
+            color: $secondary;
+        }
     }
 }
-
+.header__close-btn {
+    cursor: pointer;
+    margin-right: 16px;
+    outline: none;
+    & i {
+        color: $red;
+        font-size: 32px;
+        transition: color 0.4s;
+        &:hover {
+            color: darken($red, 26%);
+        }
+    }
+}
 .header__search--open {
     display: flex;
     flex-wrap: nowrap;
     align-items: center;
     width: 100%;
-    & i {
-        color: $red;
-        font-size: 32px;
-        transition: color 0.4s;
-        margin-right: 16px;
-        cursor: pointer;
-        &:hover {
-            color: darken($red, 26%);
-        }
-    }
+
     & input {
         padding: 8px 12px;
         width: 100%;

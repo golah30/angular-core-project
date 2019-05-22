@@ -1,0 +1,21 @@
+acp-viewport
+    .workshops-container
+        ul.feed
+            acp-article(
+                '*ngFor'='let article of articles'
+                '[routeId]'='article.id'
+                '[title]'='article.title'
+                '[image]'='article.image'
+                '[description]'='article.description'
+                '[isFavorite]'='article.isFavorite'
+                '[tags]'='article.tags'
+                '[date]'='article.date'
+            )
+        .tags
+            acp-tag(
+                '*ngFor'='let tag of tags'
+                '[tag]'='tag.name' 
+                '[isActive]'='tag.isActive' 
+                '(onTagSelect)'='onTagSelect($event)' 
+            )
+        

@@ -16,7 +16,7 @@
     display: flex;
     justify-content: center;
     overflow: auto;
-
+    position: relative;
     @include medium() {
         padding: 24px 5%;
     }
@@ -24,7 +24,7 @@
         padding: 16px 5%;
     }
 }
-.main__content-conteiner {
+.main__content-container {
     max-width: 1440px;
 }
 

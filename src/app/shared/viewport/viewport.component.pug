@@ -1,5 +1,7 @@
-.main__content 
-    .main__content-conteiner
+.main__content
+    div(#top='')
+    acp-to-top-button('(click)'='scrollTop(top)' '[active]'='isScrolled')
+    .main__content-container
         ng-content
 div.side__content('[ngClass]'='{show: isSideContent}')
     button.show-panel-button('(click)'='toggleSideContent()')

@@ -1,5 +1,5 @@
 .side__menu-backdrop((click)='closeSideMenu()')
 .side__menu-links
-    a.menu__link('*ngFor'="let item of menuItems" href="{{item.href}}")
+    a.menu__link('*ngFor'="let item of menuItems" '[routerLink]'="item.href" routerLinkActive='active')
         i(class="{{item.icon}}")
         span {{item.title}}

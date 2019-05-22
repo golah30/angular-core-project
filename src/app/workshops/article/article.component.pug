@@ -1,0 +1,13 @@
+acp-card
+    .header
+        a.article__link('[routerLink]'='routePath')
+            h2.article__title {{title}}
+        ul.article__tags('*ngIf'='tags')
+            li.article__tag('*ngFor'='let tag of tags') {{tag}}
+    .content
+        .article__image
+            img('[src]'='image' alt='Article image')
+        .article__description {{description}}
+    .footer
+        acp-timestamp('[date]'='date')
+        acp-like('[isActive]'='isFavorite' '(onLikeToggle)'='likeToggle()')

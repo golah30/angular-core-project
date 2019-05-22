@@ -68,6 +68,10 @@
     & span {
         font-size: 16px;
     }
+    &.active {
+        color: darken($red, 10);
+        background-color: lighten($dark, 5);
+    }
     @include medium() {
         padding: 12px;
         & span {

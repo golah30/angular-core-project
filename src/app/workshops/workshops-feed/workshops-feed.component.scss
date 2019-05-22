@@ -1,0 +1,24 @@
+@import "mixins/mixins";
+:host {
+    display: block;
+    flex-grow: 1;
+}
+.workshops-container {
+    display: flex;
+    padding-bottom: 40px;
+}
+
+.tags {
+    margin-top: 40px;
+    display: flex;
+    align-self: flex-start;
+    max-width: 240px;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    @include medium() {
+        display: none;
+    }
+}
+
+.feed {
+}

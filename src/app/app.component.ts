@@ -1,10 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-
-interface User {
-    img: string;
-    initials: string;
-    name: string;
-}
+import { User } from "./interfaces";
 
 @Component({
     selector: "acp-root",
@@ -19,7 +14,7 @@ export class AppComponent implements OnInit {
         name: "Khristofer Khristorozhdestvenskii"
     };
 
-    isMenu: boolean = true;
+    isMenu: boolean = false;
 
     ngOnInit(): void {}
 

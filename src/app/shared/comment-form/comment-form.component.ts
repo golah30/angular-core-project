@@ -1,10 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
 import { FormControl } from "@angular/forms";
-interface Comment {
-    id: string;
-    username: string;
-    text: string;
-}
+import { Comment } from "../../interfaces";
+
 @Component({
     selector: "acp-comment-form",
     templateUrl: "./comment-form.component.pug",

@@ -1,9 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
-interface User {
-    img: string;
-    initials: string;
-    name: string;
-}
+import { User } from "../../interfaces";
 @Component({
     selector: "acp-top-pane",
     templateUrl: "./top-pane.component.pug",

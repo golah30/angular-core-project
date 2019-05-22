@@ -1,0 +1,14 @@
+acp-viewport
+    .container
+        acp-card
+            .header
+                .article__image
+                    img('[src]'='article.image' alt='Article image')
+            .footer
+                acp-timestamp('[date]'='article.date')
+                acp-like('[isActive]'='article.isFavorite' '(onLikeToggle)'='likeToggle()')
+                .article__description {{article.content}}
+            .content
+                h2.article__title {{article.title}}
+                ul.article__tags('*ngIf'='article.tags')
+                    li.article__tag('*ngFor'='let tag of article.tags') {{tag}}

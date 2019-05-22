@@ -1,8 +1,5 @@
 import { Component, OnInit, Input } from "@angular/core";
-interface Comment {
-    username: string;
-    text: string;
-}
+import { Comment } from "../../interfaces";
 @Component({
     selector: "acp-comment-card",
     templateUrl: "./comment-card.component.pug",

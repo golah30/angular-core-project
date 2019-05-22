@@ -6,12 +6,8 @@ import {
     EventEmitter,
     HostBinding
 } from "@angular/core";
+import { MenuItem } from "../../interfaces";
 
-interface MenuItem {
-    icon: string;
-    href: string;
-    title: string;
-}
 @Component({
     selector: "acp-side-menu",
     templateUrl: "./side-menu.component.pug",

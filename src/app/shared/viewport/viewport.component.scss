@@ -1,3 +1,34 @@
+@import "variables/variables";
+@import "mixins/mixins";
+:host {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    height: 100%;
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+}
+.main__content {
+    height: 100%;
+    flex-grow: 1;
+    padding: 0 32px;
+    display: flex;
+    justify-content: center;
+    overflow: auto;
+
+    @include medium() {
+        padding: 24px 5%;
+    }
+    @include small() {
+        padding: 16px 5%;
+    }
+}
+.main__content-conteiner {
+    max-width: 1440px;
+    height: 300%;
+}
+
 .side__content {
     height: 100%;
     width: 0;

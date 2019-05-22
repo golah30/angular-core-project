@@ -1,0 +1,29 @@
+@import "variables/variables";
+
+:host {
+    display: block;
+    color: $text;
+    border-radius: 50%;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+}
+
+.user-pic__image {
+    display: block;
+    height: 100%;
+    line-height: 100%;
+    position: relative;
+    &[alt]::after {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: $primary;
+        content: attr(alt);
+    }
+}

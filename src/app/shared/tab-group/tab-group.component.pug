@@ -1,0 +1,8 @@
+ul.tab__list
+    li.tab__item(
+        *ngFor='let tab of tabs' 
+        '[ngClass]'='{active: active}' 
+        '(click)'='selectTab(tab)'
+    )
+        button.tab__button {{tab.title}}
+ng-content

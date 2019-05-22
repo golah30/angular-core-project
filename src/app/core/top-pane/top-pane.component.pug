@@ -10,7 +10,7 @@
         .header__item.header__item--user('(click)'="account()")
             .header__user-name {{user.name}}
             .header__user-avatar
-                img(src="{{user.img}}" alt="{{user.initials}}")
+                acp-user-pic('[src]'='user.img' '[name]'='user.name')
         
 ng-template(#headerControls="")
     .header__search--open

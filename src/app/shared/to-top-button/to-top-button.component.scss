@@ -1,0 +1,35 @@
+@import "variables/variables";
+:host {
+    display: block;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+}
+.to-top {
+    border: none;
+    background-color: $primary;
+    position: relative;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    padding: 0;
+    cursor: pointer;
+    color: $text;
+    transition: all 0.4s;
+    opacity: 0;
+    display: none;
+    & i {
+        font-size: 32px;
+    }
+    &:hover {
+        background-color: $primaryLight;
+        color: $dark;
+    }
+    &:focus {
+        outline: none;
+    }
+    &.active {
+        display: block;
+        opacity: 1;
+    }
+}

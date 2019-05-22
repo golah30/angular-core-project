@@ -20,16 +20,13 @@ export class AppComponent implements OnInit {
     };
 
     isMenu: boolean = true;
-    isSideContent: boolean = true;
 
     ngOnInit(): void {}
 
     toggleMenu(): void {
         this.isMenu = !this.isMenu;
     }
-    toggleSideContent(): void {
-        this.isSideContent = !this.isSideContent;
-    }
+
     closeMenu(): void {
         this.isMenu = false;
     }

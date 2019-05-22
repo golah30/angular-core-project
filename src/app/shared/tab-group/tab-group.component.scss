@@ -1,0 +1,24 @@
+@import "variables/variables";
+:host {
+}
+.tab__list {
+    display: flex;
+    flex-wrap: nowrap;
+}
+.tab__item {
+}
+.tab__button {
+    background-color: lighten($dark, 80);
+    border: none;
+    cursor: pointer;
+    height: 36px;
+    padding: 0 12px;
+    transition: all 0.4s;
+    &:hover {
+        background-color: $primary;
+        color: $text;
+    }
+    &:focus {
+        outline: none;
+    }
+}

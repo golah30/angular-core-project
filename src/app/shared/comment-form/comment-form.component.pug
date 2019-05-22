@@ -1,0 +1,9 @@
+input.comment__input(
+    '[formControl]'='inputControl' 
+    '[ngClass]'='{err: errmsg}' 
+    '(focus)'='focus()' 
+    placeholder='Enter your comment'
+    )
+button.comment__button('(click)'='onSubmit()') 
+    i.icon-check
+.error('[ngClass]'='{active: errmsg}') {{errmsg}}

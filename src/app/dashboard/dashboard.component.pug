@@ -1,21 +1,2 @@
 acp-viewport
-    div(#top='')
-    acp-tag(
-        '[tag]'='tag.name' 
-        '[isActive]'='tag.isActive' 
-        '(onTagSelect)'='onTagSelect($event)'
-    )
-    acp-like('[isActive]'='isFavorite' '(onLikeToggle)'='onLikeToggle()')
-    acp-timestamp('[date]'='date')
-    acp-to-top-button('(click)'='scrollTop(top)' '[active]'='isScrolled')
-    acp-comment-card('[comment]'='comment')
-        acp-timestamp('[date]'='date')
-    acp-card
-        .header some header content
-        .content some content
-        .footer some footer content
-    acp-tab-group
-        acp-tab('[title]'='"Tab 1"') Tab 1 content
-        acp-tab('[title]'='"Tab 2"') Tab 2 content
-        acp-tab('[title]'='"Tab 3"') Tab 3 content
-    acp-comment-form('[comment]'='comment' '(submit)'='submit($event)')
+    p dashboard work!

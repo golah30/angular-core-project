@@ -1,5 +1,7 @@
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
+import { NotFoundComponent } from "./core/not-found/not-found.component";
+import { AuthGuardService } from "./guards/auth-guard.service";
 
 const routes: Routes = [
     {
@@ -9,7 +11,8 @@ const routes: Routes = [
     },
     {
         path: "workshops",
-        loadChildren: "./workshops/workshops.module#WorkshopsModule"
+        loadChildren: "./workshops/workshops.module#WorkshopsModule",
+        canActivate: [AuthGuardService]
     },
     {
         path: "dashboard",
@@ -18,6 +21,10 @@ const routes: Routes = [
     {
         path: "quizzes",
         loadChildren: "./quizzes/quizzes.module#QuizzesModule"
+    },
+    {
+        path: "**",
+        component: NotFoundComponent
     }
 ];
 

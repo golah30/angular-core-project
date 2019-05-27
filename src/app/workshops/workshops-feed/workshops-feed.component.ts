@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { Tag, Article } from "../../interfaces";
-import { TAGS, ARTICLES } from "../../../data";
+import { Router, ActivatedRoute } from "@angular/router";
 
 @Component({
     selector: "acp-workshops-feed",
@@ -8,9 +8,9 @@ import { TAGS, ARTICLES } from "../../../data";
     styleUrls: ["./workshops-feed.component.scss"]
 })
 export class WorkshopsFeedComponent implements OnInit {
-    constructor() {}
-    tags: Array<Tag> = TAGS;
-    articles: Array<Article> = ARTICLES;
+    constructor(private route: ActivatedRoute) {}
+    tags: Array<Tag>;
+    articles: Array<Article>;
     onTagSelect(tag: string): void {
         this.tags.forEach(t => {
             if (t.name === tag) {
@@ -18,5 +18,10 @@ export class WorkshopsFeedComponent implements OnInit {
             }
         });
     }
-    ngOnInit() {}
+    ngOnInit() {
+        this.route.data.subscribe(data => {
+            this.articles = data.workshops.articles;
+            this.tags = data.workshops.tags;
+        });
+    }
 }

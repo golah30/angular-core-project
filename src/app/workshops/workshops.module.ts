@@ -5,12 +5,15 @@ import { WorkshopsFeedComponent } from "./workshops-feed/workshops-feed.componen
 import { ArticleComponent } from "./article/article.component";
 import { WorkshopsRoutingModule } from "./workshops-routing.module";
 import { SharedModule } from "../shared/shared.module";
+import { WorkshopsService } from "../service/workshops/workshops.service";
+
 @NgModule({
     declarations: [
         WorkshopPageComponent,
         WorkshopsFeedComponent,
         ArticleComponent
     ],
+    providers: [WorkshopsService],
     imports: [CommonModule, WorkshopsRoutingModule, SharedModule]
 })
 export class WorkshopsModule {}

@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, OnDestroy } from "@angular/core";
 import { Tag, Article } from "../../interfaces";
 import { Router, ActivatedRoute, Params } from "@angular/router";
 
@@ -7,7 +7,7 @@ import { Router, ActivatedRoute, Params } from "@angular/router";
     templateUrl: "./workshops-feed.component.pug",
     styleUrls: ["./workshops-feed.component.scss"]
 })
-export class WorkshopsFeedComponent implements OnInit {
+export class WorkshopsFeedComponent implements OnInit, OnDestroy {
     constructor(private route: ActivatedRoute, private router: Router) {}
     tags: Array<Tag>;
     categories: Array<Tag> = [
@@ -91,6 +91,14 @@ export class WorkshopsFeedComponent implements OnInit {
 
         this.route.queryParams.subscribe(params => {
             this.onParamsChange(params);
+        });
+    }
+    ngOnDestroy() {
+        this.tags.forEach(t => {
+            t.isActive = false;
+        });
+        this.categories.forEach(t => {
+            t.isActive = false;
         });
     }
     onParamsChange(params: Params) {

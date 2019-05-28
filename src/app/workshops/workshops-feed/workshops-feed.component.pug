@@ -1,8 +1,15 @@
 acp-viewport
     .workshops-container
+        .tags
+            acp-tag(
+                '*ngFor'='let category of categories'
+                '[tag]'='category.name' 
+                '[isActive]'='category.isActive' 
+                '(onTagSelect)'='onCategorySelect($event)' 
+            )
         ul.feed
             acp-article(
-                '*ngFor'='let article of articles'
+                '*ngFor'='let article of filteredActicles'
                 '[routeId]'='article.id'
                 '[title]'='article.title'
                 '[image]'='article.image'

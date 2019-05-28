@@ -11,6 +11,7 @@ export interface Article {
     content: string;
     image: string;
     date: Date;
+    author: string;
 }
 export interface Comment {
     id: string;

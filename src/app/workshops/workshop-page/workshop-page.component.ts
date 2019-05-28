@@ -13,6 +13,7 @@ export class WorkshopPageComponent implements OnInit {
     likeToggle() {
         this.article.isFavorite = !this.article.isFavorite;
     }
+
     ngOnInit() {
         this.route.data.subscribe(data => {
             this.article = data.article;

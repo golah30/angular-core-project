@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from "@angular/core";
+import { Router } from "@angular/router";
 
 @Component({
     selector: "acp-tab",
@@ -6,8 +7,9 @@ import { Component, OnInit, Input } from "@angular/core";
     styleUrls: ["./tab.component.scss"]
 })
 export class TabComponent implements OnInit {
-    constructor() {}
+    constructor(private router: Router) {}
     @Input("title") title: string;
     @Input() active: boolean = false;
+    @Input() link: string;
     ngOnInit() {}
 }

@@ -27,14 +27,16 @@ export class CommentFormComponent implements OnInit {
             this.submit.emit({
                 id: this.comment.id,
                 text: this.inputControl.value,
-                username: this.comment.username
+                username: this.comment.username,
+                date: this.comment.date
             });
         } else {
             if (this.inputControl.value) {
                 this.submit.emit({
-                    id: "",
+                    id: "" + Math.floor(Math.random() * (999999 - 1)) + 1,
                     text: this.inputControl.value,
-                    username: "user abuser"
+                    username: "user abuser",
+                    date: new Date()
                 });
             } else {
                 this.errmsg = "enter some data";

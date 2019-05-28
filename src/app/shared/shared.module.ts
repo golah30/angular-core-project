@@ -12,6 +12,7 @@ import { CommentCardComponent } from "./comment-card/comment-card.component";
 import { CommentFormComponent } from "./comment-form/comment-form.component";
 import { LikeComponent } from "./like/like.component";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { RouterModule } from "@angular/router";
 
 @NgModule({
     declarations: [
@@ -27,7 +28,7 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
         TabComponent,
         CommentFormComponent
     ],
-    imports: [CommonModule, FormsModule, ReactiveFormsModule],
+    imports: [CommonModule, FormsModule, ReactiveFormsModule, RouterModule],
     exports: [
         UserPicComponent,
         TagComponent,

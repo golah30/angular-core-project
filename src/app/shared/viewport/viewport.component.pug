@@ -3,15 +3,6 @@
     acp-to-top-button('(click)'='scrollTop(top)' '[active]'='isScrolled')
     .main__content-container
         ng-content
-div.side__content('[ngClass]'='{show: isSideContent}')
-    button.show-panel-button('(click)'='toggleSideContent()')
-        i.icon-keyboard_arrow_down('[ngClass]'='{left: isSideContent}')
-    .side__content-wrapper
-        form.demo-form
-            label.demo-form__input
-                span Field title 1
-                input(name='val1' placeholder='Something')
-            label.demo-form__input
-                span Field title 2
-                input(name='val2' placeholder='Something')
-            input.demo-form__input-submit(type="submit", value="Submit")
+ng-content(select='acp-workshop-sidebar')
+
+        

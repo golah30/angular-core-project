@@ -1,9 +1,10 @@
 @import "variables/variables";
 
 :host {
-    width: 400px;
+    width: 100%;
     display: flex;
     flex-wrap: wrap;
+    margin-top: 16px;
 }
 
 .comment__input {
@@ -13,7 +14,6 @@
     background-color: lighten(#000000, 100);
     caret-color: $primary;
     transition: all 0.4s;
-    min-width: 280px;
     flex-grow: 1;
     &:focus {
         background-color: lighten(#000000, 98);

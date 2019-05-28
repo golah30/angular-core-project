@@ -5,10 +5,13 @@
     display: flex;
     flex-wrap: nowrap;
 }
-.tab__item {
-}
+
 .tab__button {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
     background-color: lighten($dark, 80);
+    color: $dark;
     border: none;
     cursor: pointer;
     height: 36px;
@@ -21,4 +24,8 @@
     &:focus {
         outline: none;
     }
+}
+.tab__item.active .tab__button {
+    background-color: $primary;
+    color: $text;
 }

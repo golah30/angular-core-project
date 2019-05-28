@@ -1,6 +1,6 @@
 acp-card
     .header
-        a.article__link('[routerLink]'='routePath')
+        a.article__link('[routerLink]'="routePath")
             h2.article__title {{title}}
         ul.article__tags('*ngIf'='tags')
             li.article__tag('*ngFor'='let tag of tags') {{tag}}

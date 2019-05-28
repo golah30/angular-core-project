@@ -7,10 +7,7 @@ import { Component, OnInit, OnDestroy } from "@angular/core";
 })
 export class ViewportComponent implements OnInit, OnDestroy {
     constructor() {}
-    isSideContent: boolean = false;
-    toggleSideContent(): void {
-        this.isSideContent = !this.isSideContent;
-    }
+
     isScrolled: boolean = false;
     scrollTop($element): void {
         $element.scrollIntoView({

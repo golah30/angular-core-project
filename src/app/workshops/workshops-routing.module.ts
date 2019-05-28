@@ -3,6 +3,10 @@ import { RouterModule, Routes } from "@angular/router";
 import { WorkshopPageComponent } from "./workshop-page/workshop-page.component";
 import { WorkshopsFeedComponent } from "./workshops-feed/workshops-feed.component";
 import { WorkshopsResolver } from "../service/workshops/workshops.resolver";
+import { WorkshopCommentsComponent } from "./workshop-comments/workshop-comments.component";
+import { WorkshopQuizzesComponent } from "./workshop-quizzes/workshop-quizzes.component";
+import { WorkshopResourcesComponent } from "./workshop-resources/workshop-resources.component";
+
 const routes: Routes = [
     {
         path: "",
@@ -21,7 +25,32 @@ const routes: Routes = [
         component: WorkshopPageComponent,
         resolve: {
             article: WorkshopsResolver
-        }
+        },
+        children: [
+            {
+                path: "",
+                outlet: "aside",
+                children: [
+                    {
+                        path: "",
+                        redirectTo: "comments",
+                        pathMatch: "full"
+                    },
+                    {
+                        path: "comments",
+                        component: WorkshopCommentsComponent
+                    },
+                    {
+                        path: "quizzes",
+                        component: WorkshopQuizzesComponent
+                    },
+                    {
+                        path: "resources",
+                        component: WorkshopResourcesComponent
+                    }
+                ]
+            }
+        ]
     }
 ];
 

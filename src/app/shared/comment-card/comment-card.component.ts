@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from "@angular/core";
+import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
 import { Comment } from "../../interfaces";
 @Component({
     selector: "acp-comment-card",
@@ -7,7 +7,12 @@ import { Comment } from "../../interfaces";
 })
 export class CommentCardComponent implements OnInit {
     @Input() comment: Comment;
+    @Output() onDelete = new EventEmitter<string>();
     constructor() {}
+    delete() {
+        console.log("pre");
 
+        this.onDelete.emit(this.comment.id);
+    }
     ngOnInit() {}
 }

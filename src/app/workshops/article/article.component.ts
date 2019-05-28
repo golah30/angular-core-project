@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from "@angular/core";
+import { Router } from "@angular/router";
 
 @Component({
     selector: "acp-article",
@@ -14,7 +15,7 @@ export class ArticleComponent implements OnInit {
     @Input() routeId: string;
     @Input() date: string;
     routePath: string;
-    constructor() {}
+    constructor(private router: Router) {}
     likeToggle() {
         this.isFavorite = !this.isFavorite;
     }

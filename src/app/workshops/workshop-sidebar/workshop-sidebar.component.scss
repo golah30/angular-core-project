@@ -4,15 +4,13 @@
 .side__content {
     height: 100%;
     width: 0;
-    padding: 32px 0;
+
     box-shadow: -3px 0px 8px 0px rgba(0, 0, 0, 0.1);
-    overflow-x: hidden;
-    overflow-y: auto;
     flex-shrink: 0;
     transition: width 0.4s;
+    position: relative;
     &.show {
         width: 320px;
-        padding: 32px 10px;
     }
     @include medium() {
         display: none;
@@ -20,33 +18,40 @@
     @include wide() {
         &.show {
             width: 480px;
-            padding: 32px 10px;
         }
     }
 }
 
 .side__content-wrapper {
+    position: absolute;
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 2000px;
+    height: 100%;
+    width: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 32px 0;
+    z-index: 55;
+    background-color: $white;
 }
 
 .show-panel-button {
     position: absolute;
+    z-index: 50;
     border: none;
-    right: -24px;
-    top: 10px;
-    width: 60px;
-    height: 30px;
-    background-color: $primary;
-    color: $primary;
+    left: -24px;
+    top: 50%;
+    width: 48px;
+    height: 48px;
+    background-color: $dark;
     transform-origin: center;
     display: flex;
-    padding-left: 6px;
     align-items: center;
+    justify-content: center;
     outline: none;
     cursor: pointer;
+    transform: translateY(-50%) rotate(45deg);
     transition: color 0.4s, background-color 0.4s, right 0.4s;
     &:hover {
         background-color: $primary;
@@ -54,12 +59,19 @@
         right: 0px;
     }
     & i {
+        display: inline-block;
+        background-color: transparent;
         transition: transform 0.4s;
-        transform: rotate(90deg);
-        font-size: 24px;
-        color: $white;
+        transform: rotate(45deg);
+        margin-bottom: -20px;
+        margin-right: 20px;
+        &::before {
+            display: inline-block;
+            font-size: 32px;
+            color: $white;
+        }
         &.left {
-            transform: rotate(-90deg);
+            transform: rotate(-135deg);
         }
     }
 }

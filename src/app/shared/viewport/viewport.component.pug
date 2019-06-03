@@ -1,8 +1,6 @@
-.main__content
-    div(#top='')
-    acp-to-top-button('(click)'='scrollTop(top)' '[active]'='isScrolled')
-    .main__content-container
-        ng-content
-ng-content(select='acp-workshop-sidebar')
-
-        
+acp-to-top-button('[scrollEl]'='_scrollEl')
+.viewport
+    .main__content(#scroll='')
+        .main__content-container
+            ng-content
+    ng-content(select='acp-workshop-sidebar')

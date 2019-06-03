@@ -19,7 +19,7 @@
     transition: all 0.4s;
     &:hover {
         background-color: $primary;
-        color: $text;
+        color: $white;
     }
     &:focus {
         outline: none;
@@ -27,5 +27,5 @@
 }
 .tab__item.active .tab__button {
     background-color: $primary;
-    color: $text;
+    color: $white;
 }

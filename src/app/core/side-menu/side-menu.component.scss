@@ -50,7 +50,7 @@
 }
 .menu__link {
     text-decoration: none;
-    color: darken($text, 14);
+    color: darken($white, 14);
     cursor: pointer;
     display: flex;
     flex-direction: column;
@@ -58,7 +58,7 @@
     padding: 12px 0;
     transition: color 0.4s, background-color 0.4s;
     &:hover {
-        color: $text;
+        color: $white;
         background-color: lighten($dark, 5);
     }
     & i {

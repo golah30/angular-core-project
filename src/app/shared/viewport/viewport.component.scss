@@ -58,48 +58,6 @@
     align-items: center;
     height: 2000px;
 }
-.demo-form {
-    width: 300px;
-    text-align: center;
-}
-
-.demo-form__input {
-    text-align: left;
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 32px;
-    color: $dark;
-    & span {
-        margin-bottom: 8px;
-        font-size: 16px;
-        cursor: pointer;
-    }
-    & input {
-        background: lighten($dark, 80);
-        color: $dark;
-        border: none;
-        padding: 12px 8px;
-        font-size: 16px;
-        &:hover {
-            background: lighten($dark, 74);
-        }
-        &:focus {
-            background: lighten($dark, 74);
-        }
-    }
-}
-
-.demo-form__input-submit {
-    border: none;
-    background-color: $primary;
-    color: $text;
-    padding: 10px 24px;
-    cursor: pointer;
-    letter-spacing: 1px;
-    &:hover {
-        background: $primaryDark;
-    }
-}
 
 .show-panel-button {
     position: absolute;
@@ -109,7 +67,7 @@
     width: 60px;
     height: 30px;
     background-color: $primary;
-    color: $text;
+    color: $white;
     transform-origin: center;
     display: flex;
     padding-left: 6px;
@@ -118,7 +76,7 @@
     cursor: pointer;
     transition: background-color 0.4s, right 0.4s;
     &:hover {
-        background-color: $primaryDark;
+        background-color: $primary;
         right: 0px;
     }
     & i {

@@ -15,11 +15,11 @@
     transition: all 0.4s;
 
     &.active {
-        color: $text;
+        color: $white;
         background-color: $primary;
     }
     &:hover {
-        background-color: $primaryLight;
+        background-color: $primary;
         color: $dark;
     }
 }

@@ -49,15 +49,15 @@
     cursor: pointer;
     transition: color 0.4s, background-color 0.4s, right 0.4s;
     &:hover {
-        background-color: $primaryDark;
-        color: $primaryDark;
+        background-color: $primary;
+        color: $primary;
         right: 0px;
     }
     & i {
         transition: transform 0.4s;
         transform: rotate(90deg);
         font-size: 24px;
-        color: $text;
+        color: $white;
         &.left {
             transform: rotate(-90deg);
         }

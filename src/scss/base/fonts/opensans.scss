@@ -1,0 +1,45 @@
+$objectsans_path: "assets/fonts/objectsans/objectsans-";
+
+@font-face {
+    font-family: "object_sansheavy";
+    src: url("#{$objectsans_path}heavy-webfont.woff2") format("woff2"),
+        url("#{$objectsans_path}heavy-webfont.woff") format("woff"),
+        url("#{$objectsans_path}heavy-webfont.svg#object_sansheavy")
+            format("svg");
+
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "object_sansheavy_slanted";
+    src: url("#{$objectsans_path}heavyslanted-webfont.woff2") format("woff2"),
+        url("#{$objectsans_path}heavyslanted-webfont.woff") format("woff"),
+        url("#{$objectsans_path}heavyslanted-webfont.svg#object_sansheavy_slanted")
+            format("svg");
+
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "object_sansregular";
+    src: url("#{$objectsans_path}regular-webfont.woff2") format("woff2"),
+        url("#{$objectsans_path}regular-webfont.woff") format("woff"),
+        url("#{$objectsans_path}regular-webfont.svg#object_sansregular")
+            format("svg");
+
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "object_sansslanted";
+    src: url("#{$objectsans_path}slanted-webfont.woff2") format("woff2"),
+        url("#{$objectsans_path}slanted-webfont.woff") format("woff"),
+        url("#{$objectsans_path}slanted-webfont.svg#object_sansslanted")
+            format("svg");
+
+    font-weight: normal;
+    font-style: normal;
+}

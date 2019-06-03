@@ -31,11 +31,11 @@
         display: block;
     }
     & i {
-        color: $text;
+        color: $white;
         font-size: 32px;
         transition: color 0.4s;
         &:hover {
-            color: $secondary;
+            color: $primary;
         }
     }
 }
@@ -56,11 +56,11 @@
     cursor: pointer;
     outline: none;
     & i {
-        color: $text;
+        color: $white;
         font-size: 32px;
         transition: color 0.4s;
         &:hover {
-            color: $secondary;
+            color: $primary;
         }
     }
 }
@@ -89,7 +89,7 @@
         background-color: $dark;
         border: none;
         border-bottom: 1px solid $dark;
-        color: $text;
+        color: $white;
         transition: border-color 0.4s;
         font-size: 16px;
         &:focus {
@@ -104,16 +104,16 @@
     margin-left: 40px;
     &:hover {
         & .header__user-name {
-            color: $text;
+            color: $white;
         }
     }
 }
 .header__user-name {
     flex: 1;
-    color: $text;
+    color: $white;
     font-size: 16px;
     text-align: right;
-    color: darken($text, 14%);
+    color: darken($white, 14%);
     transition: color 0.4s;
     overflow: hidden;
     text-overflow: ellipsis;

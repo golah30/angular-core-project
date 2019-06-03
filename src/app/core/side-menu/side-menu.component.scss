@@ -14,7 +14,7 @@
         &.active {
             transition: left 0s ease 0s;
             .side__menu-backdrop {
-                background-color: rgba($dark, 0.2);
+                background-color: rgba($dark, 0.3);
             }
 
             & .side__menu-links {
@@ -58,7 +58,7 @@
     padding: 12px 0;
     transition: color 0.4s, background-color 0.4s;
     &:hover {
-        color: $white;
+        color: $primary;
         background-color: lighten($dark, 5);
     }
     & i {
@@ -69,8 +69,8 @@
         font-size: 16px;
     }
     &.active {
-        color: darken($red, 10);
-        background-color: lighten($dark, 5);
+        color: $dark;
+        background-color: $primary;
     }
     @include medium() {
         padding: 12px;

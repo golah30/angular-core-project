@@ -13,6 +13,7 @@ import { CommentFormComponent } from "./comment-form/comment-form.component";
 import { LikeComponent } from "./like/like.component";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { RouterModule } from "@angular/router";
+import { SvglogoComponent } from "./svglogo/svglogo.component";
 
 @NgModule({
     declarations: [
@@ -26,7 +27,8 @@ import { RouterModule } from "@angular/router";
         ViewportComponent,
         TabGroupComponent,
         TabComponent,
-        CommentFormComponent
+        CommentFormComponent,
+        SvglogoComponent
     ],
     imports: [CommonModule, FormsModule, ReactiveFormsModule, RouterModule],
     exports: [
@@ -40,7 +42,8 @@ import { RouterModule } from "@angular/router";
         ViewportComponent,
         TabGroupComponent,
         TabComponent,
-        CommentFormComponent
+        CommentFormComponent,
+        SvglogoComponent
     ]
 })
 export class SharedModule {}

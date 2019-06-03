@@ -23,6 +23,8 @@ export class AppComponent implements OnInit {
     }
 
     closeMenu(): void {
-        this.isMenu = false;
+        if (this.isMenu) {
+            this.isMenu = false;
+        }
     }
 }

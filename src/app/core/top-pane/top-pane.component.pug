@@ -1,19 +1,19 @@
-.header__container
-    ng-container(*ngIf='!isSearch; else headerControls')
-        .header__item
-            .header__logo
-                img(src="{{logoSrc}}" alt='ACP')
-            button.header__menu-icon('(click)'="toggleSideMenu()")
-                i([ngClass]='isMenu ? "icon-close" : "icon-menu"')
-            button.header__search('(click)'="toggleSearch()")
+.header__container([ngClass]='{activeSearch: isSearch}')
+    .header__item
+        .header__logo
+            acp-svglogo('[isDark]'='isSearch')
+        button.header__menu-icon('(click)'="toggleSideMenu()")
+            i([ngClass]='isMenu ? "icon-close" : "icon-menu"')
+        .search-bar([ngClass]='{active: isSearch}')
+            button.header__search-controll('(click)'="toggleSearch()")
+                i([ngClass]='isSearch ? "icon-close" : "icon-search"')
+            input(name='search' placeholder='Start typing')
+            button.header__search()
                 i.icon-search
-        .header__item.header__item--user('(click)'="account()")
-            .header__user-name {{user.name}}
-            .header__user-avatar
-                acp-user-pic('[src]'='user.img' '[name]'='user.name')
-        
-ng-template(#headerControls="")
-    .header__search--open
-        button.header__close-btn('(click)'='toggleSearch()')
-            i.icon-close
-        input(name='search' placeholder='Start typing')
+        .after
+            svg(viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg")
+                path(d="M0 0H50V25V50H0L50 25L0 0Z")
+    .header__item--user('(click)'="account()")
+        .header__user-name {{user.name}}
+        .header__user-avatar
+            acp-user-pic('[src]'='user.img' '[name]'='user.name')

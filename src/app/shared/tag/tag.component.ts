@@ -7,9 +7,8 @@ import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
 })
 export class TagComponent implements OnInit {
     @Input() tag: string;
-    @Input() isActive: boolean;
     @Output() onTagSelect = new EventEmitter<string>();
-
+    @Input() index: string;
     constructor() {}
 
     onTagClick(): void {

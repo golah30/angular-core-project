@@ -1,0 +1,25 @@
+@import "variables/variables";
+:host {
+    display: inline-block;
+    margin-bottom: 12px;
+}
+
+.tag {
+    display: block;
+    background-color: lighten($dark, 80%);
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 14px;
+    user-select: none;
+    cursor: pointer;
+    transition: all 0.4s;
+
+    &.active {
+        color: $white;
+        background-color: $primary;
+    }
+    &:hover {
+        background-color: $primary;
+        color: $dark;
+    }
+}

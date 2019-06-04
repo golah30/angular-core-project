@@ -15,7 +15,6 @@ export class WorkshopsFeedComponent implements OnInit, OnDestroy {
         { name: "Favorite", isActive: false },
         { name: "My Workshops", isActive: false }
     ];
-    data = "dataatatatataat";
     range: Array<number> | number;
     articles: Array<Article>;
     filteredActicles: Array<Article>;
@@ -31,7 +30,7 @@ export class WorkshopsFeedComponent implements OnInit, OnDestroy {
         });
 
         this.categories.forEach((t, i) => {
-            if (t.isActive && i !== 0) {
+            if (t.isActive) {
                 activeCategories.push(i);
             }
         });
@@ -40,6 +39,9 @@ export class WorkshopsFeedComponent implements OnInit, OnDestroy {
             this.categories[0].isActive = false;
         } else {
             this.categories[0].isActive = true;
+        }
+        if (!activeTags.length && !activeCategories.length) {
+            activeCategories.push(0);
         }
         this.router.navigate([], {
             relativeTo: this.route,
@@ -91,7 +93,7 @@ export class WorkshopsFeedComponent implements OnInit, OnDestroy {
             this.tags = data.workshops.tags;
             this.range = this.filteredActicles.length;
         });
-
+        this.setQueryParams();
         this.route.queryParams.subscribe(params => {
             this.onParamsChange(params);
         });

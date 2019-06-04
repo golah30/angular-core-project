@@ -16,6 +16,9 @@ import { RouterModule } from "@angular/router";
 import { SvglogoComponent } from "./svglogo/svglogo.component";
 import { ForRangeDirective } from "./directives/for-range.directive";
 import { AcpCollapseComponent } from "./directives/collapse/acp-collapse/acp-collapse.component";
+import { TextToColorDirective } from "./directives/text-to-color/text-to-color.directive";
+import { QueryParamsActiveDirective } from "./directives/query-params-active/query-params-active.directive";
+import { CategoryTagComponent } from "./category-tag/category-tag.component";
 
 @NgModule({
     declarations: [
@@ -32,7 +35,10 @@ import { AcpCollapseComponent } from "./directives/collapse/acp-collapse/acp-col
         CommentFormComponent,
         SvglogoComponent,
         ForRangeDirective,
-        AcpCollapseComponent
+        AcpCollapseComponent,
+        TextToColorDirective,
+        QueryParamsActiveDirective,
+        CategoryTagComponent
     ],
     imports: [CommonModule, FormsModule, ReactiveFormsModule, RouterModule],
     exports: [
@@ -49,7 +55,10 @@ import { AcpCollapseComponent } from "./directives/collapse/acp-collapse/acp-col
         CommentFormComponent,
         SvglogoComponent,
         ForRangeDirective,
-        AcpCollapseComponent
+        AcpCollapseComponent,
+        QueryParamsActiveDirective,
+        TextToColorDirective,
+        CategoryTagComponent
     ]
 })
 export class SharedModule {}

@@ -9,7 +9,7 @@ import { User } from "./interfaces";
 export class AppComponent implements OnInit {
     title: string = "acp-project";
     user: User = {
-        img: "../assets/images/avatar.png",
+        img: "",
         initials: "DK",
         name: "Khristofer Khristorozhdestvenskii"
     };

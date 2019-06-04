@@ -27,3 +27,14 @@
         content: attr(alt);
     }
 }
+
+.user-pic__placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    line-height: 100%;
+    position: relative;
+    transition: background-color 0.3s;
+    color: $dark;
+}

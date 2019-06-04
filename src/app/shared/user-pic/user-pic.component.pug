@@ -1,1 +1,14 @@
-img.user-pic__image(src="{{src}}" alt="{{initials}}")
+img.user-pic__image(
+    '*ngIf'='isSrc'
+    'acpTextToColor'
+    '[title]'='name'
+    src="{{src}}" 
+    alt="{{initials}}"
+)
+.user-pic__placeholder(
+    '*ngIf'='!isSrc'
+    'acpTextToColor'
+    '[darken]'='true'
+    '[title]'='name'
+) 
+    span {{initials}}

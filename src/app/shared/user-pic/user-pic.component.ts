@@ -10,7 +10,10 @@ export class UserPicComponent implements OnInit {
     @Input() name: string;
     constructor() {}
     initials: string = "UU";
+    isSrc: boolean;
+    colormap: Array<string> = ["#fdd000"];
     ngOnInit() {
+        this.isSrc = this.src !== "";
         let initials: string = "";
         this.name.split(" ").forEach(word => {
             initials += word[0].toUpperCase();

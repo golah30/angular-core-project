@@ -32,14 +32,25 @@ export class TextToColorDirective implements OnInit, OnChanges {
         "#a9e5bb"
     ];
     @Input() darken: boolean = false;
+    @Input() disabled: boolean = false;
 
     ngOnInit(): void {
+        if (this.disabled) {
+            this._renderer.setStyle(
+                this.elem.nativeElement,
+                "cursor",
+                "default"
+            );
+        }
         this._renderer.setStyle(
             this.elem.nativeElement,
             "background-color",
             this.toColor()
         );
         this._renderer.listen(this.elem.nativeElement, "mouseenter", e => {
+            if (this.disabled) {
+                return false;
+            }
             let lum = 0;
             if (this.darken) {
                 lum = -0.2;
@@ -57,6 +68,9 @@ export class TextToColorDirective implements OnInit, OnChanges {
             );
         });
         this._renderer.listen(this.elem.nativeElement, "mouseleave", e => {
+            if (this.disabled) {
+                return false;
+            }
             this._renderer.removeStyle(
                 this.elem.nativeElement,
                 "background-color"
@@ -78,6 +92,9 @@ export class TextToColorDirective implements OnInit, OnChanges {
     }
 
     toColor(): string {
+        if (this.disabled) {
+            return "#929292";
+        }
         let hash = 0;
         if (this.title.length === 0) return this.colorMap[hash];
         for (let i = 0; i < this.title.length; i++) {

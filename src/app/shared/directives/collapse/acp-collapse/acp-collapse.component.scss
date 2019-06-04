@@ -1,0 +1,19 @@
+@import "variables/variables";
+.content {
+    overflow: hidden;
+    background-color: red;
+}
+.controll-collapse {
+    cursor: pointer;
+    width: 150px;
+    background-color: $dark;
+    color: $white;
+    transition: all 0.4s;
+    text-align: center;
+    padding: 8px 12px;
+    letter-spacing: 1px;
+    &:hover {
+        color: $dark;
+        background-color: $primary;
+    }
+}

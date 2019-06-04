@@ -9,7 +9,7 @@ acp-viewport
             )
         ul.feed
             acp-article(
-                '*ngFor'='let article of filteredActicles'
+                '*acpForRange'='let article of filteredActicles; range: range'
                 '[routeId]'='article.id'
                 '[title]'='article.title'
                 '[image]'='article.image'
@@ -25,4 +25,3 @@ acp-viewport
                 '[isActive]'='tag.isActive' 
                 '(onTagSelect)'='onTagSelect($event)' 
             )
-        

@@ -14,6 +14,8 @@ import { LikeComponent } from "./like/like.component";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { RouterModule } from "@angular/router";
 import { SvglogoComponent } from "./svglogo/svglogo.component";
+import { ForRangeDirective } from "./directives/for-range.directive";
+import { AcpCollapseComponent } from "./directives/collapse/acp-collapse/acp-collapse.component";
 
 @NgModule({
     declarations: [
@@ -28,7 +30,9 @@ import { SvglogoComponent } from "./svglogo/svglogo.component";
         TabGroupComponent,
         TabComponent,
         CommentFormComponent,
-        SvglogoComponent
+        SvglogoComponent,
+        ForRangeDirective,
+        AcpCollapseComponent
     ],
     imports: [CommonModule, FormsModule, ReactiveFormsModule, RouterModule],
     exports: [
@@ -43,7 +47,9 @@ import { SvglogoComponent } from "./svglogo/svglogo.component";
         TabGroupComponent,
         TabComponent,
         CommentFormComponent,
-        SvglogoComponent
+        SvglogoComponent,
+        ForRangeDirective,
+        AcpCollapseComponent
     ]
 })
 export class SharedModule {}

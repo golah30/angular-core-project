@@ -15,6 +15,8 @@ export class WorkshopsFeedComponent implements OnInit, OnDestroy {
         { name: "Favorite", isActive: false },
         { name: "My Workshops", isActive: false }
     ];
+    data = "dataatatatataat";
+    range: Array<number> | number;
     articles: Array<Article>;
     filteredActicles: Array<Article>;
     userid: string = "178";
@@ -87,6 +89,7 @@ export class WorkshopsFeedComponent implements OnInit, OnDestroy {
             this.articles = data.workshops.articles;
             this.filteredActicles = data.workshops.articles;
             this.tags = data.workshops.tags;
+            this.range = this.filteredActicles.length;
         });
 
         this.route.queryParams.subscribe(params => {
@@ -166,5 +169,6 @@ export class WorkshopsFeedComponent implements OnInit, OnDestroy {
         }
 
         this.filteredActicles = filteredArticles;
+        this.range = this.filteredActicles.length;
     }
 }

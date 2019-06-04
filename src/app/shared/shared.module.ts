@@ -19,6 +19,7 @@ import { AcpCollapseComponent } from "./directives/collapse/acp-collapse/acp-col
 import { TextToColorDirective } from "./directives/text-to-color/text-to-color.directive";
 import { QueryParamsActiveDirective } from "./directives/query-params-active/query-params-active.directive";
 import { CategoryTagComponent } from "./category-tag/category-tag.component";
+import { HighlightDirective } from "./directives/highlight/highlight.directive";
 
 @NgModule({
     declarations: [
@@ -38,7 +39,8 @@ import { CategoryTagComponent } from "./category-tag/category-tag.component";
         AcpCollapseComponent,
         TextToColorDirective,
         QueryParamsActiveDirective,
-        CategoryTagComponent
+        CategoryTagComponent,
+        HighlightDirective
     ],
     imports: [CommonModule, FormsModule, ReactiveFormsModule, RouterModule],
     exports: [
@@ -58,7 +60,8 @@ import { CategoryTagComponent } from "./category-tag/category-tag.component";
         AcpCollapseComponent,
         QueryParamsActiveDirective,
         TextToColorDirective,
-        CategoryTagComponent
+        CategoryTagComponent,
+        HighlightDirective
     ]
 })
 export class SharedModule {}

@@ -10,6 +10,8 @@ acp-viewport
         ul.feed
             acp-article(
                 '*acpForRange'='let article of filteredActicles; range: range'
+                'acpHighlight'
+                '[isHighlight]'='article.author === userid'
                 '[routeId]'='article.id'
                 '[title]'='article.title'
                 '[image]'='article.image'

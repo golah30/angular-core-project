@@ -15,12 +15,11 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { RouterModule } from "@angular/router";
 import { SvglogoComponent } from "./svglogo/svglogo.component";
 import { ForRangeDirective } from "./directives/for-range.directive";
-import { AcpCollapseComponent } from "./directives/collapse/acp-collapse/acp-collapse.component";
 import { TextToColorDirective } from "./directives/text-to-color/text-to-color.directive";
 import { QueryParamsActiveDirective } from "./directives/query-params-active/query-params-active.directive";
 import { CategoryTagComponent } from "./category-tag/category-tag.component";
 import { HighlightDirective } from "./directives/highlight/highlight.directive";
-
+import { AcpCollapseComponent } from "./directives/collapse/acp-collapse/acp-collapse.component";
 @NgModule({
     declarations: [
         UserPicComponent,
@@ -36,11 +35,11 @@ import { HighlightDirective } from "./directives/highlight/highlight.directive";
         CommentFormComponent,
         SvglogoComponent,
         ForRangeDirective,
-        AcpCollapseComponent,
         TextToColorDirective,
         QueryParamsActiveDirective,
         CategoryTagComponent,
-        HighlightDirective
+        HighlightDirective,
+        AcpCollapseComponent
     ],
     imports: [CommonModule, FormsModule, ReactiveFormsModule, RouterModule],
     exports: [
@@ -57,11 +56,11 @@ import { HighlightDirective } from "./directives/highlight/highlight.directive";
         CommentFormComponent,
         SvglogoComponent,
         ForRangeDirective,
-        AcpCollapseComponent,
         QueryParamsActiveDirective,
         TextToColorDirective,
         CategoryTagComponent,
-        HighlightDirective
+        HighlightDirective,
+        AcpCollapseComponent
     ]
 })
 export class SharedModule {}

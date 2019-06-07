@@ -5,7 +5,7 @@ acp-card
         ul.article__tags('*ngIf'='tags')
             li.article__tag('*ngFor'='let tag of tags') {{tag}}
     .content
-        .article__image
+        a.article__image('[routerLink]'="routePath")
             img('[src]'='image' alt='Article image')
         .article__description {{description}}
     .footer

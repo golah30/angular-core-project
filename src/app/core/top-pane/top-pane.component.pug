@@ -1,6 +1,6 @@
 .header__container([ngClass]='{activeSearch: isSearch}')
     .header__item
-        .header__logo
+        a.header__logo(routerLink='/')
             acp-svglogo('[isDark]'='isSearch')
         button.header__menu-icon('(click)'="toggleSideMenu()")
             i([ngClass]='isMenu ? "icon-close" : "icon-menu"')

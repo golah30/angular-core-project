@@ -1,4 +1,5 @@
 @import "variables/variables";
+@import "mixins/mixins";
 :host {
     display: block;
     position: absolute;
@@ -23,10 +24,21 @@
         display: inline-block;
         font-size: 32px;
         transform: rotate(-45deg);
+        @include medium() {
+            font-size: 24px;
+        }
+    }
+    @include medium() {
+        width: 36px;
+        height: 36px;
     }
     &:hover {
         background-color: $primary;
         color: $dark;
+        @include medium() {
+            background-color: $dark;
+            color: $white;
+        }
     }
     &:focus {
         outline: none;

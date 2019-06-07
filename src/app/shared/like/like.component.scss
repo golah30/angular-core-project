@@ -1,10 +1,19 @@
 @import "variables/variables";
 :host {
-    display: inline-block;
-    width: 40px;
+    display: flex;
     height: 40px;
+    align-items: center;
+    flex-wrap: nowrap;
 }
-
+.counter {
+    font-size: 16px;
+    color: $dark;
+    transition: color 0.4s;
+    margin-right: 8px;
+    &.active {
+        color: $red;
+    }
+}
 .like {
     width: 100%;
     height: 100%;
@@ -33,7 +42,7 @@
         opacity: 1;
         transition: all 0.4s;
         &.active {
-            color: darken($red, 15%);
+            color: $red;
             &:last-child {
                 opacity: 1;
             }

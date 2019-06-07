@@ -7,6 +7,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
 })
 export class LikeComponent implements OnInit {
     @Input() isActive: boolean;
+    @Input() count: number;
     @Output() onLikeToggle = new EventEmitter();
     constructor() {}
     onClick(): void {

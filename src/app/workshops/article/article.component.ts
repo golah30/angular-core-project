@@ -14,10 +14,17 @@ export class ArticleComponent implements OnInit {
     @Input() tags: Array<string>;
     @Input() routeId: string;
     @Input() date: string;
+    @Input() likes: number;
     routePath: string;
     constructor(private router: Router) {}
     likeToggle() {
         this.isFavorite = !this.isFavorite;
+
+        if (this.isFavorite) {
+            this.likes++;
+        } else {
+            this.likes--;
+        }
     }
     ngOnInit() {
         this.routePath = `/workshops/${this.routeId}`;

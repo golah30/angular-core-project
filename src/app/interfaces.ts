@@ -6,6 +6,7 @@ export interface Article {
     id: string;
     title: string;
     isFavorite: boolean;
+    likes: number;
     tags: Array<string>;
     description: string;
     content: string;

@@ -1,0 +1,79 @@
+@import "variables/variables";
+:host {
+    display: block;
+    flex-grow: 1;
+}
+
+.container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.status {
+    width: 300px;
+    & svg {
+        width: 100%;
+    }
+    margin-bottom: 16px;
+}
+
+.title {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 16px;
+}
+.desc {
+    width: 190px;
+    text-align: center;
+    font-size: 14px;
+    line-height: 150%;
+    margin-bottom: 32px;
+}
+
+.link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    width: 120px;
+    height: 36px;
+    text-decoration: none;
+    color: $white;
+    background-color: $dark;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    &:hover {
+        background-color: $primary;
+        color: $dark;
+        &::before {
+            border-right-color: $primary;
+        }
+        &::after {
+            border-left-color: $primary;
+        }
+    }
+    &::before {
+        content: "";
+        display: block;
+        position: absolute;
+        left: -36px;
+        top: 0;
+        border: 18px solid transparent;
+        border-right-color: $dark;
+        transition: border-color 0.3s;
+    }
+    &::after {
+        content: "";
+        display: block;
+        position: absolute;
+        right: -36px;
+        top: 0;
+        border: 18px solid transparent;
+        border-left-color: $dark;
+        transition: border-color 0.3s;
+    }
+}

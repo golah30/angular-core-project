@@ -2,9 +2,9 @@ $path: "assets/fonts/icomoon/icomoon.";
 
 @font-face {
     font-family: "icomoon";
-    src: url("#{$path}ttf?72vqsh") format("truetype"),
-        url("#{$path}woff?72vqsh") format("woff"),
-        url("#{$path}svg?72vqsh#icomoon") format("svg");
+    src: url("#{$path}ttf?rzz3nk") format("truetype"),
+        url("#{$path}woff?rzz3nk") format("woff"),
+        url("#{$path}svg?rzz3nk#icomoon") format("svg");
 
     font-weight: normal;
     font-style: normal;
@@ -59,6 +59,9 @@ $path: "assets/fonts/icomoon/icomoon.";
 .icon-question_answer:before {
     content: "\e8af";
 }
+.icon-star:before {
+    content: "\e838";
+}
 .icon-info:before {
     content: "\e88e";
 }
@@ -97,6 +100,9 @@ $path: "assets/fonts/icomoon/icomoon.";
 }
 .icon-settings:before {
     content: "\e8b8";
+}
+.icon-star_border:before {
+    content: "\e83a";
 }
 .icon-view_compact:before {
     content: "\e42b";

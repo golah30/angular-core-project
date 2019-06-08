@@ -8,7 +8,7 @@ import { Router } from "@angular/router";
 })
 export class TabComponent implements OnInit {
     constructor(private router: Router) {}
-    @Input("title") title: string;
+    @Input() title: string;
     @Input() active: boolean = false;
     @Input() link: string;
     ngOnInit() {}

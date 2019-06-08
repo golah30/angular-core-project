@@ -1,5 +1,7 @@
 .counter('[ngClass]'='{active: isActive}') {{count}}
-.like('(click)'='onClick()')
+.like('(click)'='onClick()' '*ngIf'='type === "like"')
     i.icon-favorite_border
     i.icon-favorite('[ngClass]'='{active: isActive}')
-
+.star('(click)'='onClick()' '*ngIf'='type === "star"')
+    i.icon-star_border
+    i.icon-star('[ngClass]'='{active: isActive}')

@@ -23,14 +23,15 @@
     overflow: auto;
     position: relative;
     @include medium() {
-        padding: 24px 5%;
+        padding: 0;
     }
     @include small() {
-        padding: 16px 5%;
+        padding: 0;
     }
 }
 .main__content-container {
     max-width: 1440px;
+    width: 100%;
 }
 
 .side__content {

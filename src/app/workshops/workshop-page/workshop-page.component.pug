@@ -1,15 +1,29 @@
 acp-viewport
-    .container
-        acp-card
-            .header
-                .article__image
-                    img('[src]'='article.image' alt='Article image')
-            .footer
-                acp-timestamp('[date]'='article.date')
-                acp-like('[isActive]'='article.isFavorite' '(onLikeToggle)'='likeToggle()')
-                .article__description {{article.content}}
-            .content
-                h2.article__title {{article.title}}
-                ul.article__tags('*ngIf'='article.tags')
-                    li.article__tag('*ngFor'='let tag of article.tags') {{tag}}
+    .top-container
+        .desc-block
+            h2.title {{article.title}}
+            ul.article__tags('*ngIf'='article.tags')
+                li.article__tag('*ngFor'='let tag of article.tags') {{tag}}
+            .author
+                span {{article.author}}
+            .date
+                acp-timestamp('[date]'='article.date')  
+        .image-block('[ngStyle]'="{ 'background-image': 'url('+article.image+')'}")
+    .content
+        .text {{article.content}}
+        .points
+            .likes
+                acp-like(
+                    '[isActive]'='article.isLike' 
+                    type='like' 
+                    '[count]'='article.likes' 
+                    '(onLikeToggle)'='likeToggle()'
+                    )
+            .stars
+                acp-like(
+                    '[isActive]'='article.isFavorite' 
+                    type='star' 
+                    '[count]'='article.stars' 
+                    '(onLikeToggle)'='favoriteToggle()'
+                    )
     acp-workshop-sidebar

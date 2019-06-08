@@ -1,4 +1,5 @@
 @import "variables/variables";
+@import "mixins/mixins";
 :host {
     display: inline-block;
 }
@@ -6,4 +7,5 @@
     font-size: 14px;
     letter-spacing: 0.5px;
     opacity: 0.74;
+    font-family: $montserrat;
 }

@@ -30,7 +30,7 @@
         outline: none;
     }
 }
-.tab__item.active .tab__button {
+.tab__button.active {
     background-color: $primary;
     color: $dark;
 }

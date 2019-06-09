@@ -9,18 +9,45 @@
     justify-content: center;
 }
 .feed {
-    margin: 0 16px;
+    @include large() {
+        width: 46%;
+    }
     @include medium() {
-        margin: 0;
+        width: auto;
     }
 }
 .tags {
+    position: fixed;
+    margin-top: 40px;
+    left: calc(50% + 280px + 80px);
+    display: flex;
+    width: 130px;
+    flex-direction: column;
+    align-self: flex-start;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    @include large() {
+        left: calc(50% + 18% + 80px);
+    }
+    @include medium() {
+        display: none;
+    }
+}
+
+.categories {
+    position: fixed;
+    top: 70px;
+    left: calc(50% - 280px - 75px);
+    width: 130px;
     margin-top: 40px;
     display: flex;
     flex-direction: column;
     align-self: flex-start;
     flex-wrap: wrap;
     justify-content: space-around;
+    @include large() {
+        left: calc(50% - 18% - 75px);
+    }
     @include medium() {
         display: none;
     }

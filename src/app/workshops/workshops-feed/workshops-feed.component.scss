@@ -1,4 +1,6 @@
 @import "mixins/mixins";
+@import "variables/variables";
+
 :host {
     display: block;
     flex-grow: 1;

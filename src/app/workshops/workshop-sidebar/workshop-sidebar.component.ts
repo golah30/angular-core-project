@@ -1,5 +1,8 @@
 import { Component, OnInit } from "@angular/core";
-
+interface Tab {
+    title: string;
+    link: any;
+}
 @Component({
     selector: "acp-workshop-sidebar",
     templateUrl: "./workshop-sidebar.component.pug",
@@ -18,4 +21,18 @@ export class WorkshopSidebarComponent implements OnInit {
     }
     link: string | null = "comments";
     ngOnInit() {}
+    tabs: Array<Tab> = [
+        {
+            title: "Comments",
+            link: [{ outlets: { aside: ["comments"] } }]
+        },
+        {
+            title: "Quizzes",
+            link: [{ outlets: { aside: ["quizzes"] } }]
+        },
+        {
+            title: "Resources",
+            link: [{ outlets: { aside: ["resources"] } }]
+        }
+    ];
 }

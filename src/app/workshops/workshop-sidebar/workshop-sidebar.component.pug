@@ -2,9 +2,9 @@ div.side__content('[ngClass]'='{show: isSideContent}')
     a.show-panel-button('(click)'='toggleSideContent()' '[routerLink]'='[{outlets: {aside: link}}]')
         i.icon-keyboard_arrow_down('[ngClass]'='{left: isSideContent}')
     .side__content-wrapper
-        acp-tab-group
-            acp-tab('[title]'='"Comments"' '[link]'='"comments"')
-            acp-tab('[title]'='"Quizzes"' '[link]'='"quizzes"')
-            acp-tab('[title]'='"Resources"' '[link]'='"resources"')
-        router-outlet(name="aside")
+        .tabs-container
+            acp-tab-group
+                acp-tab('*ngFor'='let tab of tabs' '[title]'='tab.title' '[link]'='tab.link')
+        .scrollable
+            router-outlet(name="aside")
     

@@ -4,5 +4,5 @@ ul.tab__list
         '[ngClass]'='{active: tab.active}' 
         '(click)'='selectTab(tab)'
     )
-        a.tab__button('[routerLink]'="[{ outlets: { aside: [ tab.link ] } }]") {{tab.title}}
+        a.tab__button('[routerLink]'="tab.link") {{tab.title}}
 ng-content

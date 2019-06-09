@@ -1,25 +1,30 @@
 @import "variables/variables";
 :host {
+    display: block;
 }
 .tab__list {
     display: flex;
     flex-wrap: nowrap;
+    width: 100%;
 }
-
+.tab__item {
+    width: 33.333%;
+}
 .tab__button {
     display: flex;
     align-items: center;
+    justify-content: center;
     text-decoration: none;
-    background-color: lighten($dark, 80);
+    background-color: lighten($dark, 90);
     color: $dark;
     border: none;
     cursor: pointer;
     height: 36px;
-    padding: 0 12px;
+    text-align: center;
     transition: all 0.4s;
     &:hover {
         background-color: $primary;
-        color: $white;
+        color: $dark;
     }
     &:focus {
         outline: none;
@@ -27,5 +32,5 @@
 }
 .tab__item.active .tab__button {
     background-color: $primary;
-    color: $white;
+    color: $dark;
 }

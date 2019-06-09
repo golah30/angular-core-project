@@ -19,6 +19,7 @@ export class WorkshopsFeedComponent implements OnInit, OnDestroy {
     articles: Array<Article>;
     filteredActicles: Array<Article>;
     userid: string = "178";
+    count: boolean;
     setQueryParams() {
         let activeTags: Array<number> = [];
         let activeCategories: Array<number> = [];
@@ -92,8 +93,9 @@ export class WorkshopsFeedComponent implements OnInit, OnDestroy {
             this.filteredActicles = data.workshops.articles;
             this.tags = data.workshops.tags;
             this.range = this.filteredActicles.length;
+            this.count = this.filteredActicles.length !== 0;
         });
-        this.setQueryParams();
+        // this.setQueryParams();
         this.route.queryParams.subscribe(params => {
             this.onParamsChange(params);
         });
@@ -172,5 +174,6 @@ export class WorkshopsFeedComponent implements OnInit, OnDestroy {
 
         this.filteredActicles = filteredArticles;
         this.range = this.filteredActicles.length;
+        this.count = filteredArticles.length !== 0;
     }
 }

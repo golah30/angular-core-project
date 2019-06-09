@@ -8,6 +8,7 @@ acp-viewport
                 '[index]'='i'
             )
         ul.feed
+            .empty('*ngIf'='!count') No articles for this filters
             acp-article(
                 '*acpForRange'='let article of filteredActicles; range: range'
                 'acpHighlight'

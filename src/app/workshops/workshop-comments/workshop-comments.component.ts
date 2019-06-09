@@ -12,33 +12,48 @@ export class WorkshopCommentsComponent implements OnInit {
     comments: Array<Comment> = [
         {
             id: "12",
-            username: "Some user name",
+            username: "Some user",
             text: "Lorem ipsum dolore",
-            date: new Date()
+            date: new Date(),
+            author: "U312"
         },
         {
             id: "14",
-            username: "Some user name",
+            username: "asdsssads wwss",
             text: "Lorem ipsum dolore",
-            date: new Date()
+            date: new Date(),
+            author: "U312"
         },
         {
             id: "15",
-            username: "Some user name",
+            username: "Riko Mandella",
             text: "Lorem ipsum dolore",
-            date: new Date()
+            date: new Date(),
+            author: "U32222"
         }
     ];
     comment: Comment = {
         id: "",
         username: "",
         text: "",
+        author: "U312",
         date: new Date()
     };
     submit(comment: Comment) {
         console.log(comment);
         this.comments.unshift(comment);
         console.log("comment created");
+    }
+    onEdit(comment: Comment) {
+        console.log(comment);
+
+        this.comments = this.comments.map(c => {
+            if (c.id === comment.id) {
+                return comment;
+            } else {
+                return c;
+            }
+        });
     }
     onDelete(id: string) {
         console.log("deelte");

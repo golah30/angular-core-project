@@ -21,6 +21,7 @@ export interface Comment {
     username: string;
     text: string;
     date: Date;
+    author: string;
 }
 export interface User {
     img: string;

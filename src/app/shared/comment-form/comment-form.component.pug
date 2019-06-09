@@ -1,8 +1,9 @@
-input.comment__input(
+textarea.comment__input(
     '[formControl]'='inputControl' 
     '[ngClass]'='{err: errmsg}' 
     '(focus)'='focus()' 
     placeholder='Enter your comment'
+    '(keydown)'='autosize($event)'
     )
 button.comment__button('(click)'='onSubmit()') 
     i.icon-check

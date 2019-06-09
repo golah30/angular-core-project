@@ -8,30 +8,32 @@
 }
 
 .comment__input {
+    overflow: hidden;
+    resize: none;
     padding: 18px 12px;
     border: none;
-    border-bottom: 2px solid lighten(#000000, 80);
-    background-color: lighten(#000000, 100);
-    caret-color: $primary;
+    background-color: lighten($dark, 90);
+    caret-color: $dark;
+    color: $dark;
     transition: all 0.4s;
     flex-grow: 1;
     &:focus {
-        background-color: lighten(#000000, 98);
-        border-color: $primary;
+        background-color: lighten($dark, 88);
+        outline: none;
     }
     &:hover {
-        background-color: lighten(#000000, 98);
+        background-color: lighten($dark, 88);
     }
     &.err {
         background-color: lighten($red, 25);
-        border-color: darken($red, 20);
+        color: $white;
     }
 }
 .comment__button {
     padding: 0;
     margin: 0;
     display: flex;
-    color: $primary;
+    color: $dark;
     border: none;
     cursor: pointer;
     transition: all 0.4s;
@@ -42,7 +44,7 @@
         outline: none;
     }
     &:hover {
-        color: $primary;
+        color: lighten($dark, 50);
     }
 }
 

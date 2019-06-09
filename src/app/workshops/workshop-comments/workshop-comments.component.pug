@@ -1,4 +1,9 @@
-acp-comment-form('[comment]'='comment' '(submit)'='submit($event)')
 ul.comments
-    acp-comment-card('*ngFor'='let comment of comments' '[comment]'='comment' '(onDelete)'='onDelete($event)')
-        acp-timestamp('[date]'='comment.date')
+    acp-comment-card(
+        '*ngFor'='let comment of comments' 
+        '[comment]'='comment' 
+        currentUserId='U312' 
+        '(onDelete)'='onDelete($event)'
+        '(onEdit)'='onEdit($event)'
+    )
+    acp-comment-form('[comment]'='comment' '(submit)'='submit($event)')

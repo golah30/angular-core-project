@@ -1,5 +1,14 @@
-.comment__username {{comment.username}}
-ng-content
-p.comment__text {{comment.text}}
-button.delete('(click)'="delete()") Delete comment
+.user-pic
+    acp-user-pic('[src]'='""' '[name]'='comment.username')
+.content
+    .user-name {{comment.username}}
+    .date
+        acp-timestamp('[date]'='comment.date')
+    p.comment__text('*ngIf'='!isEdit') {{comment.text}}
+    .edit('*ngIf'='isEdit')
+        acp-comment-form('[comment]'='comment' '(submit)'='onCommentEdit($event)')
+    .controls('*ngIf'='userCompare')
+        button.edit('(click)'='edit()') edit
+        button.delete('(click)'="delete()") delete
+    
 

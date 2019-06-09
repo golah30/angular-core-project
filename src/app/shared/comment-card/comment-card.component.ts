@@ -8,11 +8,21 @@ import { Comment } from "../../interfaces";
 export class CommentCardComponent implements OnInit {
     @Input() comment: Comment;
     @Output() onDelete = new EventEmitter<string>();
+    @Output() onEdit = new EventEmitter<Comment>();
+    @Input() currentUserId: string;
     constructor() {}
+    userCompare: boolean = false;
+    isEdit: boolean = false;
     delete() {
-        console.log("pre");
-
         this.onDelete.emit(this.comment.id);
     }
-    ngOnInit() {}
+    edit() {
+        this.isEdit = !this.isEdit;
+    }
+    onCommentEdit(comment: Comment) {
+        this.onEdit.emit(comment);
+    }
+    ngOnInit() {
+        this.userCompare = this.currentUserId === this.comment.author;
+    }
 }

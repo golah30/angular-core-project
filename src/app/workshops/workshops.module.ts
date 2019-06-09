@@ -6,11 +6,12 @@ import { ArticleComponent } from "./article/article.component";
 import { WorkshopsRoutingModule } from "./workshops-routing.module";
 import { SharedModule } from "../shared/shared.module";
 import { WorkshopsService } from "../service/workshops/workshops.service";
-import { WorkshopSidebarComponent } from './workshop-sidebar/workshop-sidebar.component';
-import { WorkshopCommentsComponent } from './workshop-comments/workshop-comments.component';
-import { WorkshopQuizzesComponent } from './workshop-quizzes/workshop-quizzes.component';
-import { WorkshopResourcesComponent } from './workshop-resources/workshop-resources.component';
-
+import { WorkshopSidebarComponent } from "./workshop-sidebar/workshop-sidebar.component";
+import { WorkshopCommentsComponent } from "./workshop-comments/workshop-comments.component";
+import { WorkshopQuizzesComponent } from "./workshop-quizzes/workshop-quizzes.component";
+import { WorkshopResourcesComponent } from "./workshop-resources/workshop-resources.component";
+import { WorkshopsResolver } from "../service/workshops/workshops.resolver";
+import { WorkshopResolver } from "../service/workshops/workshop.resolver";
 @NgModule({
     declarations: [
         WorkshopPageComponent,
@@ -21,7 +22,7 @@ import { WorkshopResourcesComponent } from './workshop-resources/workshop-resour
         WorkshopQuizzesComponent,
         WorkshopResourcesComponent
     ],
-    providers: [WorkshopsService],
+    providers: [WorkshopsService, WorkshopsResolver, WorkshopResolver],
     imports: [CommonModule, WorkshopsRoutingModule, SharedModule]
 })
 export class WorkshopsModule {}

@@ -1,5 +1,5 @@
 acp-viewport
-    .top-container
+    .top-container('*ngIf'='article')
         .desc-block
             h2.title {{article.title}}
             ul.article__tags('*ngIf'='article.tags')

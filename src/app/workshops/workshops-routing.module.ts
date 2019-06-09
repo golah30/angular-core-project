@@ -3,6 +3,7 @@ import { RouterModule, Routes } from "@angular/router";
 import { WorkshopPageComponent } from "./workshop-page/workshop-page.component";
 import { WorkshopsFeedComponent } from "./workshops-feed/workshops-feed.component";
 import { WorkshopsResolver } from "../service/workshops/workshops.resolver";
+import { WorkshopResolver } from "../service/workshops/workshop.resolver";
 import { WorkshopCommentsComponent } from "./workshop-comments/workshop-comments.component";
 import { WorkshopQuizzesComponent } from "./workshop-quizzes/workshop-quizzes.component";
 import { WorkshopResourcesComponent } from "./workshop-resources/workshop-resources.component";
@@ -24,7 +25,7 @@ const routes: Routes = [
         path: ":id",
         component: WorkshopPageComponent,
         resolve: {
-            article: WorkshopsResolver
+            article: WorkshopResolver
         },
         children: [
             {

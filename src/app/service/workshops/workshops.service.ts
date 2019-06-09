@@ -9,11 +9,15 @@ export class WorkshopsService {
         articles: ARTICLES,
         tags: TAGS
     };
-    public getWorkshops(id: string): Observable<any> {
-        if (id) {
+    public getWorkshops(): Observable<any> {
+        return of(this.workshops);
+    }
+    public getWorkshopById(id: string): Observable<any> {
+        let workshop = this.workshops.articles.filter(e => e.id === id)[0];
+        if (workshop) {
             return of(this.workshops.articles.filter(e => e.id === id)[0]);
         } else {
-            return of(this.workshops);
+            return of({ error: true });
         }
     }
 }

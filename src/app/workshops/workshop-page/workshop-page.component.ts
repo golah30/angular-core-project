@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { Article } from "../../interfaces";
 
 @Component({
@@ -9,7 +9,7 @@ import { Article } from "../../interfaces";
 })
 export class WorkshopPageComponent implements OnInit {
     article: Article;
-    constructor(private route: ActivatedRoute) {}
+    constructor(private route: ActivatedRoute, private router: Router) {}
     likeToggle() {
         this.article.isLike = !this.article.isLike;
         if (this.article.isLike) {
@@ -29,7 +29,11 @@ export class WorkshopPageComponent implements OnInit {
 
     ngOnInit() {
         this.route.data.subscribe(data => {
-            this.article = data.article;
+            if (!data.article.error) {
+                this.article = data.article;
+            } else {
+                this.router.navigate(["/404"]);
+            }
         });
     }
 }

@@ -10,8 +10,7 @@ import { WorkshopSidebarComponent } from "./workshop-sidebar/workshop-sidebar.co
 import { WorkshopCommentsComponent } from "./workshop-comments/workshop-comments.component";
 import { WorkshopQuizzesComponent } from "./workshop-quizzes/workshop-quizzes.component";
 import { WorkshopResourcesComponent } from "./workshop-resources/workshop-resources.component";
-import { WorkshopsResolver } from "../service/workshops/workshops.resolver";
-import { WorkshopResolver } from "../service/workshops/workshop.resolver";
+
 @NgModule({
     declarations: [
         WorkshopPageComponent,
@@ -22,7 +21,7 @@ import { WorkshopResolver } from "../service/workshops/workshop.resolver";
         WorkshopQuizzesComponent,
         WorkshopResourcesComponent
     ],
-    providers: [WorkshopsService, WorkshopsResolver, WorkshopResolver],
+    providers: [WorkshopsService],
     imports: [CommonModule, WorkshopsRoutingModule, SharedModule]
 })
 export class WorkshopsModule {}

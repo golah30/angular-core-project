@@ -12,7 +12,7 @@ export class TagComponent implements OnInit {
     constructor() {}
 
     onTagClick(): void {
-        this.onTagSelect.emit(this.tag);
+        this.onTagSelect.emit(this.index);
     }
     ngOnInit() {}
 }

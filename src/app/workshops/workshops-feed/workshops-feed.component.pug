@@ -1,5 +1,5 @@
 acp-viewport
-    .workshops-container
+    .workshops-container('*ngIf'='!loading')
         .categories
             acp-category-tag(
                 '*ngFor'='let category of categories; let i = index'
@@ -7,27 +7,31 @@ acp-viewport
                 '(onCtgSelect)'='onCategorySelect($event)'
                 '[index]'='i'
             )
-        ul.feed
-            .empty('*ngIf'='!count') No articles for this filters
-            acp-article(
-                '*acpForRange'='let article of filteredActicles; range: range'
-                'acpHighlight'
-                '[isHighlight]'='article.author === userid'
-                '[routeId]'='article.id'
-                '[title]'='article.title'
-                '[image]'='article.image'
-                '[description]'='article.description'
-                '[isFavorite]'='article.isFavorite'
-                '[tags]'='article.tags'
-                '[date]'='article.date'
-                '[likes]'='article.likes'
-                '[stars]'='article.stars'
-                '[author]'='article.author'
-            )
+        ng-container('*ngIf'='count; else empty')
+            ul.feed
+                acp-article(
+                    '*acpForRange'='let article of articles; range: range'
+                    'acpHighlight'
+                    '[isHighlight]'='article.author === userid'
+                    '[routeId]'='article.id'
+                    '[title]'='article.title'
+                    '[image]'='article.image'
+                    '[description]'='article.description'
+                    '[isFavorite]'='article.isFavorite'
+                    '[tags]'='article.tags'
+                    '[date]'='article.createdAt'
+                    '[likes]'='article.likes'
+                    '[stars]'='article.stars'
+                    '[author]'='article.author'
+                )
         .tags
             acp-tag(
                 '*ngFor'='let tag of tags; let i = index'
                 '[tag]'='tag.name' 
                 '(onTagSelect)'='onTagSelect($event)' 
-                '[index]'='i'
+                '[index]'='tag.seq'
             )
+
+ng-template('#empty'='')
+     ul.feed
+        .empty No articles for this filters

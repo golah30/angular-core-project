@@ -1,6 +1,6 @@
 export interface Tag {
+    seq: number;
     name: string;
-    isActive: boolean;
 }
 export interface Article {
     id: string;
@@ -9,11 +9,11 @@ export interface Article {
     isLike: boolean;
     likes: number;
     stars: number;
-    tags: Array<string>;
+    tags: Array<number>;
     description: string;
     content: string;
     image: string;
-    date: Date;
+    createdAt: string;
     author: string;
 }
 export interface Comment {

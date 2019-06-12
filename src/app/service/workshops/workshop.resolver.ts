@@ -7,6 +7,6 @@ import { WorkshopsService } from "./workshops.service";
 export class WorkshopResolver implements Resolve<Observable<any>> {
     constructor(private workshopsService: WorkshopsService) {}
     resolve(route: ActivatedRouteSnapshot): Observable<any> {
-        return this.workshopsService.getWorkshopById(route.params.id);
+        return this.workshopsService.getPostById(route.params.id);
     }
 }

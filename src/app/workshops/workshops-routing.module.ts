@@ -2,7 +2,7 @@ import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 import { WorkshopPageComponent } from "./workshop-page/workshop-page.component";
 import { WorkshopsFeedComponent } from "./workshops-feed/workshops-feed.component";
-import { WorkshopsResolver } from "../service/workshops/workshops.resolver";
+// import { WorkshopsResolver } from "../service/workshops/workshops.resolver";
 import { WorkshopResolver } from "../service/workshops/workshop.resolver";
 import { WorkshopCommentsComponent } from "./workshop-comments/workshop-comments.component";
 import { WorkshopQuizzesComponent } from "./workshop-quizzes/workshop-quizzes.component";
@@ -16,10 +16,10 @@ const routes: Routes = [
     },
     {
         path: "feed",
-        component: WorkshopsFeedComponent,
-        resolve: {
-            workshops: WorkshopsResolver
-        }
+        component: WorkshopsFeedComponent
+        // resolve: {
+        //     workshops: WorkshopsResolver
+        // }
     },
     {
         path: ":id",
@@ -57,7 +57,7 @@ const routes: Routes = [
 
 @NgModule({
     imports: [RouterModule.forChild(routes)],
-    providers: [WorkshopsResolver],
+    providers: [WorkshopResolver],
     exports: [RouterModule]
 })
 export class WorkshopsRoutingModule {}

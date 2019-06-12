@@ -14,6 +14,6 @@ export class CategoryTagComponent implements OnInit {
     ngOnInit() {}
 
     onCtgClick(): void {
-        this.onCtgSelect.emit(this.ctg);
+        this.onCtgSelect.emit(this.index);
     }
 }

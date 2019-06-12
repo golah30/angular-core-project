@@ -1,179 +1,163 @@
 import { Component, OnInit, OnDestroy } from "@angular/core";
 import { Tag, Article } from "../../interfaces";
 import { Router, ActivatedRoute, Params } from "@angular/router";
-
+import { WorkshopsService } from "../../service/workshops/workshops.service";
+import { TagsService } from "../../service/tags/tags.service";
 @Component({
     selector: "acp-workshops-feed",
     templateUrl: "./workshops-feed.component.pug",
     styleUrls: ["./workshops-feed.component.scss"]
 })
 export class WorkshopsFeedComponent implements OnInit, OnDestroy {
-    constructor(private route: ActivatedRoute, private router: Router) {}
+    constructor(
+        private WorkshopsService: WorkshopsService,
+        private TagsService: TagsService,
+        private route: ActivatedRoute,
+        private router: Router
+    ) {}
     tags: Array<Tag>;
-    categories: Array<Tag> = [
-        { name: "All", isActive: false },
-        { name: "Favorite", isActive: false },
-        { name: "My Workshops", isActive: false }
+    categories: Array<any> = [
+        { name: "All" },
+        { name: "Favorite" },
+        { name: "My Workshops" }
     ];
     range: Array<number> | number;
-    articles: Array<Article>;
-    filteredActicles: Array<Article>;
+    articles: Array<Article> = [];
     userid: string = "178";
-    count: boolean;
-    setQueryParams() {
-        let activeTags: Array<number> = [];
-        let activeCategories: Array<number> = [];
+    count: boolean = false;
+    loading: boolean = true;
 
-        this.tags.forEach((t, i) => {
-            if (t.isActive) {
-                activeTags.push(i);
-            }
+    ngOnInit() {
+        this.TagsService.getTags().subscribe(data => {
+            this.tags = data;
+            this.loading = false;
         });
 
-        this.categories.forEach((t, i) => {
-            if (t.isActive) {
-                activeCategories.push(i);
-            }
+        this.route.queryParamMap.subscribe(params => {
+            this.onParamsChange(params);
         });
+    }
 
-        if (activeTags.length || activeCategories.length) {
-            this.categories[0].isActive = false;
-        } else {
-            this.categories[0].isActive = true;
-        }
-        if (!activeTags.length && !activeCategories.length) {
-            activeCategories.push(0);
-        }
+    setQueryParams(tags: Array<number>, ctgs: Array<number>) {
         this.router.navigate([], {
             relativeTo: this.route,
             queryParams: {
-                tags: activeTags.length ? activeTags.toString() : null,
-                categories: activeCategories.length
-                    ? activeCategories.toString()
-                    : null
+                tags: tags && tags.length ? tags.toString() : null,
+                categories: ctgs && ctgs.length ? ctgs.toString() : null
             },
             queryParamsHandling: "merge"
         });
     }
-    onTagSelect(tag: string): void {
-        this.tags.forEach(t => {
-            if (t.name === tag) {
-                t.isActive = !t.isActive;
-            }
-        });
-        this.setQueryParams();
-    }
-
-    onCategorySelect(tag: string): void {
-        if (tag === this.categories[0].name) {
-            this.categories.forEach(t => {
-                if (t.name !== this.categories[0].name) {
-                    t.isActive = false;
-                } else {
-                    t.isActive = true;
-                }
-            });
-            this.tags.forEach(t => {
-                t.isActive = false;
-            });
-        } else {
-            this.categories.forEach(t => {
-                if (t.name === tag) {
-                    t.isActive = !t.isActive;
-                }
-            });
-            this.categories[0].isActive = false;
-        }
-        this.setQueryParams();
-    }
-
-    ngOnInit() {
-        this.route.data.subscribe(data => {
-            this.articles = data.workshops.articles;
-            this.filteredActicles = data.workshops.articles;
-            this.tags = data.workshops.tags;
-            this.range = this.filteredActicles.length;
-            this.count = this.filteredActicles.length !== 0;
-        });
-        // this.setQueryParams();
-        this.route.queryParams.subscribe(params => {
-            this.onParamsChange(params);
-        });
-    }
-    ngOnDestroy() {
-        this.tags.forEach(t => {
-            t.isActive = false;
-        });
-        this.categories.forEach(t => {
-            t.isActive = false;
-        });
-    }
-    onParamsChange(params: Params) {
+    onTagSelect(id: number): void {
         let paramsTags: Array<number> | null = null;
         let paramsCtgs: Array<number> | null = null;
-        if (params.tags) {
-            paramsTags = JSON.parse(`[${params.tags}]`);
-            paramsTags &&
-                paramsTags.forEach(i => {
-                    this.tags[i].isActive = true;
-                });
+
+        if (this.route.snapshot.queryParamMap.get("tags")) {
+            paramsTags = JSON.parse(
+                `[${this.route.snapshot.queryParamMap.get("tags")}]`
+            );
         }
-        if (params.categories) {
-            paramsCtgs = JSON.parse(`[${params.categories}]`);
-            paramsCtgs &&
-                paramsCtgs.forEach(i => {
-                    this.categories[i].isActive = true;
-                });
-        }
-        if (
-            (paramsTags && paramsTags.length) ||
-            (paramsCtgs && paramsCtgs.length)
-        ) {
-            this.categories[0].isActive = false;
+        if (paramsTags) {
+            let newtags = paramsTags.filter(e => e !== id);
+            if (newtags.length === paramsTags.length) {
+                newtags.push(id);
+            }
+            paramsTags = newtags;
         } else {
-            this.categories[0].isActive = true;
+            paramsTags = [id];
         }
-        this.filterArticles(paramsTags, paramsCtgs);
+        if (this.route.snapshot.queryParamMap.get("categories")) {
+            paramsCtgs = JSON.parse(
+                `[${this.route.snapshot.queryParamMap.get("categories")}]`
+            );
+        }
+        if (paramsTags.length && paramsCtgs && paramsCtgs[0] === 0) {
+            paramsCtgs = [];
+        }
+        this.setQueryParams(paramsTags, paramsCtgs);
     }
 
-    filterArticles(
-        tags: Array<number> | null,
-        categories: Array<number> | null
-    ) {
-        let filteredArticles: Array<Article> = this.articles;
-        if (categories) {
-            let activeCtgNames: Array<String> = categories.map(ctgKey => {
-                return this.categories[ctgKey].name;
-            });
-            if (activeCtgNames.filter(ctg => ctg === "Favorite").length) {
-                filteredArticles = filteredArticles.filter(
-                    article => article.isFavorite
+    onCategorySelect(id: number): void {
+        this.route.snapshot.queryParamMap;
+        let paramsTags: Array<number> | null = null;
+        let paramsCtgs: Array<number> | null = null;
+
+        if (this.route.snapshot.queryParamMap.get("tags")) {
+            paramsTags = JSON.parse(
+                `[${this.route.snapshot.queryParamMap.get("tags")}]`
+            );
+        }
+        if (this.route.snapshot.queryParamMap.get("categories")) {
+            paramsCtgs = JSON.parse(
+                `[${this.route.snapshot.queryParamMap.get("categories")}]`
+            );
+        }
+        if (paramsCtgs && paramsCtgs[0] === id) {
+            paramsCtgs = paramsTags ? [] : [0];
+        } else {
+            paramsCtgs = [id];
+        }
+        if (paramsCtgs[0] === 0) {
+            paramsTags = [];
+        }
+        this.setQueryParams(paramsTags, paramsCtgs);
+    }
+
+    ngOnDestroy() {}
+    onParamsChange(params: Params) {
+        let paramsTags: Array<number> | null = params.get("tags");
+        let paramsCtgs: string | null = params.get("categories");
+        if (paramsTags) {
+            paramsTags = JSON.parse(`[${paramsTags}]`);
+        }
+        if (paramsCtgs) {
+            if (paramsCtgs === "0") {
+                console.log("all posts");
+
+                this.WorkshopsService.getPosts(1).subscribe(data => {
+                    console.log(data);
+                    this.articles = data;
+                    this.range = this.articles.length;
+                    this.count = this.articles.length !== 0;
+                });
+            }
+            if (paramsCtgs === "1") {
+                console.log("fav posts");
+
+                this.WorkshopsService.getFavorite(1, paramsTags).subscribe(
+                    data => {
+                        console.log(data);
+                        this.articles = data;
+                        this.range = this.articles.length;
+                        this.count = this.articles.length !== 0;
+                    }
                 );
             }
-            if (activeCtgNames.filter(ctg => ctg === "My Workshops").length) {
-                filteredArticles = filteredArticles.filter(
-                    article => article.author === this.userid
+            if (paramsCtgs === "2") {
+                console.log("user posts");
+
+                this.WorkshopsService.getUserPosts(1, paramsTags).subscribe(
+                    data => {
+                        console.log(data);
+                        this.articles = data;
+                        this.range = this.articles.length;
+                        this.count = this.articles.length !== 0;
+                    }
                 );
             }
-        }
-
-        if (tags) {
-            let activeTagNames: Array<String> = tags.map(tagKey => {
-                return this.tags[tagKey].name;
-            });
-            filteredArticles = filteredArticles.filter(article => {
-                return (
-                    article.tags.filter(tag => {
-                        return activeTagNames.filter(
-                            activeTag => activeTag === tag
-                        ).length;
-                    }).length === activeTagNames.length
+        } else {
+            if (paramsTags) {
+                this.WorkshopsService.getPosts(1, paramsTags).subscribe(
+                    data => {
+                        console.log(data);
+                        this.articles = data;
+                        this.range = this.articles.length;
+                        this.count = this.articles.length !== 0;
+                    }
                 );
-            });
+            } else {
+                this.onCategorySelect(0);
+            }
         }
-
-        this.filteredActicles = filteredArticles;
-        this.range = this.filteredActicles.length;
-        this.count = filteredArticles.length !== 0;
     }
 }

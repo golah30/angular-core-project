@@ -1,5 +1,4 @@
 import { Component, OnInit } from "@angular/core";
-import { User } from "./interfaces";
 
 @Component({
     selector: "acp-root",
@@ -8,7 +7,7 @@ import { User } from "./interfaces";
 })
 export class AppComponent implements OnInit {
     title: string = "acp-project";
-    user: User = {
+    user = {
         img: "",
         initials: "DK",
         name: "Khristofer Khristorozhdestvenskii"

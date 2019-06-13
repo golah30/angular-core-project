@@ -2,10 +2,8 @@ import { Injectable } from "@angular/core";
 import { Article } from "../../interfaces";
 import { ApiService } from "../api/api.service";
 import { map } from "rxjs/operators";
-const headers = {
-    Authorization:
-        "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1ZDAxMDBmZDExNjljYTI4NWU0YWEwZWQiLCJpYXQiOjE1NjAzNDY5Nzl9.aE-7edVHUMzLjgAgyWTB7UPL3CId2NLb1xJ4dOSVR9c"
-};
+import { UserService } from "../user/user.service";
+
 interface Posts {
     offset: number;
     page: number;
@@ -14,7 +12,7 @@ interface Posts {
 }
 @Injectable()
 export class WorkshopsService {
-    constructor(private api: ApiService) {}
+    constructor(private api: ApiService, private UserService: UserService) {}
     posts: Array<Article> = [];
     filter: string = "";
     public getPosts(page: number, filter: Array<any> | null = []) {
@@ -25,23 +23,27 @@ export class WorkshopsService {
                 url = i !== filter.length - 1 ? `${url}${t}|` : `${url}${t}`;
             });
         }
-        return this.api.get(url, headers).pipe(
-            map((data: Posts) => {
-                this.posts = data.posts;
-                return this.posts;
-            })
-        );
+        return this.api
+            .get(url, { Authorization: this.UserService.getToken() })
+            .pipe(
+                map((data: Posts) => {
+                    this.posts = data.posts;
+                    return this.posts;
+                })
+            );
     }
     public getPostById(id: string) {
-        return this.api.get(`/posts/${id}`, headers).pipe(
-            map((data: Article) => {
-                if (data.id === id) {
-                    return data;
-                } else {
-                    return { error: true };
-                }
-            })
-        );
+        return this.api
+            .get(`/posts/${id}`, { Authorization: this.UserService.getToken() })
+            .pipe(
+                map((data: Article) => {
+                    if (data.id === id) {
+                        return data;
+                    } else {
+                        return { error: true };
+                    }
+                })
+            );
     }
     public getFavorite(page: number, filter: Array<any> | null = []) {
         let url = `/posts?page=${page}`;
@@ -54,12 +56,16 @@ export class WorkshopsService {
                         : `${url}${t.seq}`;
             });
         }
-        return this.api.get(`/posts?page=${page}`, headers).pipe(
-            map((data: Posts) => {
-                this.posts = data.posts;
-                return this.posts;
+        return this.api
+            .get(`/posts?page=${page}`, {
+                Authorization: this.UserService.getToken()
             })
-        );
+            .pipe(
+                map((data: Posts) => {
+                    this.posts = data.posts;
+                    return this.posts;
+                })
+            );
     }
     public getUserPosts(page: number, filter: Array<any> | null = []) {
         let url = `/posts?page=${page}`;
@@ -72,20 +78,30 @@ export class WorkshopsService {
                         : `${url}${t.seq}`;
             });
         }
-        return this.api.get(`/posts?page=${page}`, headers).pipe(
-            map((data: Posts) => {
-                this.posts = data.posts;
-                return this.posts;
+        return this.api
+            .get(`/posts?page=${page}`, {
+                Authorization: this.UserService.getToken()
             })
-        );
+            .pipe(
+                map((data: Posts) => {
+                    this.posts = data.posts;
+                    return this.posts;
+                })
+            );
     }
     public createPost(post: Article) {
-        return this.api.post(`/posts`, post, headers);
+        return this.api.post(`/posts`, post, {
+            Authorization: this.UserService.getToken()
+        });
     }
     public updatePost(post: Article) {
-        return this.api.put(`/posts/${post.id}`, post, headers);
+        return this.api.put(`/posts/${post.id}`, post, {
+            Authorization: this.UserService.getToken()
+        });
     }
     public deletePost(id: string) {
-        return this.api.delete(`/posts/${id}`, headers);
+        return this.api.delete(`/posts/${id}`, {
+            Authorization: this.UserService.getToken()
+        });
     }
 }

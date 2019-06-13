@@ -4,6 +4,7 @@ export interface Tag {
     name: string;
     createdAt: string;
 }
+
 export interface Article {
     id: string;
     title: string;
@@ -33,6 +34,7 @@ export interface User {
     username: string;
     posts: Array<string>;
     _id: string;
+    token: string;
 }
 export interface MenuItem {
     icon: string;

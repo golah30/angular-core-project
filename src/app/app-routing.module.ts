@@ -23,6 +23,10 @@ const routes: Routes = [
         loadChildren: "./quizzes/quizzes.module#QuizzesModule"
     },
     {
+        path: "login",
+        loadChildren: "./auth/auth.module#AuthModule"
+    },
+    {
         path: "**",
         component: NotFoundComponent
     }

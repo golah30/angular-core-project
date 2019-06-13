@@ -1,0 +1,18 @@
+.container
+    .title  {{title}}
+    .input-container
+        .input__title Login
+        input.input__field('[formControl]'='loginControl' '(focus)'='focus()' )
+    .input-container
+        .input__title Password
+        input.input__field(type='password' '(focus)'='focus()'  '[formControl]'='passwordControl')
+    .errors {{errormsg}}
+    .controls
+        button.control('(click)'='onClick()') {{control1Title}}
+        button.outline('(click)'='toggleForm()') {{control2Title}}
+    .secondary('*ngIf'='isAuth')
+        a.link(routerLink='/') Back to main
+        .input-container
+            .input__title New Password
+            input.input__field(type='password' '(focus)'='focus()'  '[formControl]'='newPasswordControl')
+        button.control('(click)'='onReset()') Set password

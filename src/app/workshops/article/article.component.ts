@@ -1,7 +1,9 @@
 import { Component, OnInit, Input } from "@angular/core";
 import { Router } from "@angular/router";
 import { TagsService } from "../../service/tags/tags.service";
-import { filter } from "rxjs/operators";
+import { UserService } from "../../service/user/user.service";
+import { User } from "../../interfaces";
+
 @Component({
     selector: "acp-article",
     templateUrl: "./article.component.pug",
@@ -20,7 +22,12 @@ export class ArticleComponent implements OnInit {
     @Input() stars: number;
     @Input() author: string;
     routePath: string;
-    constructor(private router: Router, private TagsService: TagsService) {}
+    userName: string = "";
+    constructor(
+        private router: Router,
+        private TagsService: TagsService,
+        private UserService: UserService
+    ) {}
     favoriteToggle() {
         this.isFavorite = !this.isFavorite;
 
@@ -40,6 +47,9 @@ export class ArticleComponent implements OnInit {
         }
     }
     ngOnInit() {
+        this.UserService.getUserById(this.author).subscribe((data: User) => {
+            this.userName = data.username;
+        });
         this.TagsService.getTags().subscribe(data => {
             this.tags = this.tags.map(t => {
                 let name: string = "";

@@ -1,7 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
-import { Article } from "../../interfaces";
+import { Article, User } from "../../interfaces";
 import { TagsService } from "src/app/service/tags/tags.service";
+import { UserService } from "src/app/service/user/user.service";
 
 @Component({
     selector: "acp-workshop-page",
@@ -13,9 +14,11 @@ export class WorkshopPageComponent implements OnInit {
     constructor(
         private route: ActivatedRoute,
         private router: Router,
-        private TagsService: TagsService
+        private TagsService: TagsService,
+        private UserService: UserService
     ) {}
     tags: Array<string> = [];
+    userName: string = "";
     likeToggle() {
         // this.article.isLike = !this.article.isLike;
         // if (this.article.isLike) {
@@ -45,11 +48,19 @@ export class WorkshopPageComponent implements OnInit {
             });
         });
     }
+    getUser() {
+        this.UserService.getUserById(this.article._author).subscribe(
+            (data: User) => {
+                this.userName = data.username;
+            }
+        );
+    }
     ngOnInit() {
         this.route.data.subscribe(data => {
             if (!data.article.error) {
                 this.article = data.article;
                 this.getTags();
+                this.getUser();
             } else {
                 this.router.navigate(["/404"]);
             }

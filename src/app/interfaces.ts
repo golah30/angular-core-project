@@ -1,6 +1,8 @@
 export interface Tag {
+    _author: string;
     seq: number;
     name: string;
+    createdAt: string;
 }
 export interface Article {
     id: string;
@@ -14,7 +16,7 @@ export interface Article {
     content: string;
     image: string;
     createdAt: string;
-    author: string;
+    _author: string;
 }
 export interface Comment {
     id: string;
@@ -27,6 +29,10 @@ export interface User {
     img: string;
     initials: string;
     name: string;
+    role: string;
+    username: string;
+    posts: Array<string>;
+    _id: string;
 }
 export interface MenuItem {
     icon: string;

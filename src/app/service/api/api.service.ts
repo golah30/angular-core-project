@@ -6,44 +6,42 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 })
 export class ApiService {
     constructor(private http: HttpClient) {}
-    login: string = "kda@example.com";
-    password: string = "12345";
-    token: string =
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1ZDAxMDBmZDExNjljYTI4NWU0YWEwZWQiLCJpYXQiOjE1NjAzNDY5Nzl9.aE-7edVHUMzLjgAgyWTB7UPL3CId2NLb1xJ4dOSVR9c";
-    utf8_to_b64(str) {
-        return window.btoa(unescape(encodeURIComponent(str)));
-    }
+    contentType = { "Content-Type": " application/json" };
     apiRoot: string = "https://internship.zazmic.com";
-    get(path: string, headers: HttpHeaders) {
+
+    get(path: string, headers: object = {}) {
         console.log("GET " + path);
         const httpOptions = {
-            headers
+            headers: new HttpHeaders({ ...headers, ...this.contentType })
         };
         let url = this.apiRoot + path;
         return this.http.get(url, httpOptions);
     }
-    post(path: string, data: any, headers: HttpHeaders) {
+
+    post(path: string, data: any, headers: object = {}) {
         console.log("POST " + path);
         const httpOptions = {
-            headers
+            headers: new HttpHeaders({ ...headers, ...this.contentType })
         };
         let url = this.apiRoot + path;
         return this.http.post(url, data, httpOptions);
     }
-    put(path: string, data: any, headers: HttpHeaders) {
+
+    put(path: string, data: any, headers: object = {}) {
         console.log("PUT " + path);
 
         const httpOptions = {
-            headers
+            headers: new HttpHeaders({ ...headers, ...this.contentType })
         };
         let url = this.apiRoot + path;
         return this.http.put(url, data, httpOptions);
     }
-    delete(path: string, headers: HttpHeaders) {
+
+    delete(path: string, headers: object = {}) {
         console.log("DELETE " + path);
 
         const httpOptions = {
-            headers
+            headers: new HttpHeaders({ ...headers, ...this.contentType })
         };
         let url = this.apiRoot + path;
         return this.http.delete(url, httpOptions);

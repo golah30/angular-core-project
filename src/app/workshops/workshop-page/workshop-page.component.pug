@@ -5,7 +5,7 @@ acp-viewport
             ul.article__tags('*ngIf'='tags')
                 li.article__tag('*ngFor'='let tag of tags') {{tag}}
             .author
-                span {{article.author}}
+                span {{userName}}
             .date
                 acp-timestamp('[date]'='article.createdAt')  
         .image-block('[ngStyle]'="{ 'background-image': 'url('+article.image+')'}")

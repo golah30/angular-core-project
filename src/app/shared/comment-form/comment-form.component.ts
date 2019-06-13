@@ -11,7 +11,7 @@ export class CommentFormComponent implements OnInit {
     constructor() {}
 
     @Input() comment: Comment;
-    @Output() submit = new EventEmitter<Comment>();
+    @Output() submit = new EventEmitter<any>();
     inputControl: FormControl;
     errmsg: string = "";
     ngOnInit() {
@@ -32,20 +32,13 @@ export class CommentFormComponent implements OnInit {
         if (this.comment.id) {
             this.submit.emit({
                 id: this.comment.id,
-                text: this.inputControl.value,
-                username: this.comment.username,
-                date: this.comment.date,
-                author: this.comment.author
+                text: this.inputControl.value
             });
             this.inputControl.reset();
         } else {
             if (this.inputControl.value) {
                 this.submit.emit({
-                    id: "" + Math.floor(Math.random() * (999999 - 1)) + 1,
-                    text: this.inputControl.value,
-                    username: "user abuser",
-                    date: new Date(),
-                    author: this.comment.author
+                    text: this.inputControl.value
                 });
                 this.inputControl.reset();
             } else {

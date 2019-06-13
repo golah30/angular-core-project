@@ -5,9 +5,7 @@ import { ApiService } from "../api/api.service";
 import { UserService } from "../user/user.service";
 import { map } from "rxjs/operators";
 
-@Injectable({
-    providedIn: "root"
-})
+@Injectable()
 export class TagsService {
     constructor(private api: ApiService, private UserService: UserService) {}
     tags: Array<Tag> = [];

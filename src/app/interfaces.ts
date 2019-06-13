@@ -20,21 +20,22 @@ export interface Article {
     _author: string;
 }
 export interface Comment {
-    id: string;
-    username: string;
+    createdAt?: string;
+    updatedAt?: string;
+    user?: User;
+    _author?: string;
+    id?: string;
     text: string;
-    date: Date;
-    author: string;
 }
 export interface User {
-    img: string;
-    initials: string;
-    name: string;
-    role: string;
+    picture: string;
+    firstName?: string;
+    lastName?: string;
+    role?: string;
     username: string;
-    posts: Array<string>;
-    _id: string;
-    token: string;
+    posts?: Array<string>;
+    _id?: string;
+    token?: string;
 }
 export interface MenuItem {
     icon: string;

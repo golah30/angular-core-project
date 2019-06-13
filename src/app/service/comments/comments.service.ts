@@ -3,9 +3,7 @@ import { ApiService } from "../api/api.service";
 import { Comment } from "../../interfaces";
 import { UserService } from "../user/user.service";
 
-@Injectable({
-    providedIn: "root"
-})
+@Injectable()
 export class CommentsService {
     constructor(private api: ApiService, private UserService: UserService) {}
     public getCommentsByPostId(id: string) {

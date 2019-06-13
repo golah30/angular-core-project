@@ -1,14 +1,12 @@
-.user-pic
-    acp-user-pic('[src]'='""' '[name]'='comment.username')
-.content
-    .user-name {{comment.username}}
+.user-pic('*ngIf'='comment.user')
+    acp-user-pic('[src]'='""' '[name]'='fullname()')
+.content('*ngIf'='comment.user')
+    .user-name {{fullname()}}
     .date
-        acp-timestamp('[date]'='comment.date')
+        acp-timestamp('[date]'='comment.updatedAt')
     p.comment__text('*ngIf'='!isEdit') {{comment.text}}
     .edit('*ngIf'='isEdit')
         acp-comment-form('[comment]'='comment' '(submit)'='onCommentEdit($event)')
     .controls('*ngIf'='userCompare')
         button.edit('(click)'='edit()') edit
         button.delete('(click)'="delete()") delete
-    
-

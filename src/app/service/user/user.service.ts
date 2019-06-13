@@ -10,7 +10,10 @@ import { of } from "rxjs";
 export class UserService {
     private auth: boolean = false;
     private token: string = "";
-    private User: User;
+    private User: User = {
+        picture: "",
+        username: "Unknown User"
+    };
     constructor(private api: ApiService) {}
     public getToken() {
         return "Bearer " + this.token;
@@ -46,7 +49,9 @@ export class UserService {
         return this.api.get(`/users`, { Authorization: this.getToken() });
     }
     public getCurrentUser() {
-        if (this.User) {
+        if (this.User && this.User._id) {
+            return of(this.User);
+        } else if (!this.token) {
             return of(this.User);
         }
         return this.api

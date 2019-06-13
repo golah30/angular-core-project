@@ -9,6 +9,7 @@ import {
     Renderer2
 } from "@angular/core";
 import { User } from "../../interfaces";
+
 @Component({
     selector: "acp-top-pane",
     templateUrl: "./top-pane.component.pug",

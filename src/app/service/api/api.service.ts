@@ -6,8 +6,8 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 })
 export class ApiService {
     constructor(private http: HttpClient) {}
-    contentType = { "Content-Type": " application/json" };
-    apiRoot: string = "https://internship.zazmic.com";
+    private contentType = { "Content-Type": " application/json" };
+    private apiRoot: string = "https://internship.zazmic.com";
 
     get(path: string, headers: object = {}) {
         console.log("GET " + path);
@@ -47,12 +47,3 @@ export class ApiService {
         return this.http.delete(url, httpOptions);
     }
 }
-
-// const httpOptions = {
-//     headers: new HttpHeaders({
-//         "Content-Type": " application/json",
-//         Authorization:
-//             "Basic " +
-//             this.utf8_to_b64(`${this.login}:${this.password}`)
-//     })
-// };

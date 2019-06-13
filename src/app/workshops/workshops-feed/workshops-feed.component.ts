@@ -1,8 +1,9 @@
 import { Component, OnInit, OnDestroy } from "@angular/core";
-import { Tag, Article } from "../../interfaces";
+import { Tag, Article, User } from "../../interfaces";
 import { Router, ActivatedRoute, Params } from "@angular/router";
 import { WorkshopsService } from "../../service/workshops/workshops.service";
 import { TagsService } from "../../service/tags/tags.service";
+import { UserService } from "src/app/service/user/user.service";
 @Component({
     selector: "acp-workshops-feed",
     templateUrl: "./workshops-feed.component.pug",
@@ -12,6 +13,7 @@ export class WorkshopsFeedComponent implements OnInit, OnDestroy {
     constructor(
         private WorkshopsService: WorkshopsService,
         private TagsService: TagsService,
+        private UserService: UserService,
         private route: ActivatedRoute,
         private router: Router
     ) {}
@@ -26,8 +28,11 @@ export class WorkshopsFeedComponent implements OnInit, OnDestroy {
     userid: string = "178";
     count: boolean = false;
     loading: boolean = true;
-
+    currentUser: User;
     ngOnInit() {
+        this.UserService.getCurrentUser().subscribe((data: User) => {
+            this.currentUser = data;
+        });
         this.TagsService.getTags().subscribe(data => {
             this.tags = data;
             this.loading = false;
@@ -112,18 +117,13 @@ export class WorkshopsFeedComponent implements OnInit, OnDestroy {
         }
         if (paramsCtgs) {
             if (paramsCtgs === "0") {
-                console.log("all posts");
-
                 this.WorkshopsService.getPosts(1).subscribe(data => {
-                    console.log(data);
                     this.articles = data;
                     this.range = this.articles.length;
                     this.count = this.articles.length !== 0;
                 });
             }
             if (paramsCtgs === "1") {
-                console.log("fav posts");
-
                 this.WorkshopsService.getFavorite(1, paramsTags).subscribe(
                     data => {
                         console.log(data);
@@ -134,22 +134,20 @@ export class WorkshopsFeedComponent implements OnInit, OnDestroy {
                 );
             }
             if (paramsCtgs === "2") {
-                console.log("user posts");
-
-                this.WorkshopsService.getUserPosts(1, paramsTags).subscribe(
-                    data => {
-                        console.log(data);
-                        this.articles = data;
-                        this.range = this.articles.length;
-                        this.count = this.articles.length !== 0;
-                    }
-                );
+                this.WorkshopsService.getUserPosts(
+                    1,
+                    paramsTags,
+                    this.currentUser._id
+                ).subscribe(data => {
+                    this.articles = data;
+                    this.range = this.articles.length;
+                    this.count = this.articles.length !== 0;
+                });
             }
         } else {
             if (paramsTags) {
                 this.WorkshopsService.getPosts(1, paramsTags).subscribe(
                     data => {
-                        console.log(data);
                         this.articles = data;
                         this.range = this.articles.length;
                         this.count = this.articles.length !== 0;

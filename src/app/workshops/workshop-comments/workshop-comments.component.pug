@@ -2,7 +2,7 @@ ul.comments
     acp-comment-card(
         '*ngFor'='let comment of comments' 
         '[comment]'='comment' 
-        currentUserId='U312' 
+        '[currentUserId]'='currentUser._id' 
         '(onDelete)'='onDelete($event)'
         '(onEdit)'='onEdit($event)'
     )

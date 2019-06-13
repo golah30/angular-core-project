@@ -3,6 +3,7 @@ import { Article } from "../../interfaces";
 import { ApiService } from "../api/api.service";
 import { map } from "rxjs/operators";
 import { UserService } from "../user/user.service";
+import { of } from "rxjs";
 
 interface Posts {
     offset: number;
@@ -14,6 +15,7 @@ interface Posts {
 export class WorkshopsService {
     constructor(private api: ApiService, private UserService: UserService) {}
     posts: Array<Article> = [];
+    lastPostById: Article;
     filter: string = "";
     public getPosts(page: number, filter: Array<any> | null = []) {
         let url = `/posts?page=${page}`;
@@ -32,12 +34,16 @@ export class WorkshopsService {
                 })
             );
     }
+    public getCurrentPost() {
+        return this.lastPostById;
+    }
     public getPostById(id: string) {
         return this.api
             .get(`/posts/${id}`, { Authorization: this.UserService.getToken() })
             .pipe(
                 map((data: Article) => {
                     if (data.id === id) {
+                        this.lastPostById = data;
                         return data;
                     } else {
                         return { error: true };
@@ -57,7 +63,7 @@ export class WorkshopsService {
             });
         }
         return this.api
-            .get(`/posts?page=${page}`, {
+            .get(url, {
                 Authorization: this.UserService.getToken()
             })
             .pipe(
@@ -67,8 +73,8 @@ export class WorkshopsService {
                 })
             );
     }
-    public getUserPosts(page: number, filter: Array<any> | null = []) {
-        let url = `/posts?page=${page}`;
+    public getUserPosts(page: number, filter: Array<any> | null = [], author) {
+        let url = `/posts?page=${page}&authorId=${author}`;
         if (filter && filter.length) {
             url += "&";
             filter.forEach((t, i) => {
@@ -79,7 +85,7 @@ export class WorkshopsService {
             });
         }
         return this.api
-            .get(`/posts?page=${page}`, {
+            .get(url, {
                 Authorization: this.UserService.getToken()
             })
             .pipe(

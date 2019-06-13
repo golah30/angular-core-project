@@ -1,5 +1,8 @@
 import { Component, OnInit } from "@angular/core";
-import { Comment } from "../../interfaces";
+import { Comment, Article, User } from "../../interfaces";
+import { UserService } from "src/app/service/user/user.service";
+import { CommentsService } from "src/app/service/comments/comments.service";
+import { WorkshopsService } from "src/app/service/workshops/workshops.service";
 
 @Component({
     selector: "acp-workshop-comments",
@@ -7,32 +10,15 @@ import { Comment } from "../../interfaces";
     styleUrls: ["./workshop-comments.component.scss"]
 })
 export class WorkshopCommentsComponent implements OnInit {
-    constructor() {}
-
-    comments: Array<Comment> = [
-        {
-            id: "12",
-            username: "Some user",
-            text: "Lorem ipsum dolore",
-            date: new Date(),
-            author: "U312"
-        },
-        {
-            id: "14",
-            username: "asdsssads wwss",
-            text: "Lorem ipsum dolore",
-            date: new Date(),
-            author: "U312"
-        },
-        {
-            id: "15",
-            username: "Riko Mandella",
-            text: "Lorem ipsum dolore",
-            date: new Date(),
-            author: "U32222"
-        }
-    ];
-    comment: Comment = {
+    constructor(
+        private UserService: UserService,
+        private CommentService: CommentsService,
+        private WorkshopsService: WorkshopsService
+    ) {}
+    currentPost: Article;
+    currentUser: User;
+    comments: Array<Comment> = [];
+    comment = {
         id: "",
         username: "",
         text: "",
@@ -40,25 +26,55 @@ export class WorkshopCommentsComponent implements OnInit {
         date: new Date()
     };
     submit(comment: Comment) {
-        console.log(comment);
-        this.comments.unshift(comment);
-        console.log("comment created");
+        this.CommentService.createComment(
+            this.currentPost.id,
+            comment
+        ).subscribe((data: any) => {
+            let comment = data.comment;
+            comment.user = this.currentUser;
+            this.comments.push(comment);
+        });
     }
     onEdit(comment: Comment) {
-        console.log(comment);
+        this.CommentService.updateComment(this.currentPost.id, comment.id, {
+            text: comment.text
+        }).subscribe((data: any) => {
+            let comment = data.comment;
+            comment.user = this.currentUser;
 
-        this.comments = this.comments.map(c => {
-            if (c.id === comment.id) {
-                return comment;
-            } else {
-                return c;
-            }
+            this.comments = this.comments.map(c => {
+                if (c.id === comment.id) {
+                    return comment;
+                } else {
+                    return c;
+                }
+            });
         });
     }
     onDelete(id: string) {
-        console.log("deelte");
-
-        this.comments = this.comments.filter(c => c.id !== id);
+        this.CommentService.deleteComment(this.currentPost.id, id).subscribe(
+            data => {
+                this.comments = this.comments.filter(c => c.id !== id);
+            }
+        );
     }
-    ngOnInit() {}
+    getAuthors() {
+        this.comments.forEach((e, i) => {
+            this.UserService.getUserById(e._author).subscribe((data: User) => {
+                this.comments[i].user = data;
+            });
+        });
+    }
+    ngOnInit() {
+        this.UserService.getCurrentUser().subscribe((data: User) => {
+            this.currentUser = data;
+        });
+        this.currentPost = this.WorkshopsService.getCurrentPost();
+        this.CommentService.getCommentsByPostId(this.currentPost.id).subscribe(
+            (data: Array<Comment>) => {
+                this.comments = data;
+                this.getAuthors();
+            }
+        );
+    }
 }

@@ -75,8 +75,8 @@ export class LoginComponent implements OnInit {
         this.toggleNames();
     }
     ngOnInit() {
-        this.loginControl = new FormControl("");
-        this.passwordControl = new FormControl("");
+        this.loginControl = new FormControl("kda@example.com");
+        this.passwordControl = new FormControl("12345");
         this.newPasswordControl = new FormControl("");
         this.toggleNames();
     }

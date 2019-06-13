@@ -13,6 +13,7 @@ export class CommentCardComponent implements OnInit {
     constructor() {}
     userCompare: boolean = false;
     isEdit: boolean = false;
+
     delete() {
         this.onDelete.emit(this.comment.id);
     }
@@ -22,7 +23,13 @@ export class CommentCardComponent implements OnInit {
     onCommentEdit(comment: Comment) {
         this.onEdit.emit(comment);
     }
+    fullname() {
+        let user = this.comment.user;
+        return user.firstName && user.lastName
+            ? user.firstName + " " + user.lastName
+            : user.username;
+    }
     ngOnInit() {
-        this.userCompare = this.currentUserId === this.comment.author;
+        this.userCompare = this.currentUserId === this.comment._author;
     }
 }

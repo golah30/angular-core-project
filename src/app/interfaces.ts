@@ -14,7 +14,7 @@ export interface Article {
     stars: number;
     tags: Array<number>;
     description: string;
-    content: string;
+    text: string;
     image: string;
     createdAt: string;
     _author: string;

@@ -16,7 +16,6 @@ export class LoginComponent implements OnInit {
     loginControl: FormControl;
     passwordControl: FormControl;
     newPasswordControl: FormControl;
-    isFetching = false;
     isLogin = true;
     isAuth = false;
     errormsg: string = "";
@@ -24,16 +23,12 @@ export class LoginComponent implements OnInit {
     onLogin() {
         if (!this.validate()) {
             this.errormsg = "Enter data in all fields";
-        } else if (this.isFetching) {
-            this.errormsg = "Wait. Data currently loading";
         } else {
-            this.isFetching = true;
             this.UserService.login(
                 this.loginControl.value,
                 this.passwordControl.value
             ).subscribe((data: User) => {
                 this.user = data;
-                this.isFetching = false;
                 this.isAuth = true;
             });
         }
@@ -42,12 +37,10 @@ export class LoginComponent implements OnInit {
         if (!this.validate()) {
             this.errormsg = "Enter data in all fields";
         } else {
-            this.isFetching = true;
             this.UserService.signUp(
                 this.loginControl.value,
                 this.passwordControl.value
             ).subscribe(data => {
-                this.isFetching = false;
                 this.onLogin();
             });
         }
@@ -75,8 +68,8 @@ export class LoginComponent implements OnInit {
         this.toggleNames();
     }
     ngOnInit() {
-        this.loginControl = new FormControl("kda@example.com");
-        this.passwordControl = new FormControl("12345");
+        this.loginControl = new FormControl("");
+        this.passwordControl = new FormControl("");
         this.newPasswordControl = new FormControl("");
         this.toggleNames();
     }

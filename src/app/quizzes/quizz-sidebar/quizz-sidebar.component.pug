@@ -1,0 +1,6 @@
+div.side__content('[ngClass]'='{show: isSideContent}')
+    a.show-panel-button('(click)'='toggleSideContent()' '[routerLink]'='[{outlets: {aside: link}}]')
+        i.icon-keyboard_arrow_down('[ngClass]'='{left: isSideContent}')
+    .side__content-wrapper
+        .scrollable
+            router-outlet(name="aside")

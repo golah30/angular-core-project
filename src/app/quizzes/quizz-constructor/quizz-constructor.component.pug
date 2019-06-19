@@ -1,0 +1,16 @@
+form(
+    '[formGroup]'='form' 
+    '(ngSubmit)'='onSubmit(form)'
+    novalidate='' 
+    autocomplete='off'
+)
+    acp-input(
+        formControlName='name'
+        label='Quiz name'
+        type='text'
+    )
+    ng-container('*ngFor'='let field of questionsArray.controls; index as i')
+        ng-container('*ngFor'='let conf of config[i]; index as j')
+            .form-control
+                ng-container(acpDynamicField '[config]'='conf' '[group]'='form')
+    button.acp-button('type'='button' '(click)'='addQuestion()') Add question

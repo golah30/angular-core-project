@@ -1,5 +1,6 @@
 form('[formGroup]'='form' '(ngSubmit)'='onSubmit(form)' novalidate='' autocomplete='off')
     ng-container('*ngFor'='let field of config; index as i')
         .form-control
+            .title {{field.title}}
             ng-container(acpDynamicField '[config]'='field' '[group]'='form')
-
+    button.submit Submit

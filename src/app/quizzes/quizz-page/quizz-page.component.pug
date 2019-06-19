@@ -1,0 +1,8 @@
+acp-viewport
+    .container
+        .title {{quiz.config.name}}
+        .author {{quiz.author}}
+        .date 
+             acp-timestamp('[date]'='quiz.date')
+    .form-container
+        acp-dynamic-form('[config]'='config' '(handleSubmit)'='onSubmit($event)')

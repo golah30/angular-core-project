@@ -1,0 +1,27 @@
+@import "variables/variables";
+:host {
+    display: flex;
+    flex-grow: 1;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    max-width: 600px;
+    margin: auto;
+    align-items: center;
+    padding: 40px 0;
+}
+
+.title {
+    font-size: 28px;
+}
+
+.author {
+    margin-top: 12px;
+    font-size: 16px;
+}
+.date {
+    font-size: 14px;
+    margin-top: 8px;
+}

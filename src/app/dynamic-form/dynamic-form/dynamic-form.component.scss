@@ -1,0 +1,61 @@
+@import "variables/variables";
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.form-control {
+    display: inline-block;
+    margin-top: 32px;
+}
+.title {
+    margin-bottom: 12px;
+}
+.submit {
+    margin-top: 32px;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    width: 120px;
+    height: 36px;
+    text-decoration: none;
+    color: $white;
+    background-color: $dark;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    &:focus {
+        outline: none;
+    }
+    &:hover {
+        background-color: $primary;
+        color: $dark;
+        &::before {
+            border-right-color: $primary;
+        }
+        &::after {
+            border-left-color: $primary;
+        }
+    }
+    &::before {
+        content: "";
+        display: block;
+        position: absolute;
+        left: -36px;
+        top: 0;
+        border: 18px solid transparent;
+        border-right-color: $dark;
+        transition: border-color 0.3s;
+    }
+    &::after {
+        content: "";
+        display: block;
+        position: absolute;
+        right: -36px;
+        top: 0;
+        border: 18px solid transparent;
+        border-left-color: $dark;
+        transition: border-color 0.3s;
+    }
+}

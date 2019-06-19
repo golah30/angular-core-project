@@ -1,0 +1,60 @@
+@import "variables/variables";
+@import "mixins/mixins";
+:host {
+    display: block;
+    flex-grow: 1;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.feed {
+    width: 600px;
+    @include medium() {
+        width: 80%;
+    }
+}
+
+.card-container {
+    margin-top: 40px;
+    position: relative;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+
+.header {
+    padding: 8px 12px;
+}
+
+.title {
+    text-decoration: none;
+    color: $dark;
+    cursor: pointer;
+    &:hover {
+        text-decoration: underline;
+    }
+    margin-bottom: 4px;
+}
+.footer {
+    padding: 8px 12px;
+    padding-top: 0;
+}
+
+.control {
+    position: absolute;
+    border: none;
+    background-color: transparent;
+    top: 50%;
+    right: 32px;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: $dark;
+    transition: color 0.3s;
+    &:hover {
+        color: $red;
+    }
+    & i {
+        font-size: 24px;
+    }
+}

@@ -8,7 +8,7 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 })
 export class DynamicFormComponent implements OnInit {
     @Input() config: Array<any> = [];
-    @Output() submit: EventEmitter<any> = new EventEmitter();
+    @Output() handleSubmit: EventEmitter<any> = new EventEmitter();
     form: FormGroup;
     constructor(private FormBuilder: FormBuilder) {}
 
@@ -16,16 +16,15 @@ export class DynamicFormComponent implements OnInit {
         this.form = this.createGroup();
     }
     createGroup(): FormGroup {
-        const group = this.FormBuilder.group({});
+        const group = this.FormBuilder.group({}, { updateOn: "blur" });
 
         this.config.forEach(control => {
             if (control.name) {
                 group.addControl(
                     control.name,
-                    this.FormBuilder.control(
-                        { value: control.initValue || "" },
-                        [Validators.required]
-                    )
+                    this.FormBuilder.control(control.initValue || "", [
+                        Validators.required
+                    ])
                 );
             }
         });
@@ -34,7 +33,9 @@ export class DynamicFormComponent implements OnInit {
     }
     onSubmit(form: FormGroup): void {
         if (form.valid) {
-            this.submit.emit(form.value);
+            this.handleSubmit.emit(form.value);
+        } else {
+            console.log("Form invalid");
         }
     }
 }

@@ -21,6 +21,11 @@ import { FormControlsModule } from "../form-controls/form-controls.module";
         ReactiveFormsModule,
         FormControlsModule
     ],
+    entryComponents: [
+        FormInputComponent,
+        FormSelectComponent,
+        FormButtonComponent
+    ],
     exports: [
         FormInputComponent,
         FormSelectComponent,

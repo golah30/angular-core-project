@@ -1,0 +1,18 @@
+@import "variables/variables";
+
+select {
+    border: 1px solid lighten($dark, 65);
+    cursor: pointer;
+    min-width: 150px;
+    height: 36px;
+    padding-left: 10px;
+    transition: border-color 0.2s;
+    &:focus {
+        outline: none;
+        border-color: $dark;
+    }
+}
+
+option {
+    cursor: pointer;
+}

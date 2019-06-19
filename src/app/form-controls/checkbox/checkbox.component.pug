@@ -1,0 +1,9 @@
+.checkbox
+    label
+        input(
+            type="checkbox" 
+            '[(ngModel)]'='value' 
+            '(ngModelChange)'='onChange(value)'
+        )
+        .check('[ngClass]'='{active: value}')
+        span('*ngIf'='label') {{label}}

@@ -1,0 +1,12 @@
+.input__Container
+    label.inputLabel('*ngIf'='label' '[ngClass]'='{empty: empty}') {{label}}
+    input(
+        '[type]'='type'
+        '[id]'='inputId'
+        '[(ngModel)]'='value'
+        '(ngModelChange)'='onChange(value)'
+        '(blur)'='onBlur($event)'
+        '(focus)'='onFocus()'
+        required
+    )
+

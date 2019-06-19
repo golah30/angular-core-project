@@ -1,0 +1,41 @@
+@import "variables/variables";
+
+.input__Container {
+    margin-top: 100px;
+    position: relative;
+}
+
+.inputLabel {
+    display: inline-block;
+    position: absolute;
+    padding: 0 4px;
+    top: 0;
+    background-color: $white;
+    left: 10px;
+    font-size: 12px;
+    transform: translateY(-50%);
+    font-family: $montserrat;
+    transition: all 0.3s;
+    &.empty {
+        top: 50%;
+        font-size: 16px;
+        background-color: transparent;
+    }
+}
+
+input {
+    padding: 16px 8px;
+    padding-left: 14px;
+    font-size: 16px;
+    font-family: $objsans;
+    border: 1px solid lighten($dark, 65);
+    transition: all 0.3s;
+
+    &:hover {
+        border: 1px solid lighten($dark, 0);
+    }
+    &:focus {
+        outline: none;
+        border: 1px solid lighten($dark, 0);
+    }
+}

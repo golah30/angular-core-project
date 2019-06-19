@@ -1,21 +1,16 @@
 acp-viewport
-    .testdiv(
-        'acpCollapse' 
-        '[initialCollapse]'='true'
-        '[height]'='"100px"' 
-        '[isCanCollapse]'='true' 
-        '[isAnimation]'='true'
-    )
-        p bllalallala
-        p bllalallala
-        p bllalallala
-        p bllalallala
-        p bllalallala
-        p bllalallala
-        p bllalallala
-        p bllalallala
-        p bllalallala
-        p bllalallala
-        p bllalallala
-        p bllalallala
-        p bllalallala
+    form([formGroup]='formGroup' '(ngSubmit)'="onSubmit(formGroup)")
+        acp-input(
+            formControlName='somename'
+            label='Label'
+            inputId='somename'
+            type='text'
+        )
+        acp-checkbox(
+            formControlName='check'
+            label='checkboxxxx'
+        )
+        acp-select(
+            formControlName='select'
+            '[options]'='states'
+        )

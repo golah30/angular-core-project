@@ -1,4 +1,5 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, OnChanges } from "@angular/core";
+import { FormControl, FormGroup, FormBuilder } from "@angular/forms";
 
 @Component({
     selector: "acp-quizzes",
@@ -6,7 +7,22 @@ import { Component, OnInit } from "@angular/core";
     styleUrls: ["./quizzes.component.scss"]
 })
 export class QuizzesComponent implements OnInit {
-    constructor() {}
+    formGroup: FormGroup;
 
-    ngOnInit() {}
+    constructor(private FormBuilder: FormBuilder) {}
+    states = [{ value: "first" }, { value: "second" }];
+    ngOnInit() {
+        this.formGroup = this.FormBuilder.group({
+            somename: [""],
+            check: [true],
+            select: [this.states[1]]
+        });
+        this.onChanges();
+    }
+    onSubmit() {}
+    onChanges() {
+        this.formGroup.valueChanges.subscribe(value => {
+            console.log(this.formGroup.value);
+        });
+    }
 }

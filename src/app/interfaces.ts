@@ -1,3 +1,10 @@
+import { FormGroup } from "@angular/forms";
+
+export interface Field {
+    group: FormGroup;
+    config: any;
+}
+
 export interface Tag {
     _author: string;
     seq: number;

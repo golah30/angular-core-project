@@ -1,5 +1,5 @@
 .input__Container
-    label.inputLabel('*ngIf'='label' '[ngClass]'='{empty: empty}') {{label}}
+    label.inputLabel('*ngIf'='label' '[ngClass]'='{empty: empty}' '[for]'="inputId") {{label}}
     input(
         '[type]'='type'
         '[id]'='inputId'

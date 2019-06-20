@@ -1,11 +1,6 @@
 import { Component, OnInit } from "@angular/core";
-import {
-    FormGroup,
-    FormBuilder,
-    Validators,
-    FormArray,
-    FormControl
-} from "@angular/forms";
+import _ from "lodash";
+import { FormGroup, FormControl, Validators } from "@angular/forms";
 
 @Component({
     selector: "acp-quizz-constructor",
@@ -13,55 +8,80 @@ import {
     styleUrls: ["./quizz-constructor.component.scss"]
 })
 export class QuizzConstructorComponent implements OnInit {
-    constructor(private fb: FormBuilder) {}
+    constructor() {}
     form: FormGroup;
+    defaultQuestionConfig = {
+        correctAnswer: "",
+        question: "",
+        questionType: "input"
+    };
     config = [];
     ngOnInit() {
-        this.form = this.createGroup();
-        this.form.valueChanges.subscribe(data => {
-            console.log(data);
+        this.form = new FormGroup({
+            name: new FormControl("", Validators.required)
         });
     }
-    get questionsArray() {
-        return this.form.get("questions") as FormArray;
-    }
 
-    createGroup(): FormGroup {
-        const group = this.fb.group({}, { updateOn: "blur" });
-
-        group.addControl("name", this.fb.control("", [Validators.required]));
-
-        group.addControl("questions", this.fb.array([]));
-
-        return group;
-    }
     addQuestion() {
-        this.config.push([
-            {
-                type: "input",
-                name: "question",
-                label: "question"
-            },
-            {
-                type: "select",
-                name: "questionType",
-                options: ["Short answer", "Choise"],
-                label: "Question Type"
-            },
-            { type: "input", name: "correctAnswer", label: "Correct Answer" }
-        ]);
-        const group = this.fb.group({
-            correctAnswer: new FormControl("", Validators.required),
-            question: new FormControl("", Validators.required),
-            questionType: new FormControl("", Validators.required)
-        });
-        this.questionsArray.push(group);
-        group.get("questionType").valueChanges.subscribe(data => {
-            console.log(11);
-        });
+        this.config.push(this.defaultQuestionConfig);
     }
-    removeQuestion(index: number) {}
+    handleQuestionChange(payload: { key: number; value: any }) {
+        let config = _.cloneDeep(this.config);
+        config[payload.key] = payload.value;
+        this.config = config;
+    }
+    removeQuestion(index: number) {
+        this.config = this.config.filter((c, i) => i !== index);
+    }
     onSubmit() {
-        console.log(222);
+        let validCfg = this.validateConfig();
+        console.log(validCfg);
+
+        if (this.form.valid && validCfg) {
+            console.log({ name: this.form.value.name, questions: this.config });
+            alert("Submitted");
+        } else {
+            console.warn(
+                "Enter the name of the quiz or add at least one question"
+            );
+        }
+    }
+    validateConfig(): boolean {
+        let valid = true;
+        const config = this.config;
+        console.log(config);
+        if (!config.length) {
+            valid = false;
+        }
+        config.forEach(cfg => {
+            if (cfg.question === "") {
+                console.warn('Some question without "question"');
+                valid = false;
+            }
+            if (cfg.questionType === "input" && cfg.correctAnswer === "") {
+                console.warn(
+                    'Some question with "short answer" without "correctAnswer"'
+                );
+                valid = false;
+            }
+            if (cfg.questionType !== "input") {
+                let isCorrectCheck = false;
+                cfg.answerVariants.forEach(vars => {
+                    if (vars.isCorrect) {
+                        isCorrectCheck = true;
+                    }
+                    if (vars.answer === "") {
+                        console.warn("Set values into all variants fields");
+                        valid = false;
+                    }
+                });
+                if (!isCorrectCheck) {
+                    console.warn("Set at least one variant filed as correct");
+                    valid = false;
+                }
+            }
+        });
+
+        return valid;
     }
 }

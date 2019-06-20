@@ -12,13 +12,15 @@ import { DynamicFormModule } from "../dynamic-form/dynamic-form.module";
 import { QuizzesService } from "../service/quizzes/quizzes.service";
 import { QuizzesResolver } from "../service/quizzes/quizzes.resolver";
 import { QuizResolver } from "../service/quizzes/quiz.resolver";
+import { QuizQuestionComponent } from './quizz-constructor/quiz-question/quiz-question.component';
 
 @NgModule({
     declarations: [
         QuizzPageComponent,
         QuizzFeedComponent,
         QuizzSidebarComponent,
-        QuizzConstructorComponent
+        QuizzConstructorComponent,
+        QuizQuestionComponent
     ],
     providers: [QuizzesService, QuizResolver, QuizzesResolver],
 

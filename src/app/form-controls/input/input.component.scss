@@ -15,9 +15,11 @@
     transform: translateY(-50%);
     font-family: $montserrat;
     transition: all 0.3s;
+    opacity: 1;
     &.empty {
         top: 50%;
         font-size: 16px;
+        opacity: 0.6;
         background-color: transparent;
     }
 }

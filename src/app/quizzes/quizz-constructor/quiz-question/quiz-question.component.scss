@@ -1,0 +1,137 @@
+@import "variables/variables";
+:host {
+    display: block;
+    padding: 0 8px;
+    margin-top: 32px;
+}
+.question {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: 16px 12px;
+    border-top: 1px solid lighten($dark, 70);
+    border-bottom: 1px solid lighten($dark, 70);
+}
+
+.question__title {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: $white;
+    padding: 0px 4px;
+    text-align: center;
+    font-size: 16px;
+    margin-bottom: 18px;
+}
+.input-name {
+    margin-bottom: 12px;
+}
+.input-correct {
+    margin-top: 12px;
+    margin-bottom: 12px;
+}
+.control__inline {
+    display: inline-block;
+    cursor: pointer;
+    border: none;
+    color: $dark;
+    font-size: 12px;
+    background-color: transparent;
+    opacity: 0.6;
+    transition: opacity 0.3s;
+    &:hover {
+        opacity: 1;
+        text-decoration: underline;
+    }
+}
+.variants {
+    width: 100%;
+    margin-top: 12px;
+    text-align: right;
+}
+.variants__inputs {
+    text-align: left;
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+}
+.variants__inputs-check {
+    margin-right: 8px;
+}
+.variants__inputs-input {
+    flex-grow: 1;
+}
+.variants-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.control {
+    margin-top: 8px;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    width: 120px;
+    height: 26px;
+    text-decoration: none;
+    color: $white;
+    background-color: $dark;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    &:focus {
+        outline: none;
+    }
+    &:hover {
+        background-color: $primary;
+        color: $dark;
+        &::before {
+            border-right-color: $primary;
+        }
+        &::after {
+            border-left-color: $primary;
+        }
+    }
+    &::before {
+        content: "";
+        display: block;
+        position: absolute;
+        left: -26px;
+        top: 0;
+        border: 13px solid transparent;
+        border-right-color: $dark;
+        transition: border-color 0.3s;
+    }
+    &::after {
+        content: "";
+        display: block;
+        position: absolute;
+        right: -26px;
+        top: 0;
+        border: 13px solid transparent;
+        border-left-color: $dark;
+        transition: border-color 0.3s;
+    }
+}
+
+.control__delete {
+    margin-top: 0;
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 12px;
+    height: 20px;
+    &::after {
+        right: -20px;
+        border: 10px solid transparent;
+        border-left-color: $dark;
+    }
+    &::before {
+        left: -20px;
+        border: 10px solid transparent;
+        border-right-color: $dark;
+    }
+}

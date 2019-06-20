@@ -4,13 +4,19 @@ form(
     novalidate='' 
     autocomplete='off'
 )
-    acp-input(
-        formControlName='name'
-        label='Quiz name'
-        type='text'
-    )
-    ng-container('*ngFor'='let field of questionsArray.controls; index as i')
-        ng-container('*ngFor'='let conf of config[i]; index as j')
-            .form-control
-                ng-container(acpDynamicField '[config]'='conf' '[group]'='form')
-    button.acp-button('type'='button' '(click)'='addQuestion()') Add question
+    .input
+        acp-input(
+            formControlName='name'
+            label='Quiz name'
+            type='text'
+        )
+acp-quiz-question(
+    '*ngFor'='let cfg of config; index as i'
+    '[key]'='i'
+    '[config]'='cfg'
+    '(submit)'='handleQuestionChange($event)'
+    '(delete)'='removeQuestion($event)'
+)
+.controls
+    button.control('type'='button' '(click)'='addQuestion()') Add question
+    button.control('type'='button' '(click)'='onSubmit()') Submit

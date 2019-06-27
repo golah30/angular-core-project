@@ -4,6 +4,16 @@ import { Router, ActivatedRoute, Params } from "@angular/router";
 import { WorkshopsService } from "../../service/workshops/workshops.service";
 import { TagsService } from "../../service/tags/tags.service";
 import { UserService } from "src/app/service/user/user.service";
+import { AppState } from "src/app/reducers";
+import { Store } from "@ngrx/store";
+import { Subscription } from "rxjs";
+import { selectTags, selectArticles } from "../store/workshops.selectors";
+import {
+    TagsRequest,
+    ArticlesSuccess,
+    ArticlesRequest
+} from "../store/workshops.actions";
+import { selectAuthUser } from "src/app/auth/store/auth.selectors";
 @Component({
     selector: "acp-workshops-feed",
     templateUrl: "./workshops-feed.component.pug",
@@ -11,38 +21,55 @@ import { UserService } from "src/app/service/user/user.service";
 })
 export class WorkshopsFeedComponent implements OnInit, OnDestroy {
     constructor(
-        private WorkshopsService: WorkshopsService,
-        private TagsService: TagsService,
-        private UserService: UserService,
         private route: ActivatedRoute,
-        private router: Router
+        private router: Router,
+        private store: Store<AppState>
     ) {}
+    tagsSub: Subscription;
+    articlesSub: Subscription;
+    userSub: Subscription;
     tags: Array<Tag>;
+    articles: Array<Article>;
+    currentUser: User;
+    userid = 178;
     categories: Array<any> = [
         { name: "All" },
         { name: "Favorite" },
         { name: "My Workshops" }
     ];
     range: Array<number> | number;
-    articles: Array<Article> = [];
-    userid: string = "178";
     count: boolean = false;
     loading: boolean = true;
-    currentUser: User;
-    ngOnInit() {
-        this.UserService.getCurrentUser().subscribe((data: User) => {
-            this.currentUser = data;
-        });
-        this.TagsService.getTags().subscribe(data => {
-            this.tags = data;
-            this.loading = false;
-        });
 
+    ngOnInit() {
+        this.store.dispatch(new TagsRequest());
+        this.tagsSub = this.store
+            .select(selectTags)
+            .subscribe((data: Array<Tag>) => {
+                this.tags = data;
+                this.loading = false;
+            });
+        this.articlesSub = this.store
+            .select(selectArticles)
+            .subscribe((data: Array<Article>) => {
+                this.articles = data;
+                this.range = data.length;
+                this.count = data.length !== 0;
+            });
+        this.userSub = this.store
+            .select(selectAuthUser)
+            .subscribe((data: User) => {
+                this.currentUser = data;
+            });
         this.route.queryParamMap.subscribe(params => {
             this.onParamsChange(params);
         });
     }
-
+    ngOnDestroy() {
+        this.tagsSub.unsubscribe();
+        this.articlesSub.unsubscribe();
+        this.userSub.unsubscribe();
+    }
     setQueryParams(tags: Array<number>, ctgs: Array<number>) {
         this.router.navigate([], {
             relativeTo: this.route,
@@ -108,50 +135,37 @@ export class WorkshopsFeedComponent implements OnInit, OnDestroy {
         this.setQueryParams(paramsTags, paramsCtgs);
     }
 
-    ngOnDestroy() {}
     onParamsChange(params: Params) {
-        let paramsTags: Array<number> | null = params.get("tags");
+        let paramsTags: string | null = params.get("tags");
         let paramsCtgs: string | null = params.get("categories");
         if (paramsTags) {
-            paramsTags = JSON.parse(`[${paramsTags}]`);
+            paramsTags = paramsTags.replace(/,/g, "|");
         }
         if (paramsCtgs) {
             if (paramsCtgs === "0") {
-                this.WorkshopsService.getPosts(1).subscribe(data => {
-                    this.articles = data;
-                    this.range = this.articles.length;
-                    this.count = this.articles.length !== 0;
-                });
+                this.store.dispatch(new ArticlesRequest({ page: 0, tags: "" }));
             }
             if (paramsCtgs === "1") {
-                this.WorkshopsService.getFavorite(1, paramsTags).subscribe(
-                    data => {
-                        console.log(data);
-                        this.articles = data;
-                        this.range = this.articles.length;
-                        this.count = this.articles.length !== 0;
-                    }
+                this.store.dispatch(
+                    new ArticlesRequest({ page: 0, tags: paramsTags })
                 );
             }
             if (paramsCtgs === "2") {
-                this.WorkshopsService.getUserPosts(
-                    1,
-                    paramsTags,
-                    this.currentUser._id
-                ).subscribe(data => {
-                    this.articles = data;
-                    this.range = this.articles.length;
-                    this.count = this.articles.length !== 0;
-                });
+                this.store.dispatch(
+                    new ArticlesRequest({
+                        page: 0,
+                        tags: paramsTags,
+                        author: this.currentUser._id
+                    })
+                );
             }
         } else {
             if (paramsTags) {
-                this.WorkshopsService.getPosts(1, paramsTags).subscribe(
-                    data => {
-                        this.articles = data;
-                        this.range = this.articles.length;
-                        this.count = this.articles.length !== 0;
-                    }
+                this.store.dispatch(
+                    new ArticlesRequest({
+                        page: 0,
+                        tags: paramsTags
+                    })
                 );
             } else {
                 this.onCategorySelect(0);

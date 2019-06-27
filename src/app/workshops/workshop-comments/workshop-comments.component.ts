@@ -1,19 +1,24 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, OnDestroy } from "@angular/core";
 import { Comment, Article, User } from "../../interfaces";
 import { UserService } from "src/app/service/user/user.service";
 import { CommentsService } from "src/app/service/comments/comments.service";
-import { WorkshopsService } from "src/app/service/workshops/workshops.service";
+import { Store } from "@ngrx/store";
+import { AppState } from "src/app/reducers";
+import { Subscription } from "rxjs";
+import { selectAuthUser } from "src/app/auth/store/auth.selectors";
+import { selectArticle, selectComments } from "../store/workshops.selectors";
+import { ArticleCommentsRequest } from "../store/workshops.actions";
 
 @Component({
     selector: "acp-workshop-comments",
     templateUrl: "./workshop-comments.component.pug",
     styleUrls: ["./workshop-comments.component.scss"]
 })
-export class WorkshopCommentsComponent implements OnInit {
+export class WorkshopCommentsComponent implements OnInit, OnDestroy {
     constructor(
         private UserService: UserService,
         private CommentService: CommentsService,
-        private WorkshopsService: WorkshopsService
+        private store: Store<AppState>
     ) {}
     currentPost: Article;
     currentUser: User;
@@ -25,6 +30,9 @@ export class WorkshopCommentsComponent implements OnInit {
         author: "U312",
         date: new Date()
     };
+    userSub: Subscription;
+    commentSub: Subscription;
+    articleSub: Subscription;
     submit(comment: Comment) {
         this.CommentService.createComment(
             this.currentPost.id,
@@ -66,15 +74,32 @@ export class WorkshopCommentsComponent implements OnInit {
         });
     }
     ngOnInit() {
-        this.UserService.getCurrentUser().subscribe((data: User) => {
-            this.currentUser = data;
-        });
-        this.currentPost = this.WorkshopsService.getCurrentPost();
-        this.CommentService.getCommentsByPostId(this.currentPost.id).subscribe(
-            (data: Array<Comment>) => {
-                this.comments = data;
-                this.getAuthors();
-            }
-        );
+        this.userSub = this.store
+            .select(selectAuthUser)
+            .subscribe((data: User) => {
+                this.currentUser = data;
+            });
+        this.articleSub = this.store
+            .select(selectArticle)
+            .subscribe((data: Article) => {
+                this.currentPost = data;
+
+                this.store.dispatch(
+                    new ArticleCommentsRequest({ id: this.currentPost.id })
+                );
+            });
+        this.commentSub = this.store
+            .select(selectComments)
+            .subscribe((data: Array<Comment>) => {
+                if (data.length > 0) {
+                    this.comments = data;
+                    this.getAuthors();
+                }
+            });
+    }
+    ngOnDestroy() {
+        this.articleSub.unsubscribe();
+        this.userSub.unsubscribe();
+        this.commentSub.unsubscribe();
     }
 }

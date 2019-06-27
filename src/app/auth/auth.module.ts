@@ -4,6 +4,10 @@ import { LoginComponent } from "./login/login.component";
 import { AuthRoutingModule } from "./auth-routing.module";
 import { SharedModule } from "../shared/shared.module";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { StoreModule } from "@ngrx/store";
+import { EffectsModule } from "@ngrx/effects";
+import { AuthEffects } from "./store/auth.effects";
+import { authReducer } from "./store/auth.reducer";
 
 @NgModule({
     declarations: [LoginComponent],
@@ -12,7 +16,9 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
         AuthRoutingModule,
         FormsModule,
         ReactiveFormsModule,
-        SharedModule
+        SharedModule,
+        StoreModule.forFeature("auth", authReducer),
+        EffectsModule.forFeature([AuthEffects])
     ]
 })
 export class AuthModule {}

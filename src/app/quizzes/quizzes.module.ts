@@ -12,7 +12,11 @@ import { DynamicFormModule } from "../dynamic-form/dynamic-form.module";
 import { QuizzesService } from "../service/quizzes/quizzes.service";
 import { QuizzesResolver } from "../service/quizzes/quizzes.resolver";
 import { QuizResolver } from "../service/quizzes/quiz.resolver";
-import { QuizQuestionComponent } from './quizz-constructor/quiz-question/quiz-question.component';
+import { QuizQuestionComponent } from "./quizz-constructor/quiz-question/quiz-question.component";
+import { StoreModule } from "@ngrx/store";
+import { EffectsModule } from "@ngrx/effects";
+import { quizzesReducer } from "./store/quizzes.reducer";
+import { QuizzesEffects } from "./store/quizzes.effects";
 
 @NgModule({
     declarations: [
@@ -31,7 +35,9 @@ import { QuizQuestionComponent } from './quizz-constructor/quiz-question/quiz-qu
         FormsModule,
         ReactiveFormsModule,
         FormControlsModule,
-        DynamicFormModule
+        DynamicFormModule,
+        StoreModule.forFeature("quizzes", quizzesReducer),
+        EffectsModule.forFeature([QuizzesEffects])
     ]
 })
 export class QuizzesModule {}

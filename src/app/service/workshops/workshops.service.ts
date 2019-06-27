@@ -17,13 +17,13 @@ export class WorkshopsService {
     posts: Array<Article> = [];
     lastPostById: Article;
     filter: string = "";
-    public getPosts(page: number, filter: Array<any> | null = []) {
+    public getPosts(page: number, tags: string = "", author: string = "") {
         let url = `/posts?page=${page}`;
-        if (filter && filter.length) {
-            url += "&tags=";
-            filter.forEach((t, i) => {
-                url = i !== filter.length - 1 ? `${url}${t}|` : `${url}${t}`;
-            });
+        if (tags) {
+            url += `&tags=${tags}`;
+        }
+        if (author) {
+            url += `&authorId=${author}`;
         }
         return this.api
             .get(url, { Authorization: this.UserService.getToken() })
@@ -48,50 +48,6 @@ export class WorkshopsService {
                     } else {
                         return { error: true };
                     }
-                })
-            );
-    }
-    public getFavorite(page: number, filter: Array<any> | null = []) {
-        let url = `/posts?page=${page}`;
-        if (filter && filter.length) {
-            url += "&";
-            filter.forEach((t, i) => {
-                url =
-                    i !== filter.length - 1
-                        ? `${url}${t.seq}|`
-                        : `${url}${t.seq}`;
-            });
-        }
-        return this.api
-            .get(url, {
-                Authorization: this.UserService.getToken()
-            })
-            .pipe(
-                map((data: Posts) => {
-                    this.posts = data.posts;
-                    return this.posts;
-                })
-            );
-    }
-    public getUserPosts(page: number, filter: Array<any> | null = [], author) {
-        let url = `/posts?page=${page}&authorId=${author}`;
-        if (filter && filter.length) {
-            url += "&";
-            filter.forEach((t, i) => {
-                url =
-                    i !== filter.length - 1
-                        ? `${url}${t.seq}|`
-                        : `${url}${t.seq}`;
-            });
-        }
-        return this.api
-            .get(url, {
-                Authorization: this.UserService.getToken()
-            })
-            .pipe(
-                map((data: Posts) => {
-                    this.posts = data.posts;
-                    return this.posts;
                 })
             );
     }

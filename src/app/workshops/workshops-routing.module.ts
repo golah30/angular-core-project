@@ -24,9 +24,9 @@ const routes: Routes = [
     {
         path: ":id",
         component: WorkshopPageComponent,
-        resolve: {
-            article: WorkshopResolver
-        },
+        // resolve: {
+        //     article: WorkshopResolver
+        // },
         children: [
             {
                 path: "",

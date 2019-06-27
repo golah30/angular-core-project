@@ -5,10 +5,16 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { CoreModule } from "./core/core.module";
-
 import { UserService } from "./service/user/user.service";
 import { AuthGuardService } from "./guards/auth-guard.service";
 import { ApiInterceptor } from "./interceptors/api.interceptor";
+import { StoreModule } from "@ngrx/store";
+import { reducers, metaReducers } from "./reducers";
+import { StoreDevtoolsModule } from "@ngrx/store-devtools";
+import { environment } from "../environments/environment";
+import { EffectsModule } from "@ngrx/effects";
+import { AppEffects } from "./store/app.effects";
+
 @NgModule({
     declarations: [AppComponent],
     imports: [
@@ -16,7 +22,13 @@ import { ApiInterceptor } from "./interceptors/api.interceptor";
         HttpClientModule,
         AppRoutingModule,
         CoreModule,
-        BrowserAnimationsModule
+        BrowserAnimationsModule,
+        StoreModule.forRoot(reducers, { metaReducers }),
+        StoreDevtoolsModule.instrument({
+            maxAge: 25,
+            logOnly: environment.production
+        }),
+        EffectsModule.forRoot([AppEffects])
     ],
     providers: [
         UserService,

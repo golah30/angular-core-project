@@ -12,6 +12,10 @@ import { WorkshopQuizzesComponent } from "./workshop-quizzes/workshop-quizzes.co
 import { WorkshopResourcesComponent } from "./workshop-resources/workshop-resources.component";
 import { CommentsService } from "../service/comments/comments.service";
 import { TagsService } from "../service/tags/tags.service";
+import { StoreModule } from "@ngrx/store";
+import { EffectsModule } from "@ngrx/effects";
+import { workshopsReducer } from "./store/workshops.reducer";
+import { WorkshopsEffects } from "./store/workshops.effects";
 
 @NgModule({
     declarations: [
@@ -24,6 +28,12 @@ import { TagsService } from "../service/tags/tags.service";
         WorkshopResourcesComponent
     ],
     providers: [WorkshopsService, CommentsService, TagsService],
-    imports: [CommonModule, WorkshopsRoutingModule, SharedModule]
+    imports: [
+        CommonModule,
+        WorkshopsRoutingModule,
+        SharedModule,
+        StoreModule.forFeature("workshops", workshopsReducer),
+        EffectsModule.forFeature([WorkshopsEffects])
+    ]
 })
 export class WorkshopsModule {}

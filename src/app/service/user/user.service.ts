@@ -3,6 +3,10 @@ import { ApiService } from "../api/api.service";
 import { map } from "rxjs/operators";
 import { User } from "../../interfaces";
 import { of } from "rxjs";
+import { AppState } from "src/app/reducers";
+import { Store } from "@ngrx/store";
+import { selectAuthState } from "src/app/auth/store/auth.selectors";
+import { AuthState } from "src/app/auth/store/auth.reducer";
 
 @Injectable({
     providedIn: "root"
@@ -10,20 +14,27 @@ import { of } from "rxjs";
 export class UserService {
     private auth: boolean = false;
     private token: string = "";
-    private User: User = {
-        picture: "",
-        username: "Unknown User"
-    };
-    constructor(private api: ApiService) {}
+    private User: User;
+    constructor(private api: ApiService, private store: Store<AppState>) {
+        this.store.select(selectAuthState).subscribe((authState: AuthState) => {
+            this.auth = authState.isAuth;
+            this.token = authState.token;
+            this.User = authState.user;
+        });
+    }
+
     public getToken() {
         return "Bearer " + this.token;
     }
+
     public getUserById(id: string) {
         return this.api.get(`/users/${id}`, { Authorization: this.getToken() });
     }
+
     public signUp(login: string, password: string) {
         return this.api.post(`/users/signup`, { username: login, password });
     }
+
     public login(login: string, password: string) {
         return this.api
             .get(`/users/login`, {
@@ -40,14 +51,17 @@ export class UserService {
                 })
             );
     }
+
     public createUser(user: User) {
         return this.api.post(`/users`, user, {
             Authorization: this.getToken()
         });
     }
+
     public getAllUsers() {
         return this.api.get(`/users`, { Authorization: this.getToken() });
     }
+
     public getCurrentUser() {
         if (this.User && this.User._id) {
             return of(this.User);
@@ -75,11 +89,13 @@ export class UserService {
                 })
             );
     }
+
     public deleteUser(id: string) {
         return this.api.delete(`/users/${id}`, {
             Authorization: this.getToken()
         });
     }
+
     public isAuth() {
         return this.auth;
     }

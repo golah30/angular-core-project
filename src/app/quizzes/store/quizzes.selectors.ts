@@ -17,3 +17,7 @@ export const selectQuizzesLoading = createSelector(
     selectQuizzesState,
     (state: QuizzesState) => state.loading
 );
+export const selectQuiz = createSelector(
+    selectQuizzesState,
+    (state: QuizzesState) => state.quiz
+);

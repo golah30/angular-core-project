@@ -16,7 +16,7 @@ export class DynamicFormComponent implements OnInit {
         this.form = this.createGroup();
     }
     createGroup(): FormGroup {
-        const group = this.FormBuilder.group({}, { updateOn: "blur" });
+        const group = this.FormBuilder.group({}, { updateOn: "change" });
 
         this.config.forEach(control => {
             if (control.name) {

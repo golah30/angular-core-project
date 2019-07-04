@@ -1,8 +1,9 @@
 acp-viewport
-    .container
-        .title {{quiz.config.name}}
-        .author {{quiz.author}}
-        .date 
-             acp-timestamp('[date]'='quiz.date')
-    .form-container
-        acp-dynamic-form('[config]'='config' '(handleSubmit)'='onSubmit($event)')
+    ng-container('*ngIf'='!loading')
+        .container
+            .title {{quiz.name}}
+            .author {{userName}}
+            .date 
+                acp-timestamp('[date]'='quiz.date')
+        .form-container
+            acp-dynamic-form('[config]'='config' '(handleSubmit)'='onSubmit($event)')

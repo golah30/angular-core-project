@@ -2,8 +2,6 @@ import { Component, OnInit, OnDestroy } from "@angular/core";
 import { Tag, Article, User } from "../../interfaces";
 import { Router, ActivatedRoute, Params } from "@angular/router";
 import { WorkshopsService } from "../../service/workshops/workshops.service";
-import { TagsService } from "../../service/tags/tags.service";
-import { UserService } from "src/app/service/user/user.service";
 import { AppState } from "src/app/reducers";
 import { Store } from "@ngrx/store";
 import { Subscription } from "rxjs";
@@ -23,8 +21,15 @@ export class WorkshopsFeedComponent implements OnInit, OnDestroy {
     constructor(
         private route: ActivatedRoute,
         private router: Router,
+        private WorkshopsService: WorkshopsService,
         private store: Store<AppState>
     ) {}
+
+    //bar
+    mainControlTitle: string = "Create workshop";
+    routeMainControll: string = "/workshops/create";
+    //end bar
+
     tagsSub: Subscription;
     articlesSub: Subscription;
     userSub: Subscription;
@@ -40,7 +45,7 @@ export class WorkshopsFeedComponent implements OnInit, OnDestroy {
     range: Array<number> | number;
     count: boolean = false;
     loading: boolean = true;
-
+    page: number = 0;
     ngOnInit() {
         this.store.dispatch(new TagsRequest());
         this.tagsSub = this.store
@@ -143,17 +148,19 @@ export class WorkshopsFeedComponent implements OnInit, OnDestroy {
         }
         if (paramsCtgs) {
             if (paramsCtgs === "0") {
-                this.store.dispatch(new ArticlesRequest({ page: 0, tags: "" }));
+                this.store.dispatch(
+                    new ArticlesRequest({ page: this.page, tags: "" })
+                );
             }
             if (paramsCtgs === "1") {
                 this.store.dispatch(
-                    new ArticlesRequest({ page: 0, tags: paramsTags })
+                    new ArticlesRequest({ page: this.page, tags: paramsTags })
                 );
             }
             if (paramsCtgs === "2") {
                 this.store.dispatch(
                     new ArticlesRequest({
-                        page: 0,
+                        page: this.page,
                         tags: paramsTags,
                         author: this.currentUser._id
                     })
@@ -163,7 +170,7 @@ export class WorkshopsFeedComponent implements OnInit, OnDestroy {
             if (paramsTags) {
                 this.store.dispatch(
                     new ArticlesRequest({
-                        page: 0,
+                        page: this.page,
                         tags: paramsTags
                     })
                 );
@@ -171,5 +178,20 @@ export class WorkshopsFeedComponent implements OnInit, OnDestroy {
                 this.onCategorySelect(0);
             }
         }
+    }
+    onArticleDelete(id: string) {
+        this.WorkshopsService.deletePost(id).subscribe((data: any) => {
+            this.onParamsChange(this.route.snapshot.queryParamMap);
+        });
+    }
+    onPrevPage(): void {
+        if (this.page) {
+            this.page = this.page - 1;
+            this.onParamsChange(this.route.snapshot.queryParamMap);
+        }
+    }
+    onNextPage(): void {
+        this.page = this.page + 1;
+        this.onParamsChange(this.route.snapshot.queryParamMap);
     }
 }

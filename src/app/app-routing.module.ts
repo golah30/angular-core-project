@@ -15,12 +15,9 @@ const routes: Routes = [
         canActivate: [AuthGuardService]
     },
     {
-        path: "dashboard",
-        loadChildren: "./dashboard/dashboard.module#DashboardModule"
-    },
-    {
         path: "quizzes",
-        loadChildren: "./quizzes/quizzes.module#QuizzesModule"
+        loadChildren: "./quizzes/quizzes.module#QuizzesModule",
+        canActivate: [AuthGuardService]
     },
     {
         path: "login",

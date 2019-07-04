@@ -1,15 +1,12 @@
 acp-viewport
-    .container('*ngIf'='quizzes.length > 0')
+    .container('*ngIf'='!loading')
         .feed
             .card-container('*ngFor'='let quiz of quizzes')
                 acp-card
                     .header
-                        a.title('[routerLink]'="'/quizzes/'+quiz.id") {{quiz.config.name}}
+                        a.title('[routerLink]'="'/quizzes/'+quiz.id") {{quiz.name}}
                         .date
-                            acp-timestamp('[date]'='quiz.date')  
-                    .footer
-                        .author
-                            span {{quiz.author}}
+                            acp-timestamp('[date]'='quiz.updatedAt')  
                 button.control
                     i.icon-close
     acp-quizz-sidebar

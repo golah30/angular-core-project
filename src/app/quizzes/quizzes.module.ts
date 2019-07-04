@@ -10,8 +10,6 @@ import { QuizzSidebarComponent } from "./quizz-sidebar/quizz-sidebar.component";
 import { QuizzConstructorComponent } from "./quizz-constructor/quizz-constructor.component";
 import { DynamicFormModule } from "../dynamic-form/dynamic-form.module";
 import { QuizzesService } from "../service/quizzes/quizzes.service";
-import { QuizzesResolver } from "../service/quizzes/quizzes.resolver";
-import { QuizResolver } from "../service/quizzes/quiz.resolver";
 import { QuizQuestionComponent } from "./quizz-constructor/quiz-question/quiz-question.component";
 import { StoreModule } from "@ngrx/store";
 import { EffectsModule } from "@ngrx/effects";
@@ -26,7 +24,7 @@ import { QuizzesEffects } from "./store/quizzes.effects";
         QuizzConstructorComponent,
         QuizQuestionComponent
     ],
-    providers: [QuizzesService, QuizResolver, QuizzesResolver],
+    providers: [QuizzesService],
 
     imports: [
         CommonModule,

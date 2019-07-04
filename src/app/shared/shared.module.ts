@@ -20,6 +20,7 @@ import { QueryParamsActiveDirective } from "./directives/query-params-active/que
 import { CategoryTagComponent } from "./category-tag/category-tag.component";
 import { HighlightDirective } from "./directives/highlight/highlight.directive";
 import { AcpCollapseComponent } from "./directives/collapse/acp-collapse/acp-collapse.component";
+import { ForDifDirective } from "./directives/for-dif/for-dif.directive";
 @NgModule({
     declarations: [
         UserPicComponent,
@@ -39,7 +40,8 @@ import { AcpCollapseComponent } from "./directives/collapse/acp-collapse/acp-col
         QueryParamsActiveDirective,
         CategoryTagComponent,
         HighlightDirective,
-        AcpCollapseComponent
+        AcpCollapseComponent,
+        ForDifDirective
     ],
     imports: [CommonModule, FormsModule, ReactiveFormsModule, RouterModule],
     exports: [
@@ -60,7 +62,8 @@ import { AcpCollapseComponent } from "./directives/collapse/acp-collapse/acp-col
         TextToColorDirective,
         CategoryTagComponent,
         HighlightDirective,
-        AcpCollapseComponent
+        AcpCollapseComponent,
+        ForDifDirective
     ]
 })
 export class SharedModule {}

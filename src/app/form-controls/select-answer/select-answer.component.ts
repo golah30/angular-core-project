@@ -2,22 +2,22 @@ import { Component, Input } from "@angular/core";
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
 
 interface opt {
-    value: string;
+    answer: string;
 }
 
 @Component({
-    selector: "acp-select",
+    selector: "acp-select-answer",
     providers: [
         {
             provide: NG_VALUE_ACCESSOR,
-            useExisting: SelectComponent,
+            useExisting: SelectAnswerComponent,
             multi: true
         }
     ],
-    templateUrl: "./select.component.pug",
-    styleUrls: ["./select.component.scss"]
+    templateUrl: "./select-answer.component.pug",
+    styleUrls: ["./select-answer.component.scss"]
 })
-export class SelectComponent implements ControlValueAccessor {
+export class SelectAnswerComponent implements ControlValueAccessor {
     constructor() {}
     value: opt;
     @Input() options;
@@ -26,8 +26,6 @@ export class SelectComponent implements ControlValueAccessor {
     private propagateTouched = ($event: FocusEvent) => {};
 
     writeValue(value: opt): void {
-        console.log(this.options);
-
         this.value = value;
     }
     registerOnChange(fn: any) {

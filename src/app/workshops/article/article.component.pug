@@ -11,10 +11,14 @@ acp-card
             li.article__tag('*ngFor'='let tag of tags') {{tag}}
         .article__description {{description}}
     .footer
-        .author
-            span {{userName}}
-        .points
-            .likes
-                acp-like('[isActive]'='isLike' type='like' '[count]'='likes' '(onLikeToggle)'='likeToggle()')
-            .stars
-                acp-like('[isActive]'='isFavorite' type='star' '[count]'='stars' '(onLikeToggle)'='favoriteToggle()')
+        .footer-container
+            .author
+                span {{userName}}
+            .points
+                .likes
+                    acp-like('[isActive]'='isLike' type='like' '[count]'='likes' '(onLikeToggle)'='likeToggle()')
+                .stars
+                    acp-like('[isActive]'='isFavorite' type='star' '[count]'='stars' '(onLikeToggle)'='favoriteToggle()')
+        .controls('*ngIf'='isAuthor')
+            i.icon-mode_edit('(click)'='onEditClick()')
+            i.icon-close('(click)'='onDeleteClick()')

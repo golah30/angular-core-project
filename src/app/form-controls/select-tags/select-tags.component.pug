@@ -1,0 +1,18 @@
+.container
+    .list-container('(blur)'='onSelectClose()' tabindex="0")
+        .control('[ngClass]'='{active: active}' '(click)'='onSelectOpen()')
+            span {{label}}
+            i.icon-keyboard_arrow_down
+        .options('[ngClass]'='{active: active}')
+            .option(
+                '*acpForDif'='let option of options; cmp: value' 
+                '(click)'='onAdd(option.seq)'
+            ) {{option.name}}
+    .selected-container('*ngIf'='selected.length')
+        .selected(
+            '*ngFor'='let option of selected' 
+            '(click)'='onRemove(option.seq)'
+        )
+            span {{option.name}}
+            i.icon-close
+

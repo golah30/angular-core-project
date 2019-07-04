@@ -24,7 +24,7 @@ export interface Article {
     text: string;
     image: string;
     createdAt: string;
-    _author: string;
+    author: string;
 }
 export interface Comment {
     createdAt?: string;

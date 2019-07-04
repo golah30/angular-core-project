@@ -1,10 +1,19 @@
-import { Component, OnInit, Input, OnDestroy } from "@angular/core";
+import {
+    Component,
+    OnInit,
+    Input,
+    OnDestroy,
+    Output,
+    EventEmitter
+} from "@angular/core";
 import { UserService } from "../../service/user/user.service";
 import { User, Tag } from "../../interfaces";
 import { Subscription } from "rxjs";
 import { Store } from "@ngrx/store";
 import { AppState } from "src/app/reducers";
 import { selectTags } from "../store/workshops.selectors";
+import { selectAuthUser } from "src/app/auth/store/auth.selectors";
+import { Router } from "@angular/router";
 
 @Component({
     selector: "acp-article",
@@ -23,12 +32,16 @@ export class ArticleComponent implements OnInit, OnDestroy {
     @Input() likes: number;
     @Input() stars: number;
     @Input() author: string;
+    @Output() delete = new EventEmitter<string>();
     routePath: string;
+    isAuthor: boolean = false;
     userName: string = "";
     tagsSub: Subscription;
+    userSub: Subscription;
     constructor(
         private UserService: UserService,
-        private store: Store<AppState>
+        private store: Store<AppState>,
+        private router: Router
     ) {}
     favoriteToggle() {
         this.isFavorite = !this.isFavorite;
@@ -55,6 +68,15 @@ export class ArticleComponent implements OnInit, OnDestroy {
                     ? `${data.firstName} ${data.lastName}`
                     : data.username;
         });
+        this.userSub = this.store
+            .select(selectAuthUser)
+            .subscribe((data: User) => {
+                if (data.role && data.role === "admin") {
+                    this.isAuthor = true;
+                } else {
+                    this.isAuthor = data._id === this.author;
+                }
+            });
         this.tagsSub = this.store
             .select(selectTags)
             .subscribe((data: Array<Tag>) => {
@@ -72,5 +94,12 @@ export class ArticleComponent implements OnInit, OnDestroy {
     }
     ngOnDestroy() {
         this.tagsSub.unsubscribe();
+        this.userSub.unsubscribe();
+    }
+    onEditClick(): void {
+        this.router.navigate([`/workshops/${this.routeId}/edit`]);
+    }
+    onDeleteClick(): void {
+        this.delete.emit(this.routeId);
     }
 }

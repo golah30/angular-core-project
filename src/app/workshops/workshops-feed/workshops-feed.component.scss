@@ -5,12 +5,49 @@
     display: block;
     flex-grow: 1;
 }
+.bar {
+    width: 100%;
+    position: sticky;
+    top: 0;
+    display: flex;
+    flex-wrap: nowrap;
+    background-color: lighten($dark, 15);
+    height: 40px;
+    justify-content: flex-end;
+    z-index: 20;
+}
+.bar__main {
+    order: 1;
+
+    height: 100%;
+}
+.main-controll {
+    display: inline-block;
+    height: 100%;
+    position: relative;
+    padding: 12px;
+    text-align: center;
+    color: $white;
+    cursor: pointer;
+    transition: all 0.3s;
+    &:hover {
+        background-color: $primary;
+        color: $dark;
+    }
+}
+.feed-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: nowrap;
+}
 .workshops-container {
     display: flex;
+    flex-direction: column;
     padding-bottom: 40px;
-    justify-content: center;
+    align-items: center;
 }
 .feed {
+    margin: 0 8px;
     @include large() {
         width: 46%;
     }
@@ -23,38 +60,61 @@
     text-align: center;
 }
 .tags {
-    position: fixed;
+    position: sticky;
     margin-top: 40px;
-    left: calc(50% + 280px + 80px);
+    top: 80px;
     display: flex;
     width: 130px;
     flex-direction: column;
     align-self: flex-start;
     flex-wrap: wrap;
     justify-content: space-around;
-    @include large() {
-        left: calc(50% + 18% + 80px);
-    }
     @include medium() {
         display: none;
     }
 }
 
 .categories {
-    position: fixed;
-    top: 70px;
-    left: calc(50% - 280px - 75px);
+    position: sticky;
     width: 130px;
+    top: 80px;
     margin-top: 40px;
     display: flex;
     flex-direction: column;
     align-self: flex-start;
     flex-wrap: wrap;
     justify-content: space-around;
-    @include large() {
-        left: calc(50% - 18% - 75px);
-    }
     @include medium() {
         display: none;
+    }
+}
+
+.pagination {
+    margin-top: 40px;
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+}
+.current {
+    font-size: 24px;
+    font-family: $objsans_bold;
+    margin: 0 24px;
+}
+.controll {
+    text-decoration: none;
+    cursor: pointer;
+    opacity: 0.74;
+    transition: opacity 0.3s;
+    &:hover {
+        text-decoration: underline;
+        opacity: 1;
+    }
+    &.disabled {
+        opacity: 0.3;
+        cursor: default;
+        &:hover {
+            text-decoration: none;
+            opacity: 0.3;
+        }
     }
 }

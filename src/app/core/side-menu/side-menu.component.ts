@@ -23,11 +23,6 @@ export class SideMenuComponent implements OnInit {
     }
     menuItems: Array<MenuItem> = [
         {
-            icon: "icon-view_compact",
-            href: "/dashboard",
-            title: "Dashboard"
-        },
-        {
             icon: "icon-school",
             href: "/workshops",
             title: "Workshops"

@@ -1,37 +1,46 @@
 acp-viewport
     .workshops-container('*ngIf'='!loading')
-        .categories
-            acp-category-tag(
-                '*ngFor'='let category of categories; let i = index'
-                '[ctg]'='category.name' 
-                '(onCtgSelect)'='onCategorySelect($event)'
-                '[index]'='i'
-            )
-        ng-container('*ngIf'='count; else empty')
-            ul.feed
-                acp-article(
-                    '*acpForRange'='let article of articles; range: range'
-                    'acpHighlight'
-                    '[isHighlight]'='article.author === userid'
-                    '[routeId]'='article.id'
-                    '[title]'='article.title'
-                    '[image]'='article.image'
-                    '[description]'='article.description'
-                    '[isFavorite]'='article.isFavorite'
-                    '[tags]'='article.tags'
-                    '[date]'='article.createdAt'
-                    '[likes]'='article.likes'
-                    '[stars]'='article.stars'
-                    '[author]'='article._author'
+        .bar
+            .bar__aside
+            .bar__main
+                .main-controll('[routerLink]'="routeMainControll") {{mainControlTitle}}
+            .bar__aside
+        .feed-container
+            .categories
+                acp-category-tag(
+                    '*ngFor'='let category of categories; let i = index'
+                    '[ctg]'='category.name' 
+                    '(onCtgSelect)'='onCategorySelect($event)'
+                    '[index]'='i'
                 )
-        .tags
-            acp-tag(
-                '*ngFor'='let tag of tags; let i = index'
-                '[tag]'='tag.name' 
-                '(onTagSelect)'='onTagSelect($event)' 
-                '[index]'='tag.seq'
-            )
-
+            ul.feed
+                ng-container('*ngIf'='count; else empty')
+                    acp-article(
+                        '*ngFor'='let article of articles'
+                        'acpHighlight'
+                        '[isHighlight]'='article.author === userid'
+                        '[routeId]'='article.id'
+                        '[title]'='article.title'
+                        '[image]'='article.image'
+                        '[description]'='article.description'
+                        '[isFavorite]'='article.isFavorite'
+                        '[tags]'='article.tags'
+                        '[date]'='article.createdAt'
+                        '[likes]'='article.likes'
+                        '[stars]'='article.stars'
+                        '[author]'='article.author'
+                        '(delete)'='onArticleDelete($event)'
+                    )
+            .tags
+                acp-tag(
+                    '*ngFor'='let tag of tags; let i = index'
+                    '[tag]'='tag.name' 
+                    '(onTagSelect)'='onTagSelect($event)' 
+                    '[index]'='tag.seq'
+                )
+        .pagination
+            .controll.prev('(click)'='onPrevPage()' '[ngClass]'='{disabled: !page}') prev
+            .current {{page+1}}
+            .controll.next('(click)'='onNextPage()') next
 ng-template('#empty'='')
-     ul.feed
         .empty No articles for this filters

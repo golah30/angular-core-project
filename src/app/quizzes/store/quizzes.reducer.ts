@@ -4,12 +4,14 @@ export interface QuizzesState {
     loading: boolean;
     error: string;
     list: Array<any>;
+    quiz: any;
 }
 
 export const initialState: QuizzesState = {
     loading: false,
     error: "",
-    list: []
+    list: [],
+    quiz: null
 };
 
 export function quizzesReducer(
@@ -37,6 +39,20 @@ export function quizzesReducer(
                 loading: false,
                 error: action.payload.error,
                 list: []
+            };
+        case QuizzesActionTypes.QuizzPageRequest:
+            return {
+                ...state,
+                loading: true,
+                error: "",
+                quiz: null
+            };
+        case QuizzesActionTypes.QuizzPageSuccess:
+            return {
+                ...state,
+                loading: true,
+                error: "",
+                quiz: action.payload.quiz
             };
         default:
             return state;

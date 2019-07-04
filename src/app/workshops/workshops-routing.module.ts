@@ -2,11 +2,9 @@ import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 import { WorkshopPageComponent } from "./workshop-page/workshop-page.component";
 import { WorkshopsFeedComponent } from "./workshops-feed/workshops-feed.component";
-// import { WorkshopsResolver } from "../service/workshops/workshops.resolver";
-import { WorkshopResolver } from "../service/workshops/workshop.resolver";
 import { WorkshopCommentsComponent } from "./workshop-comments/workshop-comments.component";
 import { WorkshopQuizzesComponent } from "./workshop-quizzes/workshop-quizzes.component";
-import { WorkshopResourcesComponent } from "./workshop-resources/workshop-resources.component";
+import { WorkshopsCreateComponent } from "./workshops-create/workshops-create.component";
 
 const routes: Routes = [
     {
@@ -17,16 +15,20 @@ const routes: Routes = [
     {
         path: "feed",
         component: WorkshopsFeedComponent
-        // resolve: {
-        //     workshops: WorkshopsResolver
-        // }
+    },
+    {
+        path: "create",
+        pathMatch: "full",
+        component: WorkshopsCreateComponent
+    },
+    {
+        path: ":id/edit",
+        pathMatch: "full",
+        component: WorkshopsCreateComponent
     },
     {
         path: ":id",
         component: WorkshopPageComponent,
-        // resolve: {
-        //     article: WorkshopResolver
-        // },
         children: [
             {
                 path: "",
@@ -44,10 +46,6 @@ const routes: Routes = [
                     {
                         path: "quizzes",
                         component: WorkshopQuizzesComponent
-                    },
-                    {
-                        path: "resources",
-                        component: WorkshopResourcesComponent
                     }
                 ]
             }
@@ -57,7 +55,7 @@ const routes: Routes = [
 
 @NgModule({
     imports: [RouterModule.forChild(routes)],
-    providers: [WorkshopResolver],
+    providers: [],
     exports: [RouterModule]
 })
 export class WorkshopsRoutingModule {}

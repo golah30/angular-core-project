@@ -41,10 +41,6 @@ export class WorkshopSidebarComponent implements OnInit {
         {
             title: "Quizzes",
             link: [{ outlets: { aside: ["quizzes"] } }]
-        },
-        {
-            title: "Resources",
-            link: [{ outlets: { aside: ["resources"] } }]
         }
     ];
 }

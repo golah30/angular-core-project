@@ -1,0 +1,90 @@
+@import "mixins/mixins";
+@import "variables/variables";
+:host {
+    display: block;
+    flex-grow: 1;
+}
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 40px;
+}
+
+.title {
+    font-family: $objsans;
+    font-size: 36px;
+    text-align: center;
+}
+form {
+    margin-top: 40px;
+    max-width: 800px;
+    width: 100%;
+}
+.row {
+    margin-bottom: 24px;
+}
+
+.control {
+    margin-top: 8px;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    width: 120px;
+    height: 36px;
+    text-decoration: none;
+    color: $white;
+    background-color: $dark;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    &:focus {
+        outline: none;
+    }
+    &:hover {
+        background-color: $primary;
+        color: $dark;
+        &::before {
+            border-right-color: $primary;
+        }
+        &::after {
+            border-left-color: $primary;
+        }
+    }
+    &::before {
+        content: "";
+        display: block;
+        position: absolute;
+        left: -36px;
+        top: 0;
+        border: 18px solid transparent;
+        border-right-color: $dark;
+        transition: border-color 0.3s;
+    }
+    &::after {
+        content: "";
+        display: block;
+        position: absolute;
+        right: -36px;
+        top: 0;
+        border: 18px solid transparent;
+        border-left-color: $dark;
+        transition: border-color 0.3s;
+    }
+}
+.inline {
+    &::before {
+        display: none;
+    }
+    &::after {
+        display: none;
+    }
+    color: $dark;
+    background-color: transparent;
+    &:hover {
+        background-color: transparent;
+        color: $dark;
+        text-decoration: underline;
+    }
+}

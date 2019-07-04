@@ -1,0 +1,6 @@
+.select
+    select('[(ngModel)]'='value' '(ngModelChange)'='onChange(value)')
+        option( 
+            '*ngFor'='let opt of options; index as i'
+            '[ngValue]'="i"
+        ) {{opt.answer}}

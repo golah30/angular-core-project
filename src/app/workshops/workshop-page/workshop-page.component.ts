@@ -59,7 +59,7 @@ export class WorkshopPageComponent implements OnInit, OnDestroy {
         }
     }
     getUser() {
-        this.UserService.getUserById(this.article._author).subscribe(
+        this.UserService.getUserById(this.article.author).subscribe(
             (data: User) => {
                 this.userName =
                     data.firstName && data.lastName

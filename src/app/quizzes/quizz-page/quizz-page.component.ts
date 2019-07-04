@@ -7,6 +7,7 @@ import { selectQuiz } from "../store/quizzes.selectors";
 import { Subscription } from "rxjs";
 import { UserService } from "src/app/service/user/user.service";
 import { User } from "src/app/interfaces";
+import { QuizzesService } from "src/app/service/quizzes/quizzes.service";
 
 @Component({
     selector: "acp-quizz-page",
@@ -18,7 +19,8 @@ export class QuizzPageComponent implements OnInit, OnDestroy {
         private route: ActivatedRoute,
         private router: Router,
         private store: Store<AppState>,
-        private UserService: UserService
+        private UserService: UserService,
+        private QuizzesService: QuizzesService
     ) {}
 
     quiz: any;
@@ -68,5 +70,10 @@ export class QuizzPageComponent implements OnInit, OnDestroy {
     }
     onSubmit(value: any) {
         console.log("submit", value);
+        this.QuizzesService.validateResult(this.quiz.id, value).subscribe(
+            data => {
+                console.log(data);
+            }
+        );
     }
 }

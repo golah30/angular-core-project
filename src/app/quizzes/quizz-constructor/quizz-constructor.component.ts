@@ -1,6 +1,10 @@
 import { Component, OnInit } from "@angular/core";
 import _ from "lodash";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
+import { QuizzesService } from "src/app/service/quizzes/quizzes.service";
+import { Store } from "@ngrx/store";
+import { AppState } from "src/app/reducers";
+import { QuizzesRequest } from "../store/quizzes.actions";
 
 @Component({
     selector: "acp-quizz-constructor",
@@ -8,7 +12,10 @@ import { FormGroup, FormControl, Validators } from "@angular/forms";
     styleUrls: ["./quizz-constructor.component.scss"]
 })
 export class QuizzConstructorComponent implements OnInit {
-    constructor() {}
+    constructor(
+        private QuizzesService: QuizzesService,
+        private store: Store<AppState>
+    ) {}
     form: FormGroup;
     defaultQuestionConfig = {
         correctAnswer: "",
@@ -39,7 +46,13 @@ export class QuizzConstructorComponent implements OnInit {
 
         if (this.form.valid && validCfg) {
             console.log({ name: this.form.value.name, questions: this.config });
-            alert("Submitted");
+            this.QuizzesService.createQuizz({
+                name: this.form.value.name,
+                questions: this.config
+            }).subscribe((data: any) => {
+                this.store.dispatch(new QuizzesRequest({}));
+                alert("Submitted");
+            });
         } else {
             console.warn(
                 "Enter the name of the quiz or add at least one question"

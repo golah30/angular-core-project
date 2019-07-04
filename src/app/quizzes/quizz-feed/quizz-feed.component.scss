@@ -15,11 +15,15 @@
     @include medium() {
         width: 80%;
     }
+    padding-bottom: 40px;
 }
 
 .card-container {
     margin-top: 40px;
     position: relative;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 }
 
@@ -40,19 +44,31 @@
     padding: 8px 12px;
     padding-top: 0;
 }
-
+.controls {
+    margin: 0 12px;
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+}
 .control {
-    position: absolute;
     border: none;
     background-color: transparent;
-    top: 50%;
-    right: 32px;
-    transform: translateY(-50%);
     cursor: pointer;
     color: $dark;
-    transition: color 0.3s;
-    &:hover {
-        color: $red;
+    transition: all 0.3s;
+    opacity: 0.64;
+    &.edit {
+        &:hover {
+            color: $primary;
+            opacity: 1;
+        }
+    }
+    &.delete {
+        &:hover {
+            transform: rotate(90deg);
+            color: $red;
+            opacity: 1;
+        }
     }
     & i {
         font-size: 24px;

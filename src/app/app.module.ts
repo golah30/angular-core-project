@@ -16,6 +16,7 @@ import { EffectsModule } from "@ngrx/effects";
 import { AppEffects } from "./store/app.effects";
 import { ScrollingModule } from "@angular/cdk/scrolling";
 import { ScrollingModule as ExperimentalScrollingModule } from "@angular/cdk-experimental/scrolling";
+import { QuizzesService } from "./service/quizzes/quizzes.service";
 
 @NgModule({
     declarations: [AppComponent],
@@ -36,6 +37,7 @@ import { ScrollingModule as ExperimentalScrollingModule } from "@angular/cdk-exp
     ],
     providers: [
         UserService,
+        QuizzesService,
         AuthGuardService,
         {
             provide: HTTP_INTERCEPTORS,

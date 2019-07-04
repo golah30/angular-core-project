@@ -1,0 +1,5 @@
+ul.quizzes
+    li.quiz('*ngFor'='let quiz of quizzes')
+        a.title('[routerLink]'="'/quizzes/'+quiz.id") {{quiz.name}}
+        .date
+            acp-timestamp('[date]'='quiz.updatedAt')  

@@ -31,4 +31,29 @@ export class QuizzesService {
                 })
             );
     }
+    public validateResult(id: string, answers: any) {
+        let url = `/quizzes/validate/${id}`;
+        return this.api
+            .post(
+                url,
+                { formData: answers },
+                { Authorization: this.UserService.getToken() }
+            )
+            .pipe(
+                map((data: any) => {
+                    return data;
+                })
+            );
+    }
+    createQuizz(config: any) {
+        let url = "/quizzes";
+        return this.api
+            .post(url, config, { Authorization: this.UserService.getToken() })
+            .pipe(
+                map(data => {
+                    console.log(data);
+                    return data;
+                })
+            );
+    }
 }

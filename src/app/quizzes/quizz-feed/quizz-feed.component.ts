@@ -7,6 +7,9 @@ import { QuizzesRequest } from "../store/quizzes.actions";
 import { selectQuizzes } from "../store/quizzes.selectors";
 import { selectAuthUser } from "src/app/auth/store/auth.selectors";
 import { User } from "src/app/interfaces";
+import { QuizzesService } from "src/app/service/quizzes/quizzes.service";
+import { ConfirmPopupService } from "src/app/core/confirm-popup/confirm-popup.service";
+
 @Component({
     selector: "acp-quizz-feed",
     templateUrl: "./quizz-feed.component.pug",
@@ -16,14 +19,15 @@ export class QuizzFeedComponent implements OnInit, OnDestroy {
     constructor(
         private route: ActivatedRoute,
         private router: Router,
-        private store: Store<AppState>
+        private store: Store<AppState>,
+        private QuizzesService: QuizzesService,
+        private confirmPopupService: ConfirmPopupService
     ) {}
 
     quizzes: any = [];
     loading: boolean = true;
     quizSub: Subscription;
     currentUser: User;
-    userSub: Subscription;
     user$;
     ngOnInit() {
         this.store.dispatch(new QuizzesRequest({}));
@@ -36,15 +40,25 @@ export class QuizzFeedComponent implements OnInit, OnDestroy {
                 }
             });
         this.user$ = this.store.select(selectAuthUser);
-        // this.userSub = this.store
-        //     .select(selectAuthUser);
-        //     .subscribe((data: User) => {
-        //         this.currentUser = data;
-        //     });
     }
 
     ngOnDestroy() {
         this.quizSub.unsubscribe();
-        // this.userSub.unsubscribe();
     }
+    onQuizDelete(id: string) {
+        this.confirmPopupService
+            .confirm({
+                title: "Delete quiz",
+                message: "Do you want to delete this quiz?"
+            })
+            .subscribe((confirmed: boolean) => {
+                this.deleteQuiz(id);
+            });
+    }
+    private deleteQuiz(id) {
+        this.QuizzesService.deleteQuizz(id).subscribe(data => {
+            this.store.dispatch(new QuizzesRequest({}));
+        });
+    }
+    onQuizEdit(id: string) {}
 }

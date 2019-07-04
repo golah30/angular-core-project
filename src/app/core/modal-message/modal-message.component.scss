@@ -1,0 +1,13 @@
+@import "variables/variables";
+.modal__container {
+    background-color: lighten($red, 15);
+    padding: 24px 16px;
+    width: 300px;
+}
+
+.modal__message {
+    text-align: center;
+    font-size: 16px;
+    font-family: $montserrat;
+    color: white;
+}

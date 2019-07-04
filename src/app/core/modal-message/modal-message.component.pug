@@ -1,0 +1,6 @@
+.modal__container(
+    '[@modal]'='animationState'
+    '(@modal.start)'='onAnimationStart($event)'
+    '(@modal.done)'='onAnimationDone($event)'
+)
+    .modal__message {{data?.message}}

@@ -1,0 +1,83 @@
+@import "variables/variables";
+
+.confirm-popup__container {
+    padding: 24px;
+    background-color: $white;
+    max-width: 300px;
+    position: relative;
+}
+.confirm-popup__close-button {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: rotate(45deg) translate(0%, -72%);
+    background-color: $dark;
+    transition: all 0.3s;
+    width: 36px;
+    height: 36px;
+    right: 0;
+    top: 0;
+    cursor: pointer;
+    & i {
+        color: $white;
+        transition: all 0.3s;
+        transform: rotate(-45deg);
+        font-size: 24px;
+    }
+    &:hover {
+        background-color: $white;
+        & i {
+            color: $red;
+            transform: rotate(-135deg);
+        }
+    }
+}
+
+.confirm-popup__title {
+    font-size: 24px;
+    font-family: $objsans;
+    text-align: center;
+    margin-bottom: 16px;
+}
+
+.confirm-popup__message {
+    font-size: 16px;
+    font-family: $montserrat;
+    text-align: center;
+    margin-bottom: 32px;
+    line-height: 140%;
+}
+
+.confirm-popup__controls {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+}
+button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 8px 12px;
+    min-width: 120px;
+    height: 36px;
+    border: none;
+    transition: all 0.3s;
+    cursor: pointer;
+}
+.cancel {
+    background-color: lighten($red, 15);
+    color: white;
+    &:hover {
+        background-color: $red;
+    }
+}
+
+.confirm {
+    background-color: $dark;
+    color: white;
+    &:hover {
+        background-color: $primary;
+        color: $dark;
+    }
+}

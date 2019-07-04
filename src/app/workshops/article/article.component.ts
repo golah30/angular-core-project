@@ -14,6 +14,7 @@ import { AppState } from "src/app/reducers";
 import { selectTags } from "../store/workshops.selectors";
 import { selectAuthUser } from "src/app/auth/store/auth.selectors";
 import { Router } from "@angular/router";
+import { ConfirmPopupService } from "src/app/core/confirm-popup/confirm-popup.service";
 
 @Component({
     selector: "acp-article",
@@ -40,6 +41,7 @@ export class ArticleComponent implements OnInit, OnDestroy {
     userSub: Subscription;
     constructor(
         private UserService: UserService,
+        private confirmPopupService: ConfirmPopupService,
         private store: Store<AppState>,
         private router: Router
     ) {}
@@ -100,6 +102,13 @@ export class ArticleComponent implements OnInit, OnDestroy {
         this.router.navigate([`/workshops/${this.routeId}/edit`]);
     }
     onDeleteClick(): void {
-        this.delete.emit(this.routeId);
+        this.confirmPopupService
+            .confirm({
+                title: "Delete workshop",
+                message: "Do you want to delete this workshop?"
+            })
+            .subscribe((confirmed: boolean) => {
+                this.delete.emit(this.routeId);
+            });
     }
 }

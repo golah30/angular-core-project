@@ -111,6 +111,7 @@ export class WorkshopsFeedComponent implements OnInit, OnDestroy {
         if (paramsTags.length && paramsCtgs && paramsCtgs[0] === 0) {
             paramsCtgs = [];
         }
+        this.page = 0;
         this.setQueryParams(paramsTags, paramsCtgs);
     }
 
@@ -137,6 +138,7 @@ export class WorkshopsFeedComponent implements OnInit, OnDestroy {
         if (paramsCtgs[0] === 0) {
             paramsTags = [];
         }
+        this.page = 0;
         this.setQueryParams(paramsTags, paramsCtgs);
     }
 

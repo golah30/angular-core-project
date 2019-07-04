@@ -8,8 +8,10 @@ import {
     HttpRequest,
     HttpErrorResponse
 } from "@angular/common/http";
+import { ModalMessageService } from "../core/modal-message/modal-message.service";
 @Injectable()
 export class ApiInterceptor implements HttpInterceptor {
+    constructor(private modalService: ModalMessageService) {}
     intercept(
         req: HttpRequest<any>,
         next: HttpHandler
@@ -17,7 +19,7 @@ export class ApiInterceptor implements HttpInterceptor {
         return next.handle(req).pipe(
             catchError((error: HttpErrorResponse) => {
                 if (error.error.message) {
-                    alert(error.error.message);
+                    this.modalService.modal({ message: error.error.message });
                 }
 
                 return throwError(error);

@@ -51,7 +51,18 @@ export class QuizzesService {
             .post(url, config, { Authorization: this.UserService.getToken() })
             .pipe(
                 map(data => {
-                    console.log(data);
+                    return data;
+                })
+            );
+    }
+    deleteQuizz(id: string) {
+        let url = `/quizzes/${id}`;
+        return this.api
+            .delete(url, {
+                Authorization: this.UserService.getToken()
+            })
+            .pipe(
+                map(data => {
                     return data;
                 })
             );

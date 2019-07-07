@@ -17,6 +17,12 @@ import { AppEffects } from "./store/app.effects";
 import { ScrollingModule } from "@angular/cdk/scrolling";
 import { ScrollingModule as ExperimentalScrollingModule } from "@angular/cdk-experimental/scrolling";
 import { QuizzesService } from "./service/quizzes/quizzes.service";
+import { AuthEffects } from "./auth/store/auth.effects";
+import { WorkshopsEffects } from "./workshops/store/workshops.effects";
+import { QuizzesEffects } from "./quizzes/store/quizzes.effects";
+import { WorkshopsService } from "./service/workshops/workshops.service";
+import { TagsService } from "./service/tags/tags.service";
+import { CommentsService } from "./service/comments/comments.service";
 
 @NgModule({
     declarations: [AppComponent],
@@ -29,15 +35,23 @@ import { QuizzesService } from "./service/quizzes/quizzes.service";
         ScrollingModule,
         ExperimentalScrollingModule,
         StoreModule.forRoot(reducers, { metaReducers }),
+        EffectsModule.forRoot([
+            AppEffects,
+            AuthEffects,
+            WorkshopsEffects,
+            QuizzesEffects
+        ]),
         StoreDevtoolsModule.instrument({
             maxAge: 25,
             logOnly: environment.production
-        }),
-        EffectsModule.forRoot([AppEffects])
+        })
     ],
     providers: [
         UserService,
         QuizzesService,
+        WorkshopsService,
+        TagsService,
+        CommentsService,
         AuthGuardService,
         {
             provide: HTTP_INTERCEPTORS,

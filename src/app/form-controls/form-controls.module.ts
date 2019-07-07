@@ -7,6 +7,8 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { SelectTagsComponent } from "./select-tags/select-tags.component";
 import { SharedModule } from "../shared/shared.module";
 import { SelectAnswerComponent } from "./select-answer/select-answer.component";
+import { MultiselectWorkshopsComponent } from "./multiselect-workshops/multiselect-workshops.component";
+import { ContainsPipe } from './multiselect-workshops/contains.pipe';
 
 @NgModule({
     declarations: [
@@ -14,7 +16,9 @@ import { SelectAnswerComponent } from "./select-answer/select-answer.component";
         CheckboxComponent,
         SelectComponent,
         SelectTagsComponent,
-        SelectAnswerComponent
+        SelectAnswerComponent,
+        MultiselectWorkshopsComponent,
+        ContainsPipe
     ],
     imports: [CommonModule, FormsModule, ReactiveFormsModule, SharedModule],
     exports: [
@@ -22,6 +26,7 @@ import { SelectAnswerComponent } from "./select-answer/select-answer.component";
         CheckboxComponent,
         SelectComponent,
         SelectTagsComponent,
+        MultiselectWorkshopsComponent,
         SelectAnswerComponent
     ]
 })

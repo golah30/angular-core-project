@@ -1,10 +1,6 @@
 import { Component, Input } from "@angular/core";
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
 
-interface opt {
-    value: string;
-}
-
 @Component({
     selector: "acp-select",
     providers: [
@@ -19,13 +15,13 @@ interface opt {
 })
 export class SelectComponent implements ControlValueAccessor {
     constructor() {}
-    value: opt;
+    value: string;
     @Input() options;
 
-    private propagateChange = (value: opt) => {};
+    private propagateChange = (value: string) => {};
     private propagateTouched = ($event: FocusEvent) => {};
 
-    writeValue(value: opt): void {
+    writeValue(value: string): void {
         console.log(this.options);
 
         this.value = value;
@@ -36,7 +32,7 @@ export class SelectComponent implements ControlValueAccessor {
     registerOnTouched(fn: any) {
         this.propagateTouched = fn;
     }
-    onChange(value: opt) {
+    onChange(value: string) {
         this.propagateChange(value);
     }
 }

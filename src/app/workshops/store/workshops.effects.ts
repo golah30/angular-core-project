@@ -41,8 +41,11 @@ export class WorkshopsEffects {
                 payload.tags,
                 payload.author
             ).pipe(
-                map((data: Array<Article>) => {
-                    return new ArticlesSuccess({ articles: data });
+                map((data: any) => {
+                    return new ArticlesSuccess({
+                        articles: data.posts,
+                        total: data.total
+                    });
                 }),
                 catchError(error =>
                     of(new ArticlesFailure({ error: error.error.message }))

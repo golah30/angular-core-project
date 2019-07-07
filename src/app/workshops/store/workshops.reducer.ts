@@ -6,6 +6,7 @@ export interface WorkshopsState {
     error: string;
     tags: Array<Tag>;
     articles: Array<Article>;
+    total: number;
     article: null | Article;
     comments: Array<Comment>;
 }
@@ -15,6 +16,7 @@ export const initialState: WorkshopsState = {
     error: "",
     tags: [],
     articles: [],
+    total: 0,
     article: null,
     comments: []
 };
@@ -34,6 +36,7 @@ export function workshopsReducer(
             return {
                 ...state,
                 articles: action.payload.articles,
+                total: action.payload.total,
                 loading: false,
                 error: ""
             };

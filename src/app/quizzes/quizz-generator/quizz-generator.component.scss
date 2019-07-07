@@ -1,10 +1,86 @@
 @import "variables/variables";
 :host {
     display: block;
-    padding: 0 8px;
-    margin-top: 32px;
+    padding: 20px 8px;
+}
+.title {
+    font-size: 18px;
+    text-align: center;
+    font-family: $objsans;
+}
+.input {
+    margin-top: 12px;
+    margin-bottom: 18px;
+}
+.controls {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.subtitle {
+    font-size: 14px;
+    opacity: 0.65;
+    text-align: center;
+    font-family: $objsans;
+}
+.selected {
+    font-size: 14px;
+    opacity: 0.75;
+    text-align: center;
+    font-family: $objsans;
+    margin-top: 4px;
+}
+.control {
+    margin-top: 8px;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    width: 120px;
+    height: 26px;
+    text-decoration: none;
+    color: $white;
+    background-color: $dark;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    &:focus {
+        outline: none;
+    }
+    &:hover {
+        background-color: $primary;
+        color: $dark;
+        &::before {
+            border-right-color: $primary;
+        }
+        &::after {
+            border-left-color: $primary;
+        }
+    }
+    &::before {
+        content: "";
+        display: block;
+        position: absolute;
+        left: -26px;
+        top: 0;
+        border: 13px solid transparent;
+        border-right-color: $dark;
+        transition: border-color 0.3s;
+    }
+    &::after {
+        content: "";
+        display: block;
+        position: absolute;
+        right: -26px;
+        top: 0;
+        border: 13px solid transparent;
+        border-left-color: $dark;
+        transition: border-color 0.3s;
+    }
 }
 .question {
+    margin-top: 32px;
     position: relative;
     display: flex;
     flex-direction: column;

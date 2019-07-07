@@ -2,5 +2,6 @@
     '[@modal]'='animationState'
     '(@modal.start)'='onAnimationStart($event)'
     '(@modal.done)'='onAnimationDone($event)'
+    '[ngClass]'='data?.type'
 )
     .modal__message {{data?.message}}

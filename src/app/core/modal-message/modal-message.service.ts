@@ -11,6 +11,7 @@ import { ComponentPortal, PortalInjector } from "@angular/cdk/portal";
 import { MODAL_MESSAGE_DATA } from "./modal-message.tokens";
 
 export interface ModalData {
+    type?: "error" | "correct";
     message?: string | null;
     component?: any;
     componentToken?: InjectionToken<any>;
@@ -28,6 +29,7 @@ const DEFAULT_MODAL_CONFIG: ModalConfig = {
     hasBackdrop: false,
     backdropClass: "modal-message__backdrop",
     data: {
+        type: "error",
         message: ""
     }
 };

@@ -30,7 +30,7 @@ export class WorkshopsService {
             .pipe(
                 map((data: Posts) => {
                     this.posts = data.posts;
-                    return this.posts;
+                    return data;
                 })
             );
     }

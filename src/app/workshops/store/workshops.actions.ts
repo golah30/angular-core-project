@@ -25,7 +25,7 @@ export class ArticlesRequest implements Action {
 }
 export class ArticlesSuccess implements Action {
     readonly type = WorkshopsActionTypes.ArticlesSuccess;
-    constructor(public payload: { articles: Array<Article> }) {}
+    constructor(public payload: { articles: Array<Article>; total: number }) {}
 }
 export class ArticlesFailure implements Action {
     readonly type = WorkshopsActionTypes.ArticlesFailure;

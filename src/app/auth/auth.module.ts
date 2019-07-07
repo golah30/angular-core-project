@@ -16,9 +16,7 @@ import { authReducer } from "./store/auth.reducer";
         AuthRoutingModule,
         FormsModule,
         ReactiveFormsModule,
-        SharedModule,
-        StoreModule.forFeature("auth", authReducer),
-        EffectsModule.forFeature([AuthEffects])
+        SharedModule
     ]
 })
 export class AuthModule {}

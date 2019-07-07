@@ -32,7 +32,9 @@ input {
     border: 1px solid lighten($dark, 65);
     transition: all 0.3s;
     width: 100%;
-
+    &.ng-invalid.ng-touched {
+        border: 1px solid $red;
+    }
     &:hover {
         border: 1px solid lighten($dark, 0);
     }

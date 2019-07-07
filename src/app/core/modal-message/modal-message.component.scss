@@ -1,8 +1,14 @@
 @import "variables/variables";
 .modal__container {
-    background-color: lighten($red, 15);
     padding: 24px 16px;
     width: 300px;
+    &.error {
+        background-color: lighten($red, 15);
+    }
+    &.correct {
+        color: $dark;
+        background-color: $green;
+    }
 }
 
 .modal__message {

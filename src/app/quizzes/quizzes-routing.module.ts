@@ -2,7 +2,7 @@ import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 import { QuizzFeedComponent } from "./quizz-feed/quizz-feed.component";
 import { QuizzPageComponent } from "./quizz-page/quizz-page.component";
-import { QuizzConstructorComponent } from "./quizz-constructor/quizz-constructor.component";
+import { QuizzGeneratorComponent } from "./quizz-generator/quizz-generator.component";
 
 const routes: Routes = [
     {
@@ -25,7 +25,7 @@ const routes: Routes = [
                     },
                     {
                         path: "construct",
-                        component: QuizzConstructorComponent
+                        component: QuizzGeneratorComponent
                     }
                 ]
             }

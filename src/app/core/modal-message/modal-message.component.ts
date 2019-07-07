@@ -62,7 +62,7 @@ export class ModalMessageComponent implements OnInit {
         this.delayedClose();
     }
     async delayedClose() {
-        await this.delay(1500);
+        await this.delay(5000);
         this.modalRef.close();
     }
     onAnimationStart(event: AnimationEvent) {

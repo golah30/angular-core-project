@@ -57,6 +57,9 @@
     color: $dark;
     transition: all 0.3s;
     opacity: 0.64;
+    &:focus {
+        outline: none;
+    }
     &.edit {
         &:hover {
             color: $primary;

@@ -39,8 +39,6 @@ import { QuizzesService } from "../service/quizzes/quizzes.service";
         FormsModule,
         ReactiveFormsModule,
         FormControlsModule,
-        StoreModule.forFeature("workshops", workshopsReducer),
-        EffectsModule.forFeature([WorkshopsEffects]),
         ScrollingModule,
         ExperimentalScrollingModule
     ]

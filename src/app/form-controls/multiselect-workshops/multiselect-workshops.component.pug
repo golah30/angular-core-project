@@ -1,0 +1,14 @@
+.container('*ngIf'='isOpen')
+    .feed
+        .article(
+            '*ngFor'='let article of articles; trackBy: trackByFn' 
+            '(click)'='onChange(article.id)'
+            '[ngClass]'='{active: [article.id,value] | contains}'
+        ) {{article.title}}
+    .pagination
+        span('[ngClass]'='{disabled: !page}' '(click)'='onPrevClick()') prev
+        span('[ngClass]'='{disabled: page === maxPage}' '(click)'='onNextClick()') next
+    .controls
+        button.control('type'='button' '(click)'='onSelectorClose()') Confirm
+.controls
+    button.control('type'='button' '(click)'='onSelectorOpen()') Select

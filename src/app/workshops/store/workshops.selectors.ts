@@ -9,6 +9,10 @@ export const selectArticles = createSelector(
     selectWorkshopsState,
     (state: WorkshopsState) => state.articles
 );
+export const selectTotalArticlesCount = createSelector(
+    selectWorkshopsState,
+    (state: WorkshopsState) => state.total
+);
 export const selectArticle = createSelector(
     selectWorkshopsState,
     (state: WorkshopsState) => state.article

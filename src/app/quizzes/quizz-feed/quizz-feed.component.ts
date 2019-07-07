@@ -9,6 +9,7 @@ import { selectAuthUser } from "src/app/auth/store/auth.selectors";
 import { User } from "src/app/interfaces";
 import { QuizzesService } from "src/app/service/quizzes/quizzes.service";
 import { ConfirmPopupService } from "src/app/core/confirm-popup/confirm-popup.service";
+import { ModalMessageService } from "src/app/core/modal-message/modal-message.service";
 
 @Component({
     selector: "acp-quizz-feed",
@@ -21,7 +22,8 @@ export class QuizzFeedComponent implements OnInit, OnDestroy {
         private router: Router,
         private store: Store<AppState>,
         private QuizzesService: QuizzesService,
-        private confirmPopupService: ConfirmPopupService
+        private confirmPopupService: ConfirmPopupService,
+        private modalService: ModalMessageService
     ) {}
 
     quizzes: any = [];
@@ -57,6 +59,10 @@ export class QuizzFeedComponent implements OnInit, OnDestroy {
     }
     private deleteQuiz(id) {
         this.QuizzesService.deleteQuizz(id).subscribe(data => {
+            this.modalService.modal({
+                type: "correct",
+                message: "Quiz deleted"
+            });
             this.store.dispatch(new QuizzesRequest({}));
         });
     }

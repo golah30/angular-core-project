@@ -2,5 +2,5 @@
     select('[(ngModel)]'='value' '(ngModelChange)'='onChange(value)')
         option( 
             '*ngFor'='let opt of options'
-            '[ngValue]'="opt"
+            '[ngValue]'="opt.value"
         ) {{opt.title}}

@@ -1,0 +1,66 @@
+form(
+    '[formGroup]'='form' 
+    '(ngSubmit)'='onSubmit()'
+    novalidate='' 
+    autocomplete='off'
+)   
+    .title Enter your quiz name
+    .input
+        acp-input(
+            formControlName='name'
+            '[inputId]'='"Quiz name"'
+            label='Quiz name'
+            type='text'
+        )
+    .title Attach workshops
+    .subtitle optional
+    acp-multiselect-workshops(formControlName='posts')
+    .selected Selected: {{form.controls.posts.value.length}}
+    .questions(formArrayName="questions")
+        ng-container('*ngFor'='let qstn of questions.controls; index as q')
+            .question('[formGroupName]'='q')
+                .question__title Question {{q+1}}
+                .input-name
+                    acp-input(
+                        formControlName='question'
+                        '[inputId]'='"question " + q'
+                        label='Question'
+                        type='text'
+                    )
+                .input-select
+                    acp-select(
+                        formControlName='questionType'
+                        '[options]'='options'
+                    )
+                ng-container('*ngIf'='qstn.controls.questionType.value === "input"')
+                    div.input-correct
+                        acp-input(
+                            formControlName='correctAnswer'
+                            '[inputId]'='"correctAnswer " + q'
+                            label='Correct Answer'
+                            type='text'
+                        )
+                ng-container('*ngIf'='qstn.controls.questionType.value !== "input"')
+                    div.variants-container('formArrayName'="answerVariants")
+                        ng-container('*ngFor'='let group of qstn.controls.answerVariants.controls; let k = index')
+                            div.variants(       
+                                '[formGroupName]'="k"
+                            )
+                                .variants__inputs
+                                    .variants__inputs-check
+                                        acp-checkbox(
+                                            formControlName='isCorrect'
+                                        )
+                                    .variants__inputs-input
+                                        acp-input(
+                                            formControlName='answer'
+                                            '[inputId]'='"Variant " + k + " " + q'
+                                            '[label]'='"Variant " + (k+1)'
+                                            type='text'
+                                        )
+                                button.control__inline(type='button' '(click)'='removeAnswer(q,k)') Delete answer         
+                        button.control(type='button' '(click)'='addAnswer(q)') Add answer
+                button.control.control__delete(type='button' '(click)'='removeQuestion(q)') Delete question
+.controls
+    button.control('type'='button' '(click)'='addQuestion()') Add question
+    button.control('type'='button' '(click)'='onSubmit()') Submit

@@ -1,5 +1,11 @@
 import { Component, OnInit } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
+import {
+    ActivatedRoute,
+    Router,
+    RouterEvent,
+    NavigationEnd
+} from "@angular/router";
+import { filter } from "rxjs/operators";
 
 @Component({
     selector: "acp-quizz-sidebar",
@@ -7,7 +13,7 @@ import { ActivatedRoute } from "@angular/router";
     styleUrls: ["./quizz-sidebar.component.scss"]
 })
 export class QuizzSidebarComponent implements OnInit {
-    constructor(private route: ActivatedRoute) {}
+    constructor(private route: ActivatedRoute, private router: Router) {}
     isSideContent: boolean = false;
     link: string | null = "construct";
     toggleSideContent(): void {
@@ -19,15 +25,21 @@ export class QuizzSidebarComponent implements OnInit {
         }
     }
     ngOnInit() {
-        if (
-            this.route.snapshot.firstChild &&
-            this.route.firstChild.children[0] &&
-            this.route.firstChild.children[0].routeConfig.path
-        ) {
-            this.link = null;
-            this.isSideContent = true;
-        } else {
-            this.link = "construct";
-        }
+        this.router.events
+            .pipe(filter(event => event instanceof NavigationEnd))
+            .subscribe((event: RouterEvent) => {
+                if (event.url) {
+                    if (
+                        this.route.snapshot.firstChild &&
+                        this.route.firstChild.children[0] &&
+                        this.route.firstChild.children[0].routeConfig.path
+                    ) {
+                        this.link = null;
+                        this.isSideContent = true;
+                    } else {
+                        this.link = "construct";
+                    }
+                }
+            });
     }
 }

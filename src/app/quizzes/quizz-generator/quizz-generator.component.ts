@@ -10,7 +10,10 @@ import { ModalMessageService } from "src/app/core/modal-message/modal-message.se
 import { QuizzesService } from "src/app/service/quizzes/quizzes.service";
 import { Store } from "@ngrx/store";
 import { AppState } from "src/app/reducers";
-import { QuizzesRequest } from "../store/quizzes.actions";
+import { QuizzesRequest, QuizzPageRequest } from "../store/quizzes.actions";
+import { ActivatedRoute } from "@angular/router";
+import { Subscription } from "rxjs";
+import { selectQuiz } from "../store/quizzes.selectors";
 
 @Component({
     selector: "acp-quizz-generator",
@@ -22,15 +25,35 @@ export class QuizzGeneratorComponent implements OnInit {
         private fb: FormBuilder,
         private modalService: ModalMessageService,
         private QuizzesService: QuizzesService,
-        private store: Store<AppState>
+        private store: Store<AppState>,
+        private route: ActivatedRoute
     ) {}
     form: FormGroup;
     options = [
         { value: "input", title: "Short answer" },
         { value: "select", title: "Choice" }
     ];
+    quizId: string | null = null;
+    loading: boolean = false;
+    quizSub: Subscription;
     ngOnInit() {
-        this.createForm();
+        if (this.route.snapshot.params.id) {
+            this.loading = true;
+            this.store.dispatch(
+                new QuizzPageRequest({ id: this.route.snapshot.params.id })
+            );
+            this.quizSub = this.store
+                .select(selectQuiz)
+                .subscribe((data: any) => {
+                    if (data && data.id === this.route.snapshot.params.id) {
+                        this.createFormFromConfig(data);
+                        this.loading = false;
+                        this.quizId = data.id;
+                    }
+                });
+        } else {
+            this.createForm();
+        }
     }
     createForm() {
         this.form = new FormGroup({
@@ -39,19 +62,91 @@ export class QuizzGeneratorComponent implements OnInit {
             posts: new FormControl([])
         });
     }
-    addQuestion(): void {
+    createFormFromConfig(config: any) {
+        this.form = new FormGroup({
+            name: new FormControl(config.name, Validators.required),
+            questions: new FormArray([], Validators.required),
+            posts: new FormControl(config.posts)
+        });
+        config.questions.forEach((question, index) => {
+            if (question.questionType === "input") {
+                this.addQuestion(
+                    question.correctAnswer,
+                    question.question,
+                    question.questionType
+                );
+            } else {
+                let answerVariants = new FormArray([]);
+
+                question.answerVariants.forEach(v => {
+                    answerVariants.push(
+                        this.fb.group({
+                            isCorrect: [
+                                v.isCorrect,
+                                {
+                                    validators: Validators.required,
+                                    updateOn: "change"
+                                }
+                            ],
+                            answer: [
+                                v.answer,
+                                {
+                                    validators: Validators.required,
+                                    updateOn: "blur"
+                                }
+                            ]
+                        })
+                    );
+                });
+                this.questions.push(
+                    this.fb.group({
+                        question: [
+                            question.question,
+                            {
+                                validators: Validators.required,
+                                updateOn: "blur"
+                            }
+                        ],
+                        questionType: [
+                            question.questionType,
+                            {
+                                validators: Validators.required,
+                                updateOn: "change"
+                            }
+                        ],
+                        answerVariants: answerVariants
+                    })
+                );
+                this.questions
+                    .at(index)
+                    .get("questionType")
+                    .valueChanges.subscribe(data => {
+                        if (data === "input") {
+                            this.formatQuestionToInput(index);
+                        } else {
+                            this.formatQuestionToSelect(index);
+                        }
+                    });
+            }
+        });
+    }
+    addQuestion(
+        correctAnswer: string = "",
+        question: string = "",
+        questionType: string = "input"
+    ): void {
         this.questions.push(
             this.fb.group({
                 correctAnswer: [
-                    "",
+                    correctAnswer,
                     { validators: Validators.required, updateOn: "blur" }
                 ],
                 question: [
-                    "",
+                    question,
                     { validators: Validators.required, updateOn: "blur" }
                 ],
                 questionType: [
-                    "input",
+                    questionType,
                     { validators: Validators.required, updateOn: "change" }
                 ]
             })
@@ -163,15 +258,30 @@ export class QuizzGeneratorComponent implements OnInit {
                         "Questions with variants must have a field that checked as a correct variant"
                 });
             } else {
-                this.QuizzesService.createQuizz(this.form.value).subscribe(
-                    (data: any) => {
+                if (this.quizId) {
+                    this.QuizzesService.updateQuizz(
+                        this.quizId,
+                        this.form.value
+                    ).subscribe((data: any) => {
                         this.store.dispatch(new QuizzesRequest({}));
                         this.modalService.modal({
                             type: "correct",
-                            message: `Quiz "${this.form.value.name}" created`
+                            message: `Quiz "${this.form.value.name}" updated`
                         });
-                    }
-                );
+                    });
+                } else {
+                    this.QuizzesService.createQuizz(this.form.value).subscribe(
+                        (data: any) => {
+                            this.store.dispatch(new QuizzesRequest({}));
+                            this.modalService.modal({
+                                type: "correct",
+                                message: `Quiz "${
+                                    this.form.value.name
+                                }" created`
+                            });
+                        }
+                    );
+                }
             }
         } else {
             if (!this.form.value.questions.length) {

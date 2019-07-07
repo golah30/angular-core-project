@@ -25,11 +25,6 @@ export class WorkshopsFeedComponent implements OnInit, OnDestroy {
         private store: Store<AppState>
     ) {}
 
-    //bar
-    mainControlTitle: string = "Create workshop";
-    routeMainControll: string = "/workshops/create";
-    //end bar
-
     tagsSub: Subscription;
     articlesSub: Subscription;
     userSub: Subscription;

@@ -1,7 +1,6 @@
 @import "variables/variables";
 :host {
     display: inline-block;
-    margin-bottom: 12px;
 }
 
 .tag {
@@ -11,9 +10,13 @@
     border-radius: 4px;
     font-size: 14px;
     user-select: none;
+    margin-bottom: 12px;
     cursor: pointer;
     transition: all 0.4s;
-
+    &.strong {
+        border-radius: 0;
+        margin-bottom: 0;
+    }
     &.active {
         color: $white;
         background-color: $primary;

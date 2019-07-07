@@ -20,5 +20,5 @@ acp-card
                 .stars
                     acp-like('[isActive]'='isFavorite' type='star' '[count]'='stars' '(onLikeToggle)'='favoriteToggle()')
         .controls('*ngIf'='isAuthor')
-            i.icon-mode_edit('(click)'='onEditClick()')
+            i.icon-edit('(click)'='onEditClick()')
             i.icon-close('(click)'='onDeleteClick()')

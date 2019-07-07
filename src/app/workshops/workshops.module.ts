@@ -21,6 +21,7 @@ import { FormControlsModule } from "../form-controls/form-controls.module";
 import { ScrollingModule } from "@angular/cdk/scrolling";
 import { ScrollingModule as ExperimentalScrollingModule } from "@angular/cdk-experimental/scrolling";
 import { QuizzesService } from "../service/quizzes/quizzes.service";
+import { WorkshopsBarComponent } from './workshops-bar/workshops-bar.component';
 @NgModule({
     declarations: [
         WorkshopPageComponent,
@@ -29,7 +30,8 @@ import { QuizzesService } from "../service/quizzes/quizzes.service";
         WorkshopSidebarComponent,
         WorkshopCommentsComponent,
         WorkshopQuizzesComponent,
-        WorkshopsCreateComponent
+        WorkshopsCreateComponent,
+        WorkshopsBarComponent
     ],
     providers: [WorkshopsService, CommentsService, QuizzesService, TagsService],
     imports: [

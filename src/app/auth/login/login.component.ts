@@ -43,8 +43,8 @@ export class LoginComponent implements OnInit, OnDestroy {
     isAuth: boolean;
     AuthSub: Subscription;
     ngOnInit() {
-        this.loginControl = new FormControl("");
-        this.passwordControl = new FormControl("");
+        this.loginControl = new FormControl("dimakur");
+        this.passwordControl = new FormControl("12345");
         this.newPasswordControl = new FormControl("");
         this.toggleNames();
 

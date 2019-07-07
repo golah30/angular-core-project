@@ -9,8 +9,11 @@ acp-viewport
                             acp-timestamp('[date]'='quiz.updatedAt') 
                 ng-container('*ngIf'='user$ | async as user')
                     .controls('*ngIf'='quiz.author === user._id || user.role === "admin"')
-                        button.control.edit('*ngIf'='quiz.status === "draft"' '(click)'='onQuizEdit(quiz.id)')
-                            i.icon-mode_edit
+                        a.control.edit(
+                            '*ngIf'='quiz.status === "draft"' 
+                            '[routerLink]'='[{outlets: {aside: "construct/" + quiz.id}}]' 
+                        )
+                            i.icon-edit
                         button.control.delete('(click)'='onQuizDelete(quiz.id)')
                             i.icon-close
     acp-quizz-sidebar

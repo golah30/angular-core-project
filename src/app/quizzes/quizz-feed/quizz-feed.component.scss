@@ -11,7 +11,8 @@
     align-items: center;
 }
 .feed {
-    width: 600px;
+    width: 100%;
+    max-width: 600px;
     @include medium() {
         width: 80%;
     }
@@ -51,6 +52,7 @@
     align-items: center;
 }
 .control {
+    text-decoration: none;
     border: none;
     background-color: transparent;
     cursor: pointer;
@@ -64,6 +66,9 @@
         &:hover {
             color: $primary;
             opacity: 1;
+        }
+        @include medium() {
+            display: none;
         }
     }
     &.delete {

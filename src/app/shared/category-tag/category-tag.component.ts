@@ -10,6 +10,7 @@ export class CategoryTagComponent implements OnInit {
     @Input() ctg: string;
     @Output() onCtgSelect = new EventEmitter<string>();
     @Input() index: string;
+    @Input() strong: boolean = false;
 
     ngOnInit() {}
 

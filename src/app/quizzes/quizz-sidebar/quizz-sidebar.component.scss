@@ -1,10 +1,13 @@
 @import "mixins/mixins";
 @import "variables/variables";
-
+:host {
+    @include medium() {
+        display: none;
+    }
+}
 .side__content {
     height: 100%;
     width: 0;
-
     box-shadow: -3px 0px 8px 0px rgba(0, 0, 0, 0.1);
     flex-shrink: 0;
     transition: width 0.4s;

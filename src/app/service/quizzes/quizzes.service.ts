@@ -55,6 +55,18 @@ export class QuizzesService {
                 })
             );
     }
+    updateQuizz(id: string, config: any) {
+        let url = `/quizzes/${id}`;
+        return this.api
+            .put(url, config, {
+                Authorization: this.UserService.getToken()
+            })
+            .pipe(
+                map(data => {
+                    return data;
+                })
+            );
+    }
     deleteQuizz(id: string) {
         let url = `/quizzes/${id}`;
         return this.api

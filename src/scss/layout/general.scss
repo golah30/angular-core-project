@@ -13,14 +13,15 @@ body {
     width: 5px;
 }
 ::-webkit-scrollbar-track {
-    background: transparent;
+    background: $dark;
 }
 ::-webkit-scrollbar-thumb {
-    background: $dark;
+    background: $primary;
     border-radius: 2px;
 }
 ::-webkit-scrollbar-thumb:hover {
-    background: lighten($dark, 20);
+    background: lighten($primary, 10);
+    cursor: pointer;
     border-radius: 2px;
 }
 ul {

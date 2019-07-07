@@ -1,0 +1,33 @@
+.container('tabindex'="1" '(blur)'='onContentBlur()')
+    .bar
+        .bar__aside.right
+            .bar__aside-control('(click)'='onCategoriesOpen()')
+                i.icon-filter
+                span Categories
+        .bar__main
+            .main-controll('[routerLink]'="routeMainControll") 
+                span {{mainControlTitle}}
+                i.icon-close
+        .bar__aside.left
+            .bar__aside-control('(click)'='onTagsOpen()')
+                span Tags
+                i.icon-tags
+    .content('[ngClass]'='{activeleft: isCategories}')
+        ng-container('*ngIf'='isTags')
+            .tags
+                acp-tag(
+                    '*ngFor'='let tag of tags; let i = index'
+                    '[tag]'='tag.name' 
+                    '(onTagSelect)'='onTagSelect($event)' 
+                    '[index]'='tag.seq'
+                    '[strong]'='true'
+                )
+        ng-container('*ngIf'='isCategories')
+            .categories
+                acp-category-tag(
+                    '*ngFor'='let category of categories; let i = index'
+                    '[ctg]'='category.name' 
+                    '(onCtgSelect)'='onCategorySelect($event)'
+                    '[index]'='i'
+                    '[strong]'='true'
+                )

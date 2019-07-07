@@ -2,9 +2,9 @@ $path: "assets/fonts/icomoon/icomoon.";
 
 @font-face {
     font-family: "icomoon";
-    src: url("#{$path}ttf?thxu23") format("truetype"),
-        url("#{$path}woff?thxu23") format("woff"),
-        url("#{$path}svg?thxu23#icomoon") format("svg");
+    src: url("#{$path}ttf?oz8jpp") format("truetype"),
+        url("#{$path}woff?oz8jpp") format("woff"),
+        url("#{$path}svg?oz8jpp#icomoon") format("svg");
 
     font-weight: normal;
     font-style: normal;
@@ -23,6 +23,15 @@ $path: "assets/fonts/icomoon/icomoon.";
     -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-filter:before {
+    content: "\e900";
+}
+.icon-tags:before {
+    content: "\e901";
+}
+.icon-edit:before {
+    content: "\e902";
+}
 .icon-account_circle:before {
     content: "\e853";
 }
@@ -46,9 +55,6 @@ $path: "assets/fonts/icomoon/icomoon.";
 }
 .icon-close:before {
     content: "\e5cd";
-}
-.icon-mode_edit:before {
-    content: "\e254";
 }
 .icon-delete_forever:before {
     content: "\e92b";

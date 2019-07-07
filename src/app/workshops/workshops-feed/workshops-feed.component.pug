@@ -1,10 +1,11 @@
 acp-viewport
     .workshops-container('*ngIf'='!loading')
-        .bar
-            .bar__aside
-            .bar__main
-                .main-controll('[routerLink]'="routeMainControll") {{mainControlTitle}}
-            .bar__aside
+        acp-workshops-bar(
+            '[tags]'='tags' 
+            '[categories]'='categories' 
+            '(onCtgSelect)'='onCategorySelect($event)'
+            '(onTgSelect)'='onTagSelect($event)'
+        )
         .feed-container
             .categories
                 acp-category-tag(

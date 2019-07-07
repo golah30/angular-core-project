@@ -6,8 +6,9 @@ import {
     selectArticles,
     selectTotalArticlesCount
 } from "src/app/workshops/store/workshops.selectors";
-import { Article } from "src/app/interfaces";
+import { Article, User } from "src/app/interfaces";
 import { ArticlesRequest } from "src/app/workshops/store/workshops.actions";
+import { selectAuthUser } from "src/app/auth/store/auth.selectors";
 
 @Component({
     selector: "acp-multiselect-workshops",
@@ -29,7 +30,11 @@ export class MultiselectWorkshopsComponent implements ControlValueAccessor {
     isOpen: boolean = false;
     page: number = 0;
     maxPage: number = 0;
+    userId: string = "";
     constructor(private store: Store<AppState>) {
+        this.store.select(selectAuthUser).subscribe((data: User) => {
+            this.userId = data._id;
+        });
         this.store.select(selectArticles).subscribe((data: Array<Article>) => {
             this.articles = data;
         });
@@ -59,17 +64,23 @@ export class MultiselectWorkshopsComponent implements ControlValueAccessor {
     onPrevClick(): void {
         if (this.page) {
             this.page = this.page - 1;
-            this.store.dispatch(new ArticlesRequest({ page: this.page }));
+            this.store.dispatch(
+                new ArticlesRequest({ author: this.userId, page: this.page })
+            );
         }
     }
     onNextClick(): void {
         if (this.page !== this.maxPage) {
             this.page = this.page + 1;
-            this.store.dispatch(new ArticlesRequest({ page: this.page }));
+            this.store.dispatch(
+                new ArticlesRequest({ author: this.userId, page: this.page })
+            );
         }
     }
     onSelectorOpen(): void {
-        this.store.dispatch(new ArticlesRequest({ page: this.page }));
+        this.store.dispatch(
+            new ArticlesRequest({ author: this.userId, page: this.page })
+        );
         this.isOpen = true;
     }
     onSelectorClose(): void {

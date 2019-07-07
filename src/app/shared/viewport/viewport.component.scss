@@ -17,17 +17,10 @@
 .main__content {
     height: 100%;
     flex-grow: 1;
-    padding: 0 32px;
     display: flex;
     justify-content: center;
     overflow: auto;
     position: relative;
-    @include medium() {
-        padding: 0;
-    }
-    @include small() {
-        padding: 0;
-    }
 }
 .main__content-container {
     max-width: 1440px;

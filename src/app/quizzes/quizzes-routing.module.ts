@@ -26,6 +26,10 @@ const routes: Routes = [
                     {
                         path: "construct",
                         component: QuizzGeneratorComponent
+                    },
+                    {
+                        path: "construct/:id",
+                        component: QuizzGeneratorComponent
                     }
                 ]
             }

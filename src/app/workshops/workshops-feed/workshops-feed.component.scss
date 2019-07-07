@@ -5,36 +5,7 @@
     display: block;
     flex-grow: 1;
 }
-.bar {
-    width: 100%;
-    position: sticky;
-    top: 0;
-    display: flex;
-    flex-wrap: nowrap;
-    background-color: lighten($dark, 15);
-    height: 40px;
-    justify-content: flex-end;
-    z-index: 20;
-}
-.bar__main {
-    order: 1;
 
-    height: 100%;
-}
-.main-controll {
-    display: inline-block;
-    height: 100%;
-    position: relative;
-    padding: 12px;
-    text-align: center;
-    color: $white;
-    cursor: pointer;
-    transition: all 0.3s;
-    &:hover {
-        background-color: $primary;
-        color: $dark;
-    }
-}
 .feed-container {
     display: flex;
     justify-content: center;
@@ -45,6 +16,9 @@
     flex-direction: column;
     padding-bottom: 40px;
     align-items: center;
+    @include small() {
+        padding-bottom: 100px;
+    }
 }
 .feed {
     margin: 0 8px;

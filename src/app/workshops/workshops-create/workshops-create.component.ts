@@ -8,7 +8,8 @@ import { selectTags, selectArticle } from "../store/workshops.selectors";
 import { Location } from "@angular/common";
 import { WorkshopsService } from "src/app/service/workshops/workshops.service";
 import { Router, ActivatedRoute } from "@angular/router";
-import { ArticlePageRequest } from "../store/workshops.actions";
+import { ArticlePageRequest, TagsRequest } from "../store/workshops.actions";
+import { ModalMessageService } from "src/app/core/modal-message/modal-message.service";
 
 @Component({
     selector: "acp-workshops-create",
@@ -21,7 +22,8 @@ export class WorkshopsCreateComponent implements OnInit, OnDestroy {
         private _location: Location,
         private WorkshopsService: WorkshopsService,
         private router: Router,
-        private route: ActivatedRoute
+        private route: ActivatedRoute,
+        private modalService: ModalMessageService
     ) {}
     form: FormGroup;
     tagsSub: Subscription;
@@ -47,10 +49,13 @@ export class WorkshopsCreateComponent implements OnInit, OnDestroy {
             .select(selectTags)
             .subscribe((data: Array<Tag>) => {
                 this.tags = data;
+                if (!data.length) {
+                    this.store.dispatch(new TagsRequest());
+                }
             });
     }
     ngOnDestroy() {
-        this.tagsSub.unsubscribe();
+        this.tagsSub && this.tagsSub.unsubscribe();
         if (this.route.snapshot.params.id) {
             this.articleSub.unsubscribe();
         }
@@ -85,15 +90,27 @@ export class WorkshopsCreateComponent implements OnInit, OnDestroy {
                     id: this.route.snapshot.params.id,
                     ...this.form.value
                 }).subscribe((data: any) => {
+                    this.modalService.modal({
+                        type: "correct",
+                        message: "Workshop updated!"
+                    });
                     this.router.navigate(["/workshops/" + data.post.id]);
                 });
             } else {
                 this.WorkshopsService.createPost({
                     ...this.form.value
                 }).subscribe((data: any) => {
+                    this.modalService.modal({
+                        type: "correct",
+                        message: "Workshop created!"
+                    });
                     this.router.navigate(["/workshops/" + data.post.id]);
                 });
             }
+        } else {
+            this.modalService.modal({
+                message: "All field required!"
+            });
         }
     }
     onReject(): void {

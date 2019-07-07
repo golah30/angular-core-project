@@ -103,7 +103,7 @@ export class WorkshopPageComponent implements OnInit, OnDestroy {
             });
     }
     ngOnDestroy() {
-        this.pageSub.unsubscribe();
-        this.tagsSub.unsubscribe();
+        this.pageSub && this.pageSub.unsubscribe();
+        this.tagsSub && this.tagsSub.unsubscribe();
     }
 }

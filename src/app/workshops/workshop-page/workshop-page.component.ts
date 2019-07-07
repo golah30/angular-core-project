@@ -8,6 +8,7 @@ import { AppState } from "src/app/reducers";
 import { ArticlePageRequest, TagsRequest } from "../store/workshops.actions";
 import { selectArticle, selectTags } from "../store/workshops.selectors";
 import { Subscription } from "rxjs";
+import { Location } from "@angular/common";
 
 @Component({
     selector: "acp-workshop-page",
@@ -19,6 +20,7 @@ export class WorkshopPageComponent implements OnInit, OnDestroy {
     constructor(
         private route: ActivatedRoute,
         private router: Router,
+        private _location: Location,
         private TagsService: TagsService,
         private UserService: UserService,
         private store: Store<AppState>
@@ -44,6 +46,9 @@ export class WorkshopPageComponent implements OnInit, OnDestroy {
         // } else {
         //     this.article.stars--;
         // }
+    }
+    goBack() {
+        this._location.back();
     }
     getTags() {
         if (this.allTags.length > 0) {
@@ -95,11 +100,6 @@ export class WorkshopPageComponent implements OnInit, OnDestroy {
                     this.getTags();
                     this.getUser();
                 }
-                // if (data.error) {
-                //     this.router.navigate(["/404"]);
-                // } else {
-
-                // }
             });
     }
     ngOnDestroy() {

@@ -1,5 +1,5 @@
 acp-viewport
-    .top-container('*ngIf'='!loading')
+    .top-container('*ngIf'='!loading; else loader')
         .desc-block
             h2.title {{article.title}}
             ul.article__tags('*ngIf'='tags')
@@ -26,4 +26,11 @@ acp-viewport
                     '[count]'='article.stars' 
                     '(onLikeToggle)'='favoriteToggle()'
                     )
+        button.control('(click)'='goBack()') Go back
     acp-workshop-sidebar
+
+ng-template('#loader'='')
+    .loader
+        .sk-double-bounce
+            .sk-child.sk-double-bounce-1
+            .sk-child.sk-double-bounce-2

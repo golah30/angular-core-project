@@ -1,5 +1,5 @@
 acp-viewport
-    .workshops-container('*ngIf'='!loading')
+    .workshops-container('*ngIf'='!loading; else loader')
         acp-workshops-bar(
             '[tags]'='tags' 
             '[categories]'='categories' 
@@ -42,6 +42,12 @@ acp-viewport
         .pagination
             .controll.prev('(click)'='onPrevPage()' '[ngClass]'='{disabled: !page}') prev
             .current {{page+1}}
-            .controll.next('(click)'='onNextPage()') next
+            .controll.next('(click)'='onNextPage()' '[ngClass]'='{disabled: page === maxPage}') next
 ng-template('#empty'='')
         .empty No articles for this filters
+
+ng-template('#loader'='')
+    .loader
+        .sk-double-bounce
+            .sk-child.sk-double-bounce-1
+            .sk-child.sk-double-bounce-2

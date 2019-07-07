@@ -95,7 +95,16 @@ export class UserService {
             Authorization: this.getToken()
         });
     }
-
+    public getUserByToken(token: string) {
+        return this.api
+            .get(`/users/current`, { Authorization: "Bearer " + token })
+            .pipe(
+                map((data: User) => {
+                    this.User = data;
+                    return this.User;
+                })
+            );
+    }
     public isAuth() {
         return this.auth;
     }

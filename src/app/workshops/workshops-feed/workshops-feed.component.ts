@@ -5,7 +5,12 @@ import { WorkshopsService } from "../../service/workshops/workshops.service";
 import { AppState } from "src/app/reducers";
 import { Store } from "@ngrx/store";
 import { Subscription } from "rxjs";
-import { selectTags, selectArticles } from "../store/workshops.selectors";
+import {
+    selectTags,
+    selectArticles,
+    selectWorkshopsLoading,
+    selectTotalArticlesCount
+} from "../store/workshops.selectors";
 import {
     TagsRequest,
     ArticlesSuccess,
@@ -41,13 +46,21 @@ export class WorkshopsFeedComponent implements OnInit, OnDestroy {
     count: boolean = false;
     loading: boolean = true;
     page: number = 0;
+    maxPage: number = 0;
     ngOnInit() {
+        this.store.select(selectWorkshopsLoading).subscribe((data: boolean) => {
+            this.loading = data;
+        });
+        this.store
+            .select(selectTotalArticlesCount)
+            .subscribe((data: number) => {
+                this.maxPage = Math.ceil(data / 10) - 1;
+            });
         this.store.dispatch(new TagsRequest());
         this.tagsSub = this.store
             .select(selectTags)
             .subscribe((data: Array<Tag>) => {
                 this.tags = data;
-                this.loading = false;
             });
         this.articlesSub = this.store
             .select(selectArticles)
@@ -66,9 +79,9 @@ export class WorkshopsFeedComponent implements OnInit, OnDestroy {
         });
     }
     ngOnDestroy() {
-        this.tagsSub.unsubscribe();
-        this.articlesSub.unsubscribe();
-        this.userSub.unsubscribe();
+        this.tagsSub && this.tagsSub.unsubscribe();
+        this.articlesSub && this.articlesSub.unsubscribe();
+        this.userSub && this.userSub.unsubscribe();
     }
     setQueryParams(tags: Array<number>, ctgs: Array<number>) {
         this.router.navigate([], {
@@ -188,7 +201,9 @@ export class WorkshopsFeedComponent implements OnInit, OnDestroy {
         }
     }
     onNextPage(): void {
-        this.page = this.page + 1;
-        this.onParamsChange(this.route.snapshot.queryParamMap);
+        if (this.page !== this.maxPage) {
+            this.page = this.page + 1;
+            this.onParamsChange(this.route.snapshot.queryParamMap);
+        }
     }
 }

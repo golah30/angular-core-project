@@ -25,6 +25,18 @@ export function authReducer(
     action: AuthActions
 ): AuthState {
     switch (action.type) {
+        case AuthActionTypes.LogInByToken:
+            return {
+                ...state,
+                isAuth: false,
+                loading: true,
+                error: "",
+                token: action.payload.token,
+                user: {
+                    picture: "",
+                    username: "Unknown User"
+                }
+            };
         case AuthActionTypes.LogInRequest:
             return {
                 ...state,

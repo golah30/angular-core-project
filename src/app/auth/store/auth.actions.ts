@@ -7,9 +7,13 @@ export enum AuthActionTypes {
     LogInFailure = "[Auth] Login Failure",
     SignUpRequest = "[Auth] Sign up request",
     SignUpSuccess = "[Auth] Sign up success",
-    SignUpFailure = "[Auth] Sign up failure"
+    SignUpFailure = "[Auth] Sign up failure",
+    LogInByToken = "[Auth] Login by token Request"
 }
-
+export class LogInByToken implements Action {
+    readonly type = AuthActionTypes.LogInByToken;
+    constructor(public payload: { token: string }) {}
+}
 export class LogInRequest implements Action {
     readonly type = AuthActionTypes.LogInRequest;
     constructor(public payload: { login: string; password: string }) {}
@@ -39,4 +43,5 @@ export type AuthActions =
     | LogInFailure
     | SignUpRequest
     | SignUpSuccess
-    | SignUpFailure;
+    | SignUpFailure
+    | LogInByToken;

@@ -22,6 +22,7 @@ export class AuthEffects {
         exhaustMap((payload: any) => {
             return this.UserService.login(payload.login, payload.password).pipe(
                 map((data: any) => {
+                    localStorage.setItem("token", data.token);
                     return new LogInSuccess({
                         user: data,
                         token: data.token

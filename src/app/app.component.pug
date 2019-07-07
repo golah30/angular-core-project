@@ -1,4 +1,12 @@
-acp-top-pane('[user]'='user' '[isMenu]'='isMenu' '(toggleMenu)'='toggleMenu()')
-.wrapper
+ng-container('*ngIf'='isAuth')
+    acp-top-pane('[user]'='user' '[isMenu]'='isMenu' '(toggleMenu)'='toggleMenu()')
+.wrapper('*ngIf'='!loading; else loader')
     router-outlet
-    acp-side-menu('[isMenu]'='isMenu' '(closeMenu)'='closeMenu()')
+    ng-container('*ngIf'='isAuth')
+        acp-side-menu('[isMenu]'='isMenu' '(closeMenu)'='closeMenu()')
+
+ng-template('#loader'='')
+    .loader
+        .sk-double-bounce
+            .sk-child.sk-double-bounce-1
+            .sk-child.sk-double-bounce-2

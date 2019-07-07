@@ -21,7 +21,9 @@ import { FormControlsModule } from "../form-controls/form-controls.module";
 import { ScrollingModule } from "@angular/cdk/scrolling";
 import { ScrollingModule as ExperimentalScrollingModule } from "@angular/cdk-experimental/scrolling";
 import { QuizzesService } from "../service/quizzes/quizzes.service";
-import { WorkshopsBarComponent } from './workshops-bar/workshops-bar.component';
+import { WorkshopsBarComponent } from "./workshops-bar/workshops-bar.component";
+import { EditorModule } from "@tinymce/tinymce-angular";
+
 @NgModule({
     declarations: [
         WorkshopPageComponent,
@@ -42,7 +44,8 @@ import { WorkshopsBarComponent } from './workshops-bar/workshops-bar.component';
         ReactiveFormsModule,
         FormControlsModule,
         ScrollingModule,
-        ExperimentalScrollingModule
+        ExperimentalScrollingModule,
+        EditorModule
     ]
 })
 export class WorkshopsModule {}

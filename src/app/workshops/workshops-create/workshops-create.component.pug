@@ -1,41 +1,38 @@
-.container('*ngIf'='created')
-    .title Create or edit workshop
-    form(
-        '[formGroup]'='form' 
-        '(ngSubmit)'='onSubmit()'
-        novalidate='' 
-        autocomplete='off'
-    )
-        .row
-            acp-input(
-                formControlName='title'
-                label='Workshop name'
-                type='text'
-            )
-        .row
-            acp-input(
-                formControlName='image'
-                label='Image link'
-                type='text'
-            )
-        .row
-            acp-input(
-                formControlName='description'
-                label='Short desctription'
-                type='text'
-            )
-        .row
-            acp-select-tags(
-                formControlName='tags'
-                label='Select tags'
-                '[options]'='tags'
-            )
-        .row
-            acp-input(
-                formControlName='text'
-                label='Workshop text'
-                type='text'
-            )
-    .controls
-        button.control('type'='button' '(click)'='onSubmit()') Save
-        button.control.inline('type'='button' '(click)'='onReject()') Cancel
+acp-viewport
+    .container('*ngIf'='created')
+        .title Create or edit workshop
+        form(
+            '[formGroup]'='form' 
+            '(ngSubmit)'='onSubmit()'
+            novalidate='' 
+            autocomplete='off'
+        )
+            .row
+                acp-input(
+                    formControlName='title'
+                    label='Workshop name'
+                    type='text'
+                )
+            .row
+                acp-input(
+                    formControlName='image'
+                    label='Image link'
+                    type='text'
+                )
+            .row
+                acp-input(
+                    formControlName='description'
+                    label='Short desctription'
+                    type='text'
+                )
+            .row
+                acp-select-tags(
+                    formControlName='tags'
+                    label='Select tags'
+                    '[options]'='tags'
+                )
+            .row
+                editor([init]="init" formControlName='text')
+        .controls
+            button.control('type'='button' '(click)'='onSubmit()') Save
+            button.control.inline('type'='button' '(click)'='onReject()') Cancel

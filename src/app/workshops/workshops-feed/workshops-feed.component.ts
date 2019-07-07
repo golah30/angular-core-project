@@ -17,6 +17,7 @@ import {
     ArticlesRequest
 } from "../store/workshops.actions";
 import { selectAuthUser } from "src/app/auth/store/auth.selectors";
+import { ModalMessageService } from "src/app/core/modal-message/modal-message.service";
 @Component({
     selector: "acp-workshops-feed",
     templateUrl: "./workshops-feed.component.pug",
@@ -27,7 +28,8 @@ export class WorkshopsFeedComponent implements OnInit, OnDestroy {
         private route: ActivatedRoute,
         private router: Router,
         private WorkshopsService: WorkshopsService,
-        private store: Store<AppState>
+        private store: Store<AppState>,
+        private modalService: ModalMessageService
     ) {}
 
     tagsSub: Subscription;
@@ -191,6 +193,10 @@ export class WorkshopsFeedComponent implements OnInit, OnDestroy {
     }
     onArticleDelete(id: string) {
         this.WorkshopsService.deletePost(id).subscribe((data: any) => {
+            this.modalService.modal({
+                type: "correct",
+                message: "Workshop deleted!"
+            });
             this.onParamsChange(this.route.snapshot.queryParamMap);
         });
     }

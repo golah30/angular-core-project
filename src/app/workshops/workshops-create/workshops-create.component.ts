@@ -30,6 +30,16 @@ export class WorkshopsCreateComponent implements OnInit, OnDestroy {
     tags: Array<Tag>;
     articleSub: Subscription;
     created: boolean = false;
+    init: any = {
+        plugins: [
+            "advlist autolink lists link image charmap print preview anchor",
+            "searchreplace visualblocks code fullscreen",
+            "insertdatetime media table paste code help wordcount"
+        ],
+        menubar: false,
+        toolbar:
+            "undo redo | formatselect | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat"
+    };
     ngOnInit() {
         if (this.route.snapshot.params.id) {
             this.store.dispatch(

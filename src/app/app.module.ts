@@ -23,7 +23,7 @@ import { QuizzesEffects } from "./quizzes/store/quizzes.effects";
 import { WorkshopsService } from "./service/workshops/workshops.service";
 import { TagsService } from "./service/tags/tags.service";
 import { CommentsService } from "./service/comments/comments.service";
-
+import { EditorModule } from "@tinymce/tinymce-angular";
 @NgModule({
     declarations: [AppComponent],
     imports: [
@@ -44,7 +44,8 @@ import { CommentsService } from "./service/comments/comments.service";
         StoreDevtoolsModule.instrument({
             maxAge: 25,
             logOnly: environment.production
-        })
+        }),
+        EditorModule
     ],
     providers: [
         UserService,

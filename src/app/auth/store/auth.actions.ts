@@ -8,7 +8,11 @@ export enum AuthActionTypes {
     SignUpRequest = "[Auth] Sign up request",
     SignUpSuccess = "[Auth] Sign up success",
     SignUpFailure = "[Auth] Sign up failure",
-    LogInByToken = "[Auth] Login by token Request"
+    LogInByToken = "[Auth] Login by token Request",
+    Logout = "[Auth] Logout"
+}
+export class Logout implements Action {
+    readonly type = AuthActionTypes.Logout;
 }
 export class LogInByToken implements Action {
     readonly type = AuthActionTypes.LogInByToken;
@@ -44,4 +48,5 @@ export type AuthActions =
     | SignUpRequest
     | SignUpSuccess
     | SignUpFailure
-    | LogInByToken;
+    | LogInByToken
+    | Logout;

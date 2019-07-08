@@ -14,6 +14,6 @@
             svg(viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg")
                 path(d="M0 0H50V25V50H0L50 25L0 0Z")
     .header__item--user('(click)'="account()")
-        .header__user-name {{user.username}}
+        .header__user-name {{username}}
         .header__user-avatar
-            acp-user-pic('[src]'='user.picture' '[name]'='user.username')
+            acp-user-pic('[src]'='user.picture' '[name]'='username')

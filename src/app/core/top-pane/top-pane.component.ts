@@ -9,6 +9,10 @@ import {
     Renderer2
 } from "@angular/core";
 import { User } from "../../interfaces";
+import { Store } from "@ngrx/store";
+import { AppState } from "src/app/reducers";
+import { Logout } from "src/app/auth/store/auth.actions";
+import { Router } from "@angular/router";
 
 @Component({
     selector: "acp-top-pane",
@@ -16,7 +20,11 @@ import { User } from "../../interfaces";
     styleUrls: ["./top-pane.component.scss"]
 })
 export class TopPaneComponent implements OnInit {
-    constructor(private _renderer: Renderer2) {}
+    constructor(
+        private _renderer: Renderer2,
+        private store: Store<AppState>,
+        private router: Router
+    ) {}
     @ViewChild("search") searchInput: ElementRef;
     @Input() user: User;
     @Input() isMenu: boolean;
@@ -25,6 +33,7 @@ export class TopPaneComponent implements OnInit {
     logoSrc: string = "../assets/images/logo.svg";
     isSearch: boolean = false;
     closedByBlur: boolean = false;
+    username: string = "";
     toggleSearch(): void {
         if (!this.closedByBlur) {
             this.searchInput.nativeElement.value = "";
@@ -38,8 +47,15 @@ export class TopPaneComponent implements OnInit {
     toggleSideMenu(): void {
         this.toggleMenu.emit();
     }
-    account(): void {}
+    account(): void {
+        this.store.dispatch(new Logout());
+        this.router.navigate(["/login"]);
+    }
     ngOnInit() {
+        this.username =
+            this.user.firstName && this.user.lastName
+                ? this.user.firstName + " " + this.user.lastName
+                : this.user.username;
         this._renderer.listen(this.searchInput.nativeElement, "blur", e => {
             if (e.target.value === "") {
                 this.isSearch = false;

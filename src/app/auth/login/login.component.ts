@@ -18,6 +18,7 @@ import {
     selectAuthState
 } from "../store/auth.selectors";
 import { AuthState } from "../store/auth.reducer";
+import { Router } from "@angular/router";
 
 @Component({
     selector: "acp-login",
@@ -27,7 +28,8 @@ import { AuthState } from "../store/auth.reducer";
 export class LoginComponent implements OnInit, OnDestroy {
     constructor(
         private UserService: UserService,
-        private store: Store<AppState>
+        private store: Store<AppState>,
+        private router: Router
     ) {}
     title: string = "Login";
     control1Title: string = "Login";
@@ -43,8 +45,8 @@ export class LoginComponent implements OnInit, OnDestroy {
     isAuth: boolean;
     AuthSub: Subscription;
     ngOnInit() {
-        this.loginControl = new FormControl("dimakur");
-        this.passwordControl = new FormControl("12345");
+        this.loginControl = new FormControl("");
+        this.passwordControl = new FormControl("");
         this.newPasswordControl = new FormControl("");
         this.toggleNames();
 
@@ -54,6 +56,9 @@ export class LoginComponent implements OnInit, OnDestroy {
                 this.user = data.user;
                 this.isLoading = data.loading;
                 this.isAuth = data.isAuth;
+                if (this.isAuth) {
+                    this.router.navigate(["/"]);
+                }
             });
     }
     ngOnDestroy() {

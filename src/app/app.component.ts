@@ -28,6 +28,8 @@ export class AppComponent implements OnInit {
 
             if (this.user._id && this.user._id !== "") {
                 this.isAuth = true;
+            } else {
+                this.isAuth = false;
             }
         });
         this.store.select(selectAuthLoading).subscribe((data: boolean) => {

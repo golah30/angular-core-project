@@ -25,6 +25,16 @@ export function authReducer(
     action: AuthActions
 ): AuthState {
     switch (action.type) {
+        case AuthActionTypes.Logout:
+            return {
+                ...state,
+                isAuth: false,
+                token: "",
+                user: {
+                    picture: "",
+                    username: "Unknown User"
+                }
+            };
         case AuthActionTypes.LogInByToken:
             return {
                 ...state,

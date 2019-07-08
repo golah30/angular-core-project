@@ -8,6 +8,7 @@ import { Subscription } from "rxjs";
 import { UserService } from "src/app/service/user/user.service";
 import { User } from "src/app/interfaces";
 import { QuizzesService } from "src/app/service/quizzes/quizzes.service";
+import { ModalMessageService } from "src/app/core/modal-message/modal-message.service";
 
 @Component({
     selector: "acp-quizz-page",
@@ -20,7 +21,8 @@ export class QuizzPageComponent implements OnInit, OnDestroy {
         private router: Router,
         private store: Store<AppState>,
         private UserService: UserService,
-        private QuizzesService: QuizzesService
+        private QuizzesService: QuizzesService,
+        private modalService: ModalMessageService
     ) {}
 
     quiz: any;
@@ -66,13 +68,21 @@ export class QuizzPageComponent implements OnInit, OnDestroy {
         });
     }
     ngOnDestroy() {
-        this.quizSub.unsubscribe();
+        this.quizSub && this.quizSub.unsubscribe();
     }
     onSubmit(value: any) {
-        console.log("submit", value);
         this.QuizzesService.validateResult(this.quiz.id, value).subscribe(
             data => {
-                console.log(data);
+                let result = true;
+                data.results.forEach(element => {
+                    if (!element) {
+                        result = false;
+                    }
+                });
+                this.modalService.modal({
+                    type: result ? "correct" : "error",
+                    message: data.message
+                });
             }
         );
     }
